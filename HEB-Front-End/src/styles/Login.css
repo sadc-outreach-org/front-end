@@ -1,0 +1,82 @@
+.loginContainer {
+    background-color: #EE2E24;
+    margin: 0;
+    padding: 0;
+}
+
+.hebLogo {
+    width: 300px;
+    height: 100px;
+    position: absolute;
+    left: 20%;
+    top: -50px;
+}
+
+.loginForm {
+    background-color: #FFFFFF;
+    width: 500px;
+    height: 400px;
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    box-sizing: border-box;
+    text-align: center;
+    padding: 70px 30px;
+}
+
+.loginForm h1 {
+    margin: 0;
+    padding: 0 0 20px;
+    text-align: center;
+    font-size: 22px;
+}
+
+.loginForm input {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.loginForm input[type="email"], input[type="password"] {
+    border: none;
+    border-bottom: 1px solid #000;
+    background: transparent;
+    outline: none;
+    height: 40px;
+    font-size: 16px;
+}
+
+.submitLogin {
+    border: none;
+    outline: none;
+    height: 40px;
+    background: #fb2525;
+    color: #fff;
+    font-size: 18px;
+    border-radius: 20px;
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+.submitLogin:hover {
+    cursor: pointer;
+    background: #C9271E;
+    color: #fff;
+}
+
+.loginForm a {
+    text-decoration: none;
+    font-size: 12px;
+    line-height: 20px;
+    color: darkgrey;
+    font-weight: bold;
+}
+
+.loginForm a:hover {
+    color: #ffc107;
+}
+
+.title{
+    color: black;
+}

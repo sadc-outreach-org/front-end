@@ -1,0 +1,22 @@
+{
+  "candidates": [
+    {
+      "id": 1,
+      "first_name": "Christian",
+      "last_name": "Morales",
+      "email": "cmorale1@trinity.edu"
+    },
+    {
+      "id": 2,
+      "first_name": "Karl",
+      "last_name": "Manzel",
+      "email": "kmanzel@trinity.edu"
+    },
+    {
+      "id": 3,
+      "first_name": "Samantha",
+      "last_name": "Ortiz",
+      "email": "sortiz@trinity.edu"
+    }
+  ]
+}
