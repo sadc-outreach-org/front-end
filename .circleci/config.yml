@@ -8,6 +8,9 @@ jobs:
     docker:
       # specify the version you desire here
       - image: us.gcr.io/sadc-trinity/trinity-circle-builds:1.0.1
+        auth:
+          username: _json_key
+          password: $GCP_KEY
       
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
