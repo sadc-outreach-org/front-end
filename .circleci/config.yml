@@ -29,7 +29,25 @@ jobs:
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
 
-      - run: npm install
+      - run:
+        name: Installing Dependencies
+        command: npm install
+
+      - run:
+        name: Creating a Build
+        command: npm run-script build
+
+      - run:
+        name: Copy GCP Key to a File
+        command: echo "$GCP_KEY" > "GCP_KEY.json"
+
+      - run:
+        name: Authenticate to GCP
+        command: gcloud auth activate-service-account --key-file=GCP_KEY.json
+
+      - run:
+        name: Copy Jar to ui-builds Bucket
+        command: ls -l
 
       - save_cache:
           paths:
