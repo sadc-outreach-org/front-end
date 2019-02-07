@@ -47,7 +47,7 @@ jobs:
 
       - run:
           name: Copy Build Folder to ui-builds Bucket
-          command: gsutil cp -r gs://ui-builds
+          command: gsutil cp -r build/ gs://ui-builds
 
       - save_cache:
           paths:
