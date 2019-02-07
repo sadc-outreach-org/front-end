@@ -47,7 +47,7 @@ jobs:
 
       - run:
           name: Copy Jar to ui-builds Bucket
-          command: cd build/
+          command: cd build; ls -l
 
       - save_cache:
           paths:
