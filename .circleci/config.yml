@@ -46,8 +46,8 @@ jobs:
           command: gcloud auth activate-service-account --key-file=GCP_KEY.json
 
       - run:
-          name: Copy Jar to ui-builds Bucket
-          command: cd build; ls -l
+          name: Copy Build Folder to ui-builds Bucket
+          command: cd build; cp -a * gs://ui-builds
 
       - save_cache:
           paths:
