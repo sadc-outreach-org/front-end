@@ -55,7 +55,6 @@ class CandidateProfileView extends Component {
 
         return (
             <div className={"profileView"}>
-                <h1 id={"temp-nav"}>Candidate Profile View (Nav Bar Placeholder)</h1>
                 <CandidateSideNav/>
                 <div className={"main-content"}>
                     <div className={"form"}>
