@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { Document, Page } from 'react-pdf';
+import resumeFile from '../../../images/Resume_2018_Dec_18_Gerardo_Gonzalez.pdf';
 
-class MyApp extends Component {
+
+class resume extends Component {
     state = {
         numPages: null,
         pageNumber: 1,
@@ -17,13 +19,19 @@ class MyApp extends Component {
         return (
             <div>
                 <Document
-                    file="somefile.pdf"
+                    file={resumeFile}
                     onLoadSuccess={this.onDocumentLoadSuccess}
                 >
                     <Page pageNumber={pageNumber} />
                 </Document>
                 <p>Page {pageNumber} of {numPages}</p>
+                <div>
+                    <iframe src= {resumeFile}></iframe>
+                </div>
             </div>
-        );
+
+
+    );
     }
 }
+export default resume;

@@ -4,6 +4,7 @@ import Login from './app/containers/Login/Login';
 import AllCandidates from './app/containers/AllCandidatesView/AllCandidates';
 import SignUp from './app/containers/SignUp/SignUp';
 import CandidateView from './app/containers/CandidateProfileView/CandidateProfileView';
+import resume from './app/containers/ResumeView/react_pdf_test';
 import './styles/App.css';
 
 class App extends Component {
@@ -17,6 +18,7 @@ class App extends Component {
                         <Route path="/signup" component={SignUp}/>
                         <Route path="/candidates" component={AllCandidates}/>
                         <Route path="/user" component={CandidateView}/>
+                        <Route path="/resume" component={resume}/>
                     </div>
                 </Router>
             </div>
