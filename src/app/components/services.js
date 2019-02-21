@@ -7,3 +7,8 @@ export const getUsers = () => {
 export const addCandidate = (payload) => {
     return axios.post('http://cloud-25.cs.trinity.edu:8080/user/signup', payload);
 }
+
+export const getResume = () => {
+
+    return axios.get('http://cloud-25.cs.trinity.edu:8080/resume')
+}
