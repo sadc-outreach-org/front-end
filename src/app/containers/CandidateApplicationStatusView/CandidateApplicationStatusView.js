@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import CandidateSideNav from '../../components/SideNav/CandidateSideNav';
 import ApplicationStatus from '../../components/ApplicationStatus/ApplicationStatus';
+import AllApplications from '../../components/Applications/Applications';
 import '../../../styles/CandidateApplicationStatus.css';
 import axios from 'axios';
 
@@ -34,7 +35,7 @@ class CandidateApplicationStatusView extends Component {
         return (
             <div className={"applicationStatusView"}>
                 <CandidateSideNav/>
-                <ApplicationStatus/>
+                <AllApplications/>
             </div>
         )
     }

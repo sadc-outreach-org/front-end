@@ -4,9 +4,11 @@ import './styles/index.css';
 import App from './App';
 import CandidateView from './app/containers/CandidateProfileView/CandidateProfileView';
 import CandidateAppStatusView from './app/containers/CandidateApplicationStatusView/CandidateApplicationStatusView';
+import AllCandidates from './app/containers/AllCandidatesView/AllCandidates';
+import AllCandidateApplicationsView from './app/containers/AllCandidateApplicationsView/AllCandidateApplicationsView';
 import * as serviceWorker from './serviceWorker';
 
-ReactDOM.render(<CandidateAppStatusView />, document.getElementById('root'));
+ReactDOM.render(<CandidateAppStatusView/>, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
