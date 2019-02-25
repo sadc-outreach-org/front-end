@@ -10,9 +10,7 @@ const ConditionalAlert = ({visible, message})=> {
             <Alert color={"danger"}>
                 {message}
             </Alert>
-
         );
-
     } else return null;
 }
 
@@ -62,8 +60,6 @@ class SignUp extends Component {
                 console.log(res);
                 console.log(res.data.result);
             });
-
-            console.log("it worked!");
         }
     };
 
