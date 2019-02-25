@@ -73,7 +73,6 @@ class SignUp extends Component {
                             <Form onSubmit={this.handleSubmit}>
                                 <FormGroup>
                                     <h1 className={"title"}>Sign Up</h1>
-                                    <ConditionalAlert display={this.state.validEmail} field={"email"}/>
                                     <Input
                                         type={"email"}
                                         name={"email"}
