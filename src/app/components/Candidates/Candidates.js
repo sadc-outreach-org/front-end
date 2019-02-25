@@ -17,12 +17,12 @@ export default class Candidates extends React.Component {
         return (
             <div className={"tableContainer"}>
                 <table>
-                    <tr>
-                        <th>First Name</th>
-                        <th>Email</th>
-                        <th>Phone Number</th>
-                    </tr>
                     <tbody>
+                        <tr>
+                            <th>First Name</th>
+                            <th>Email</th>
+                            <th>Phone Number</th>
+                        </tr>
                         {this.state.candidates.map(candidate =>
                             <tr>
                                 <td>{candidate.firstName}</td>
