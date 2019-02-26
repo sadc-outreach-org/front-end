@@ -8,8 +8,8 @@ class CandidateSideNav extends Component {
             <div className={"profileSideNavComponent"}>
                 <SideMenu>
                     <Item divider={true} label="Actions" value="segment1"/>
-                    <Item label="Profile" value="item1"/>
-                    <Item label="Application Status" value="item2"/>
+                    <Item label="Profile" value="temp1"/>
+                    <Item label="Application Status" value="temp2"/>
                 </SideMenu>
             </div>
         )

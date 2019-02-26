@@ -13,11 +13,6 @@ class AllCandidateApplicationsView extends Component {
     render() {
         return (
             <div className={"allCandidateApplicationsView"}>
-                <div className={"tempNav"}>
-                    <a href={"/"}>Home</a>
-                    <a href={"/"}>Login</a>
-                    <a href={"/"}>Signup</a>
-                </div>
                 <h1>Your Applications</h1>
                 <div className={"tableContainer"}>
                     <Applications/>
