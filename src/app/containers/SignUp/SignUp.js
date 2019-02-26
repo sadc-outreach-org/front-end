@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import logo from '../../../images/heb-red.png';
 import {Button, Form, FormGroup, Input, Container, Row, Col, Alert} from 'reactstrap';
 import '../../../styles/SignUp.css';
-import {addCandidate} from '../../components/services';
+import {addCandidate} from '../../services';
 
 const ConditionalAlert = ({visible, message})=> {
     if(visible){
@@ -22,12 +22,12 @@ class SignUp extends Component {
             email: '',
             firstName: '',
             lastName: '',
-            phoneNumber: '',
+            phoneNum: '',
             streetAddress: '',
             zipCode: '',
             city: '',
             state: '',
-            githubLink: '',
+            gitLink: '',
             password: '',
             confirmPassword: '',
             passwordsMatch: true
@@ -52,8 +52,8 @@ class SignUp extends Component {
                 zipCode: this.state.zipCode,
                 city: this.state.city,
                 state: this.state.state,
-                phoneNumber: this.state.phoneNumber,
-                githubLink: this.state.githubLink
+                phoneNum: this.state.phoneNum,
+                gitLink: this.state.githubLink
             };
 
             addCandidate(payload).then(res => {
@@ -74,15 +74,6 @@ class SignUp extends Component {
                                 <FormGroup>
                                     <h1 className={"title"}>Sign Up</h1>
                                     <Input
-                                        type={"email"}
-                                        name={"email"}
-                                        id={"email"}
-                                        placeholder={"Email"}
-                                        defaultValue={this.state.email}
-                                        onChange={(event) => this.setState({email: event.target.value})}
-                                        required
-                                    />
-                                    <Input
                                         type={"text"}
                                         name={"firstname"}
                                         id={"firstname"}
@@ -101,12 +92,21 @@ class SignUp extends Component {
                                         required
                                     />
                                     <Input
+                                        type={"email"}
+                                        name={"email"}
+                                        id={"email"}
+                                        placeholder={"Email"}
+                                        defaultValue={this.state.email}
+                                        onChange={(event) => this.setState({email: event.target.value})}
+                                        required
+                                    />
+                                    <Input
                                         type={"text"}
                                         name={"phonenumber"}
                                         id={"phonenumber"}
                                         placeholder={"Phone Number"}
-                                        defaultValue={this.state.phoneNumber}
-                                        onChange={(event) => this.setState({phoneNumber: event.target.value})}
+                                        defaultValue={this.state.phoneNum}
+                                        onChange={(event) => this.setState({phoneNum: event.target.value})}
                                         required
                                     />
                                     <Input
@@ -149,9 +149,9 @@ class SignUp extends Component {
                                         type={"text"}
                                         name={"gitlink"}
                                         id={"gitlink"}
-                                        placeholder={"Git Hub Link"}
-                                        defaultValue={this.state.githubLink}
-                                        onChange={(event) => this.setState({githubLink: event.target.value})}
+                                        placeholder={"Git Link"}
+                                        defaultValue={this.state.gitLink}
+                                        onChange={(event) => this.setState({gitLink: event.target.value})}
                                     />
                                     <Input
                                         type={"password"}

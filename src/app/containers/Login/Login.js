@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import logo from '../../../images/heb-red.png';
 import {Button, Form, FormGroup, Input, Container, Row, Col} from 'reactstrap';
 import '../../../styles/Login.css';
-import axios from 'axios';
+import { login } from '../../services';
 
 class Login extends Component {
     constructor(props) {
@@ -23,8 +23,7 @@ class Login extends Component {
 
         console.log(payload);
 
-        axios.post("http://cloud-25.cs.trinity.edu:8080/user/login", payload)
-            .then(res => {
+        login(payload).then(res => {
                 console.log(res);
                 console.log(res.data.result);
             })

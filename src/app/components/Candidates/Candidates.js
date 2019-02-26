@@ -1,5 +1,6 @@
 import React from 'react';
-import {getUsers} from '../services.js';
+import {getUsers} from '../../services.js';
+import { Link } from 'react-router-dom';
 
 export default class Candidates extends React.Component {
     state = {
@@ -19,15 +20,26 @@ export default class Candidates extends React.Component {
                 <table>
                     <tbody>
                         <tr>
-                            <th>First Name</th>
+                            <th>First</th>
+                            <th>Last</th>
                             <th>Email</th>
                             <th>Phone Number</th>
                         </tr>
                         {this.state.candidates.map(candidate =>
                             <tr>
-                                <td>{candidate.firstName}</td>
+                                <td>
+                                    <Link to={`/user/${candidate.email}/info`}>
+                                        {candidate.firstName}
+                                    </Link>
+                                </td>
+                                <td>
+                                    <Link to={`/user/${candidate.email}/info`}>
+                                        {candidate.lastName}
+                                    </Link>
+                                </td>
                                 <td>{candidate.email}</td>
-                                <td>{candidate.phoneNumber}</td>
+                                <td>{candidate.phoneNum}</td>
+
                             </tr>)
                         }
                     </tbody>
