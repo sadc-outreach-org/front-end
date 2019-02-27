@@ -13,7 +13,7 @@ class AllCandidateApplicationsView extends Component {
     render() {
         return (
             <div className={"allCandidateApplicationsView"}>
-                <h1>Your Applications</h1>
+                <h1>Applications</h1>
                 <div className={"tableContainer"}>
                     <Applications/>
                 </div>

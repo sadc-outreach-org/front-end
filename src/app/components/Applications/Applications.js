@@ -1,5 +1,5 @@
 import React from 'react';
-// import {getApplications} from servies.js
+// import {getApplications} from services.js
 
 export default class Applications extends React.Component {
     state = {
@@ -17,7 +17,7 @@ export default class Applications extends React.Component {
         return (
             <div className={"tableContainer"}>
                 <table>
-                    <h1 className={"applicationsHeader"}>Your Applications</h1>
+                    <h1 className={"applicationsHeader"}>Applications</h1>
                     <tr>
                         <th>Requisition</th>
                         <th>Date Applied</th>

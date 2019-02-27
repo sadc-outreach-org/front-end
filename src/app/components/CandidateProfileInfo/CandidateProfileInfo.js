@@ -56,6 +56,7 @@ class CandidateProfileInfo extends Component {
             <div className={"profileView"}>
                 <div className={"main-content"}>
                     <div className={"form"}>
+                        <h1 className={"profile-header"}>Profile</h1>
                         <div className={"column"}>
                             <label htmlFor="">First Name</label>
                             <Input
