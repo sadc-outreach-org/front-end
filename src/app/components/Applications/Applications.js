@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from "axios";
 // import {getApplications} from services.js
 
 export default class Applications extends React.Component {
@@ -12,6 +13,22 @@ export default class Applications extends React.Component {
     //         this.setState({candidates});
     //     })
     // }
+
+    handleAppClick = event => {
+        event.preventDefault();
+        // let payload = {
+        //     email: this.state.email,
+        //     password: this.state.password
+        // };
+
+        console.log("Row Clicked");
+
+        // axios.post("http://cloud-25.cs.trinity.edu:8080/user/login", payload)
+        //     .then(res => {
+        //         console.log(res);
+        //         console.log(res.data.result);
+        //     })
+    };
 
     render() {
         return (
@@ -31,14 +48,9 @@ export default class Applications extends React.Component {
                             {/*/!*<td>{candidate.phoneNumber}</td>*!/*/}
                         {/*</tr>)*/}
                     {/*}*/}
-                        <tr>
+                        <tr onClick={this.handleAppClick}>
                             <td>Developer I</td>
                             <td>Feb. 2, 2019</td>
-                            <td>Ready for Interview</td>
-                        </tr>
-                        <tr>
-                            <td>Developer II</td>
-                            <td>Feb 4, 2019</td>
                             <td>Ready for Interview</td>
                         </tr>
                     </tbody>

@@ -7,3 +7,7 @@
     height: 100vh;
     background-color: white;
 }
+
+.tableContainer tr:hover {
+    cursor: pointer;
+}
