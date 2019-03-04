@@ -8,6 +8,16 @@ import Modal from 'react-modal';
 
 Modal.defaultStyles.overlay.backgroundColor = 'rgba(0, 0, 0, 0.7)';
 
+const customStyling = {
+    content : {
+        top: '35%',
+        left: '50%',
+        // right: 'auto',
+        // bottom: 'auto',
+        transform: 'translate(-50%, -50%)'
+    }
+};
+
 export default class Applications extends React.Component {
     constructor () {
         super();
@@ -80,6 +90,7 @@ export default class Applications extends React.Component {
                 <Modal
                     isOpen={this.state.showModal}
                     ariaHideApp={false}
+                    style={customStyling}
                     contentLabel="Minimal Modal Example"
                 >
                     <a className="modalCloseButton" onClick={this.handleCloseModal}/>
