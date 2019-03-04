@@ -6,7 +6,7 @@ import ApplicationStatus from '../ApplicationStatus/ApplicationStatus';
 import Modal from 'react-modal';
 // import {getApplications} from services.js
 
-
+Modal.defaultStyles.overlay.backgroundColor = 'rgba(0, 0, 0, 0.7)';
 
 export default class Applications extends React.Component {
     constructor () {
@@ -29,12 +29,11 @@ export default class Applications extends React.Component {
 
     handleOpenModal () {
         this.setState({showModal: true})
-        console.log(this.state.show)
     }
+
 
     handleCloseModal () {
         this.setState({showModal: false})
-        console.log(this.state.show)
     }
 
     handleAppClick = event => {
