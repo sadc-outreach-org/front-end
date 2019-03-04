@@ -1,13 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from "axios";
+import Modal from 'react-modal';
 // import {getApplications} from services.js
 
 export default class Applications extends React.Component {
-    state = {
-        applications: [],
-        show: false
-    };
+    constructor () {
+        super();
+        this.state = {
+            applications: [],
+            show: false
+        };
+
+        this.handleOpenModal = this.handleOpenModal.bind(this);
+        this.handleCloseModal = this.handleCloseModal.bind(this);
+    }
 
     // componentDidMount() {
     //     getUsers().then(res => {
@@ -16,12 +23,14 @@ export default class Applications extends React.Component {
     //     })
     // }
 
-    showModal = () => {
-        this.setState({show: true})
+    handleOpenModal () {
+        this.setState({showModal: true})
+        console.log(this.state.show)
     }
 
-    hideModal = () => {
-        this.setState({show: false})
+    handleCloseModal () {
+        this.setState({showModal: false})
+        console.log(this.state.show)
     }
 
     handleAppClick = event => {
@@ -42,57 +51,36 @@ export default class Applications extends React.Component {
 
     render() {
         return (
-            <main>
-                <ApplicationModal show={this.state.show} handleClose={this.hideModal}>
-                    <p>Modal</p>
-                    <p>Data</p>
-                </ApplicationModal>
-                <div className={"tableContainer"}>
-                    <table>
-                        <h1 className={"applicationsHeader"}>Applications</h1>
-                        <tr>
-                            <th>Requisition</th>
-                            <th>Date Applied</th>
-                            <th>Status</th>
-                        </tr>
-                        <tbody>
-                        {/*{this.state.candidates.map(application =>*/}
-                        {/*<tr>*/}
-                        {/*/!*<td>{candidate.firstName}</td>*!/*/}
-                        {/*/!*<td>{candidate.email}</td>*!/*/}
-                        {/*/!*<td>{candidate.phoneNumber}</td>*!/*/}
-                        {/*</tr>)*/}
-                        {/*}*/}
-                        <tr onClick={this.showModal}>
-                            <td>Developer I</td>
-                            <td>Feb. 2, 2019</td>
-                            <td>Ready for Interview</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </main>
+            <div className={"tableContainer"}>
+                <table>
+                    <h1 className={"applicationsHeader"}>Applications</h1>
+                    <tr>
+                        <th>Requisition</th>
+                        <th>Date Applied</th>
+                        <th>Status</th>
+                    </tr>
+                    <tbody>
+                    {/*{this.state.candidates.map(application =>*/}
+                    {/*<tr>*/}
+                    {/*/!*<td>{candidate.firstName}</td>*!/*/}
+                    {/*/!*<td>{candidate.email}</td>*!/*/}
+                    {/*/!*<td>{candidate.phoneNumber}</td>*!/*/}
+                    {/*</tr>)*/}
+                    {/*}*/}
+                    <tr onClick={this.handleOpenModal}>
+                        <td>Developer I</td>
+                        <td>Feb. 2, 2019</td>
+                        <td>Ready for Interview</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <Modal
+                    isOpen={this.state.showModal}
+                    contentLabel="Minimal Modal Example"
+                >
+                    <button onClick={this.handleCloseModal}>Close Modal</button>
+                </Modal>
+            </div>
         );
     }
 }
-
-const ApplicationModal = ({ handleClose, show, children }) => {
-    const showHideClassName = show ? 'modal display-block' : 'modal display-none';
-
-    return (
-        <div className={showHideClassName}>
-            <section className='modal-main'>
-                {children}
-                <button
-                    onClick={handleClose}
-                >
-                    Close
-                </button>
-            </section>
-        </div>
-    );
-};
-
-const container = document.createElement("div");
-document.body.appendChild(container);
-ReactDOM.render(<Applications />, container);
