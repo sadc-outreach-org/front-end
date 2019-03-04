@@ -1,10 +1,9 @@
 import React, {Component} from 'react';
-import CandidateSideNav from '../../components/SideNav/CandidateSideNav';
 import '../../../styles/CandidateProfile.css';
 import {Input, Button} from 'reactstrap';
 import axios from 'axios';
 
-class CandidateProfileView extends Component {
+class CandidateProfileInfo extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -55,10 +54,9 @@ class CandidateProfileView extends Component {
 
         return (
             <div className={"profileView"}>
-                <h1 id={"temp-nav"}>Candidate Profile View (Nav Bar Placeholder)</h1>
-                <CandidateSideNav/>
                 <div className={"main-content"}>
                     <div className={"form"}>
+                        <h1 className={"profile-header"}>Profile</h1>
                         <div className={"column"}>
                             <label htmlFor="">First Name</label>
                             <Input
@@ -165,4 +163,4 @@ class CandidateProfileView extends Component {
     }
 }
 
-export default CandidateProfileView;
+export default CandidateProfileInfo;

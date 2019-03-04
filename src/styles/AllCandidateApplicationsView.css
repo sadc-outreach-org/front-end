@@ -1,0 +1,13 @@
+.applicationsHeader {
+    color: black;
+    text-align: left;
+}
+
+.tableContainer {
+    height: 100vh;
+    background-color: white;
+}
+
+.tableContainer tr:hover {
+    cursor: pointer;
+}
