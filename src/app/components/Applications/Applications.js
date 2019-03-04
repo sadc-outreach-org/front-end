@@ -1,8 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from "axios";
+import '../../../styles/ApplicationStatus.css';
+import ApplicationStatus from '../ApplicationStatus/ApplicationStatus';
 import Modal from 'react-modal';
 // import {getApplications} from services.js
+
+
 
 export default class Applications extends React.Component {
     constructor () {
@@ -76,9 +80,11 @@ export default class Applications extends React.Component {
                 </table>
                 <Modal
                     isOpen={this.state.showModal}
+                    ariaHideApp={false}
                     contentLabel="Minimal Modal Example"
                 >
-                    <button onClick={this.handleCloseModal}>Close Modal</button>
+                    <a className="modalCloseButton" onClick={this.handleCloseModal}/>
+                    <ApplicationStatus/>
                 </Modal>
             </div>
         );

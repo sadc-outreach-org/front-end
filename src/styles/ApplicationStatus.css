@@ -1,15 +1,52 @@
 .applicationStatusContainer {
-    width: 85%;
-    float: right;
+    width: 100%;
 }
 
 #application-header {
     color: black;
 }
 
+.modalCloseButton {
+    float: right;
+    position: absolute;
+    right: 32px;
+    top: 32px;
+    width: 32px;
+    height: 32px;
+    opacity: 0.3;
+}
+
+.modalCloseButton:hover {
+    opacity: 1;
+    cursor: pointer;
+}
+
+.modalCloseButton:before, .modalCloseButton:after {
+    position: absolute;
+    left: 15px;
+    content: ' ';
+    height: 33px;
+    width: 2px;
+    background-color: #333;
+}
+
+.modalCloseButton:before {
+    transform: rotate(45deg);
+}
+
+.modalCloseButton:after {
+    transform: rotate(-45deg);
+}
+
 .progressbar {
     counter-reset: step;
     padding-top: 3%;
+    margin-left: 15%;
+}
+
+.modalOverlay {
+    background-color: black;
+    opacity: 1;
 }
 
 .progressbar li {
@@ -49,7 +86,7 @@
     position: absolute;
     background-color: #7d7d7d;
     top: 15px;
-    left: -54%;
+    left: -56%;
     z-index: 0;
     cursor: default;
 }
