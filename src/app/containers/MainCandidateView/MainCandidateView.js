@@ -7,7 +7,7 @@ import CandidateProfileInfo from '../../components/CandidateProfileInfo/Candidat
 import Applications from '../../components/Applications/Applications';
 import {Route, HashRouter} from "react-router-dom";
 
-class MainCandidateProfileView extends Component {
+class MainCandidateView extends Component {
     render() {
         return(
             <HashRouter>
@@ -27,4 +27,4 @@ class MainCandidateProfileView extends Component {
     }
 }
 
-export default MainCandidateProfileView;
+export default MainCandidateView;

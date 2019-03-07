@@ -5,7 +5,7 @@ import App from './App';
 // import CandidateAppStatusView from './app/containers/CandidateApplicationStatusView/CandidateApplicationStatusView';
 // import AllCandidates from './app/containers/AllCandidatesView/AllCandidates';
 // import AllCandidateApplicationsView from './app/containers/AllCandidateApplicationsView/AllCandidateApplicationsView';
-// import MainCandidateProfileView from './app/containers/MainCandidateProfileView/MainCandidateProfileView';
+// import MainCandidateView from './app/containers/MainCandidateView/MainCandidateView';
 import MainHiringManagerView from './app/containers/MainHiringManagerView/MainHiringManagerView';
 import * as serviceWorker from './serviceWorker';
 
