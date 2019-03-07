@@ -6,7 +6,7 @@ import App from './App';
 // import AllCandidates from './app/containers/AllCandidatesView/AllCandidates';
 // import AllCandidateApplicationsView from './app/containers/AllCandidateApplicationsView/AllCandidateApplicationsView';
 // import MainCandidateView from './app/containers/MainCandidateView/MainCandidateView';
-import MainHiringManagerView from './app/containers/MainHiringManagerView/MainHiringManagerView';
+// import MainHiringManagerView from './app/containers/MainHiringManagerView/MainHiringManagerView';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(<App/>, document.getElementById('root'));

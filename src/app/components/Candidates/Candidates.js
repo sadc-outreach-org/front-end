@@ -1,4 +1,5 @@
 import React from 'react';
+import '../../../styles/AllCandidates.css';
 import {getUsers} from '../../services.js';
 import { Link } from 'react-router-dom';
 
@@ -17,6 +18,8 @@ export default class Candidates extends React.Component {
     render() {
         return (
             <div className={"tableContainer"}>
+                <h1 id={"applicantsHeader"}>Applicants</h1>
+                <input type={"text"} id={"searchInput"} onKeyUp={console.log("typed")} placeholder={"Search by name"} title={"Type in a name"}/>
                 <table>
                     <tbody>
                         <tr>
@@ -24,6 +27,7 @@ export default class Candidates extends React.Component {
                             <th>Last</th>
                             <th>Email</th>
                             <th>Phone Number</th>
+                            <th>Application Status <i class="upArrow"></i><i class="downArrow"></i></th>
                         </tr>
                         {this.state.candidates.map(candidate =>
                             <tr>
@@ -39,7 +43,7 @@ export default class Candidates extends React.Component {
                                 </td>
                                 <td>{candidate.email}</td>
                                 <td>{candidate.phoneNum}</td>
-
+                                <td>{candidate.phoneNum}</td>
                             </tr>)
                         }
                     </tbody>
