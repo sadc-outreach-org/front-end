@@ -92,7 +92,7 @@ export default class Applications extends React.Component {
                     style={customStyling}
                     contentLabel="Minimal Modal Example"
                 >
-                    <a className="modalCloseButton" onClick={this.handleCloseModal}/>
+                    <div className="modalCloseButton" onClick={this.handleCloseModal}/>
                     <ApplicationStatus/>
                 </Modal>
             </div>
