@@ -12,11 +12,11 @@ class MainCandidateProfileView extends Component {
                     <SideMenu>
                         <Item divider={true} label="Actions" value="segment1"/>
                         <Item label="Applicants" value="/applicants"></Item>
-                        <Item label="Requisitions" value="/requisitions"></Item>
+                        <Item label="Jobs" value="/jobs"></Item>
                         <Item label="Active Applications" value="/active-applications"></Item>
                     </SideMenu>
                     <div className={"main-hiring-manager-content"}>
-                        {/*<Route path={"/profile"} component={CandidateProfileInfo}/>*/}
+                        <Route path={"/applicants"} component={AllCandidates}/>
                         {/*<Route path={"/applications"} component={Applications}/>*/}
                     </div>
                 </div>
