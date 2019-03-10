@@ -146,14 +146,6 @@ class SignUp extends Component {
                                         required
                                     />
                                     <Input
-                                        type={"text"}
-                                        name={"gitlink"}
-                                        id={"gitlink"}
-                                        placeholder={"Git Link"}
-                                        defaultValue={this.state.gitLink}
-                                        onChange={(event) => this.setState({gitLink: event.target.value})}
-                                    />
-                                    <Input
                                         type={"password"}
                                         name={"password"}
                                         id={"password"}
@@ -170,6 +162,12 @@ class SignUp extends Component {
                                         defaultValue={this.state.confirmPassword}
                                         onChange={(event) => this.setState({confirmPassword: event.target.value})}
                                         required
+                                    />
+                                    <Input
+                                        type={"file"}
+                                        name={"resume"}
+                                        id={"resume"}
+                                        defaultValue={this.state.gitLink}
                                     />
                                     <ConditionalAlert visible={!this.state.passwordsMatch} message={"Passwords must match!"}/>
                                     <Button
