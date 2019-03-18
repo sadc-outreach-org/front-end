@@ -37,19 +37,24 @@ class resume extends Component {
 
     componentDidMount() {
         getResume().then(res => {
-//Create a Blob from the PDF Stream
+
+            //Create a Blob from the PDF Stream
+
             const file = new Blob(
                 [res.data],
                 {type: 'application/pdf'});
 //Build a URL from the file
             const fileURL = URL.createObjectURL(file);
 //Open the URL on new Window
+
             window.open(fileURL, "_blank");
+
         })
             .catch(error => {
                 console.log(error);
             });
     }
+
 
 
 
