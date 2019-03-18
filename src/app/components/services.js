@@ -1,21 +1,19 @@
 import axios from 'axios';
-
-const API_URL = "http://34.73.221.154:8080";
 var user = "1";
 var site = "http://34.73.221.154:8080/users/";
+//http://34.73.221.154:8080/users/{userID}/resume
+
+//'http://34.73.221.154:8080/user/jbutt@gmail.com/resume'
 
 
 export const getUsers = () => {
-    return axios.get(`${API_URL}/user/users`);
-}
+    return axios.get('http://cloud-25.cs.trinity.edu:8080/users');
+};
 
 export const addCandidate = (payload) => {
-    return axios.post(`${API_URL}/user/signup`, payload);
-}
+    return axios.post('http://cloud-25.cs.trinity.edu:8080/user/signup', payload);
+};
 
-export const login = (payload) => {
-    return axios.post(`${API_URL}/user/login`, payload);
-}
 export const getResume = () => {
     return  axios(site.concat(user,"/resume"), {
         method: 'GET',
