@@ -1,5 +1,7 @@
 import React from 'react';
-import {getUsers} from '../services.js';
+import '../../../styles/AllCandidates.css';
+import {getUsers} from '../../services.js';
+import { Link } from 'react-router-dom';
 
 export default class Candidates extends React.Component {
     state = {
@@ -16,18 +18,32 @@ export default class Candidates extends React.Component {
     render() {
         return (
             <div className={"tableContainer"}>
+                <h1 id={"applicantsHeader"}>Applicants</h1>
+                <input type={"text"} id={"searchInput"} onKeyUp={console.log("typed")} placeholder={"Search by name"} title={"Type in a name"}/>
                 <table>
-                    <tr>
-                        <th>First Name</th>
-                        <th>Email</th>
-                        <th>Phone Number</th>
-                    </tr>
                     <tbody>
+                        <tr>
+                            <th>First</th>
+                            <th>Last</th>
+                            <th>Email</th>
+                            <th>Phone Number</th>
+                            <th>Application Status <i class="upArrow"></i><i class="downArrow"></i></th>
+                        </tr>
                         {this.state.candidates.map(candidate =>
                             <tr>
-                                <td>{candidate.firstName}</td>
+                                <td>
+                                    <Link to={`/user/${candidate.email}/info`}>
+                                        {candidate.firstName}
+                                    </Link>
+                                </td>
+                                <td>
+                                    <Link to={`/user/${candidate.email}/info`}>
+                                        {candidate.lastName}
+                                    </Link>
+                                </td>
                                 <td>{candidate.email}</td>
-                                <td>{candidate.phoneNumber}</td>
+                                <td>{candidate.phoneNum}</td>
+                                <td>{candidate.phoneNum}</td>
                             </tr>)
                         }
                     </tbody>

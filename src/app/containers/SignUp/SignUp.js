@@ -1,8 +1,18 @@
 import React, {Component} from 'react';
 import logo from '../../../images/heb-red.png';
-import {Button, Form, FormGroup, Input, Container, Row, Col} from 'reactstrap';
+import {Button, Form, FormGroup, Input, Container, Row, Col, Alert} from 'reactstrap';
 import '../../../styles/SignUp.css';
-import {addCandidate} from '../../components/services';
+import {addCandidate} from '../../services';
+
+const ConditionalAlert = ({visible, message})=> {
+    if(visible){
+        return(
+            <Alert color={"danger"}>
+                {message}
+            </Alert>
+        );
+    } else return null;
+}
 
 class SignUp extends Component {
     constructor(props) {
@@ -12,14 +22,15 @@ class SignUp extends Component {
             email: '',
             firstName: '',
             lastName: '',
-            phoneNumber: '',
+            phoneNum: '',
             streetAddress: '',
             zipCode: '',
             city: '',
             state: '',
-            githubLink: '',
+            gitLink: '',
             password: '',
-            confirmPassword: ''
+            confirmPassword: '',
+            passwordsMatch: true
         };
 
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -28,25 +39,28 @@ class SignUp extends Component {
     handleSubmit = event => {
         event.preventDefault();
 
-        let payload = {
-            email: this.state.email,
-            password: this.state.password,
-            firstName: this.state.firstName,
-            lastName: this.state.lastName,
-            streetAddress: this.state.streetAddress,
-            zipCode: this.state.zipCode,
-            city: this.state.city,
-            state: this.state.state,
-            phoneNumber: this.state.phoneNumber,
-            githubLink: this.state.githubLink
-        };
+        if(this.state.password !== this.state.confirmPassword) {
+            this.setState({passwordsMatch: false});
+        } else {
+            this.setState({passwordsMatch: true});
+            let payload = {
+                email: this.state.email,
+                password: this.state.password,
+                firstName: this.state.firstName,
+                lastName: this.state.lastName,
+                streetAddress: this.state.streetAddress,
+                zipCode: this.state.zipCode,
+                city: this.state.city,
+                state: this.state.state,
+                phoneNum: this.state.phoneNum,
+                gitLink: this.state.githubLink
+            };
 
-        addCandidate(payload).then(res => {
-            console.log(res);
-            console.log(res.data.result);
-        });
-
-        console.log("it worked!");
+            addCandidate(payload).then(res => {
+                console.log(res);
+                console.log(res.data.result);
+            });
+        }
     };
 
     render() {
@@ -59,15 +73,6 @@ class SignUp extends Component {
                             <Form onSubmit={this.handleSubmit}>
                                 <FormGroup>
                                     <h1 className={"title"}>Sign Up</h1>
-                                    <Input
-                                        type={"email"}
-                                        name={"email"}
-                                        id={"email"}
-                                        placeholder={"Email"}
-                                        defaultValue={this.state.email}
-                                        onChange={(event) => this.setState({email: event.target.value})}
-                                        required
-                                    />
                                     <Input
                                         type={"text"}
                                         name={"firstname"}
@@ -87,12 +92,21 @@ class SignUp extends Component {
                                         required
                                     />
                                     <Input
+                                        type={"email"}
+                                        name={"email"}
+                                        id={"email"}
+                                        placeholder={"Email"}
+                                        defaultValue={this.state.email}
+                                        onChange={(event) => this.setState({email: event.target.value})}
+                                        required
+                                    />
+                                    <Input
                                         type={"text"}
                                         name={"phonenumber"}
                                         id={"phonenumber"}
                                         placeholder={"Phone Number"}
-                                        defaultValue={this.state.phoneNumber}
-                                        onChange={(event) => this.setState({phoneNumber: event.target.value})}
+                                        defaultValue={this.state.phoneNum}
+                                        onChange={(event) => this.setState({phoneNum: event.target.value})}
                                         required
                                     />
                                     <Input
@@ -135,9 +149,9 @@ class SignUp extends Component {
                                         type={"text"}
                                         name={"gitlink"}
                                         id={"gitlink"}
-                                        placeholder={"Git Hub Link"}
-                                        defaultValue={this.state.githubLink}
-                                        onChange={(event) => this.setState({githubLink: event.target.value})}
+                                        placeholder={"Git Link"}
+                                        defaultValue={this.state.gitLink}
+                                        onChange={(event) => this.setState({gitLink: event.target.value})}
                                     />
                                     <Input
                                         type={"password"}
@@ -157,6 +171,7 @@ class SignUp extends Component {
                                         onChange={(event) => this.setState({confirmPassword: event.target.value})}
                                         required
                                     />
+                                    <ConditionalAlert visible={!this.state.passwordsMatch} message={"Passwords must match!"}/>
                                     <Button
                                         type={"submit"}
                                         className={"submitSignup btn-block"}
