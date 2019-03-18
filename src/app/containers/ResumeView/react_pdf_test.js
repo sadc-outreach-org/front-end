@@ -14,12 +14,22 @@ class resume extends Component {
 
     componentDidMount() {
         getResume().then(res => {
-            const file = res.data.result;
-            this.setState({file});
-            alert(res.data.result)
+            //Create a Blob from the PDF Stream
+            const file = new Blob(
+                [res.data],
+                {type: 'application/pdf'});
+//Build a URL from the file
+            const fileURL = URL.createObjectURL(file);
+//Open the URL on new Window
+            window.open(fileURL);
         })
-        console.log("yo")
+            .catch(error => {
+                console.log(error);
+            });
     }
+
+
+
 
 
     render() {
@@ -29,7 +39,7 @@ class resume extends Component {
 
                 </div>
 
-                <a href= 'http://34.73.221.154:8080/user/jbutt@gmail.com/resume'> view</a>
+                <a href= 'http://34.73.221.154:8080/users/1/resume'> view</a>
             </div>
 
 
