@@ -14,7 +14,7 @@ export const addCandidate = (payload) => {
 }
 
 export const login = (payload) => {
-    return axios.post(`${API_URL}/user/login`, payload);
+    return axios.post(`${API_URL}/users/login`, payload);
 }
 
 // TODO: Don't hardcode the user ID
@@ -29,3 +29,7 @@ export const getResume = () => {
 export const uploadResume = (user, pdfFile) => {
     return axios.post(site.concat(user,"/resume"), pdfFile);
 };
+
+export const getUser = (userID) => {
+    return axios.get(`${API_URL}/users/${userID}`);
+}

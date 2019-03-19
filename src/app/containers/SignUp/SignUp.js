@@ -89,6 +89,9 @@ class SignUp extends Component {
                     console.log(response);
                     console.log(response.data.result);
                 })
+                if(res.status == 200) {
+                    this.props.history.push('/login', {});
+                }
             });
         }
     };
