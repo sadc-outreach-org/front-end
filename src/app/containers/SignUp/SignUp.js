@@ -2,8 +2,7 @@ import React, {Component} from 'react';
 import logo from '../../../images/heb-red.png';
 import {Button, Form, FormGroup, Input, Container, Row, Col, Alert} from 'reactstrap';
 import '../../../styles/SignUp.css';
-import {addCandidate} from '../../components/services';
-import {uploadResume} from "../../components/services";
+import {addCandidate, uploadResume} from '../../components/services';
 
 const ConditionalAlert = ({visible, message})=> {
     if(visible){
@@ -44,6 +43,7 @@ class SignUp extends Component {
     }
 
     fileUp(file) {
+        // Make this so that it's not hardcoded to jbutt@gmail.com
         const url = 'http://34.73.221.154:8080/user/jbutt@gmail.com/resume';
         const formData = new FormData();
         formData.append('file',file)
@@ -52,7 +52,7 @@ class SignUp extends Component {
                 'content-type': 'multipart/form-data'
             }
         }
-        return  uploadResume(formData)
+        return uploadResume(formData)
     }
 
     handleSubmit = event => {
@@ -76,14 +76,16 @@ class SignUp extends Component {
             };
 
             addCandidate(payload).then(res => {
+                console.log("The following is the response for Signup:");
                 console.log(res);
                 console.log(res.data.result);
             });
-        }
 
-        this.fileUp(this.state.file).then((response) => {
-            console.log(response.data);
-        })
+            this.fileUp(this.state.file).then((response) => {
+                console.log("The following is the response for file upload:");
+                console.log(response.data);
+            })
+        }
     };
 
     render() {
