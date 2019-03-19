@@ -5,7 +5,6 @@ import AllCandidates from './app/containers/AllCandidatesView/AllCandidates';
 import SignUp from './app/containers/SignUp/SignUp';
 import MainCandidateView from './app/containers/MainCandidateView/MainCandidateView';
 import MainHiringManagerView from './app/containers/MainHiringManagerView/MainHiringManagerView';
-import CandidateView from './app/containers/CandidateProfileView/CandidateProfileView';
 import resume from './app/containers/ResumeView/react_pdf_test';
 import resumeUp from './app/containers/ResumeUpload/ResumeUpload';
 import './styles/App.css';
@@ -22,7 +21,6 @@ class App extends Component {
                         <Route path="/candidates" component={AllCandidates}/>
                         <Route path="/c-dashboard" component={MainCandidateView}/>
                         <Route path="/hm-dashboard" component={MainHiringManagerView}/>
-                        <Route path="/user" component={CandidateView}/>
                         <Route path="/resume" component={resume}/>
                         <Route path="/resumeUpload" component = {resumeUp}/>
                     </div>

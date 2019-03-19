@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 import logo from '../../../images/heb-red.png';
 import {Button, Form, FormGroup, Input, Container, Row, Col, Alert} from 'reactstrap';
 import '../../../styles/SignUp.css';
-import {addCandidate} from '../../services';
+import {addCandidate} from '../../components/services';
+import {uploadResume} from "../../components/services";
 
 const ConditionalAlert = ({visible, message})=> {
     if(visible){
@@ -27,13 +28,31 @@ class SignUp extends Component {
             zipCode: '',
             city: '',
             state: '',
-            gitLink: '',
+            resume: null,
             password: '',
             confirmPassword: '',
             passwordsMatch: true
         };
 
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.onChange = this.onChange.bind(this)
+        this.fileUp = this.fileUp.bind(this)
+    }
+
+    onChange = event => {
+        this.setState({file:event.target.files[0]})
+    }
+
+    fileUp(file) {
+        const url = 'http://34.73.221.154:8080/user/jbutt@gmail.com/resume';
+        const formData = new FormData();
+        formData.append('file',file)
+        const config = {
+            headers: {
+                'content-type': 'multipart/form-data'
+            }
+        }
+        return  uploadResume(formData)
     }
 
     handleSubmit = event => {
@@ -61,6 +80,10 @@ class SignUp extends Component {
                 console.log(res.data.result);
             });
         }
+
+        this.fileUp(this.state.file).then((response) => {
+            console.log(response.data);
+        })
     };
 
     render() {
@@ -168,6 +191,8 @@ class SignUp extends Component {
                                         name={"resume"}
                                         id={"resume"}
                                         defaultValue={this.state.gitLink}
+                                        onChange={this.onChange}
+                                        required
                                     />
                                     <ConditionalAlert visible={!this.state.passwordsMatch} message={"Passwords must match!"}/>
                                     <Button

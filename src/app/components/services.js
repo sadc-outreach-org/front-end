@@ -7,11 +7,11 @@ var site = "http://34.73.221.154:8080/users/";
 
 
 export const getUsers = () => {
-    return axios.get('http://cloud-25.cs.trinity.edu:8080/users');
+    return axios.get('http://34.73.221.154:8080/users/');
 };
 
 export const addCandidate = (payload) => {
-    return axios.post('http://cloud-25.cs.trinity.edu:8080/user/signup', payload);
+    return axios.post('http://cloud-25.cs.trinity.edu:8080/users/signup', payload);
 };
 
 export const getResume = () => {
@@ -21,6 +21,7 @@ export const getResume = () => {
     })
     //axios.get(site.concat(user,"/resume"))
 };
+
 export const uploadResume = (pdfFile) => {
     return axios.post(site.concat(user,"/resume"), pdfFile);
 };
