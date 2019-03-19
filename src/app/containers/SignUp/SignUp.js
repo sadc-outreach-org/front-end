@@ -30,7 +30,8 @@ class SignUp extends Component {
             resume: null,
             password: '',
             confirmPassword: '',
-            passwordsMatch: true
+            passwordsMatch: true,
+            userID: ''
         };
 
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -44,7 +45,6 @@ class SignUp extends Component {
 
     fileUp(file) {
         // Make this so that it's not hardcoded to jbutt@gmail.com
-        const url = 'http://34.73.221.154:8080/user/jbutt@gmail.com/resume';
         const formData = new FormData();
         formData.append('file',file)
         const config = {
@@ -52,7 +52,7 @@ class SignUp extends Component {
                 'content-type': 'multipart/form-data'
             }
         }
-        return uploadResume(formData)
+        return uploadResume(this.state.userID, formData)
     }
 
     handleSubmit = event => {
@@ -79,6 +79,8 @@ class SignUp extends Component {
                 console.log("The following is the response for Signup:");
                 console.log(res);
                 console.log(res.data.result);
+                // this.setState({userID : res.data.result.candidateID});
+                this.setState({userID : 40})
             });
 
             this.fileUp(this.state.file).then((response) => {
