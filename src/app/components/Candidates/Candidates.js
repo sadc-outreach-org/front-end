@@ -28,12 +28,12 @@ export default class Candidates extends React.Component {
                         {this.state.candidates.map(candidate =>
                             <tr>
                                 <td>
-                                    <Link to={`/user/${candidate.email}/info`}>
+                                    <Link to={`/user/${candidate.email}/info`}>//TODO update this to redirect to profile page
                                         {candidate.firstName}
                                     </Link>
                                 </td>
                                 <td>
-                                    <Link to={`/user/${candidate.email}/info`}>
+                                    <Link to={`/user/${candidate.email}/info`}>//TODO update this to redirect to profile page
                                         {candidate.lastName}
                                     </Link>
                                 </td>
