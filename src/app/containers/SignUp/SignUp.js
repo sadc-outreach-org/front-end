@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import logo from '../../../images/heb-red.png';
 import {Button, Form, FormGroup, Input, Container, Row, Col, Alert} from 'reactstrap';
 import '../../../styles/SignUp.css';
-import {addCandidate} from '../../services';
+import {addCandidate, uploadResume} from '../../components/services';
 
 const ConditionalAlert = ({visible, message})=> {
     if(visible){
@@ -27,13 +27,32 @@ class SignUp extends Component {
             zipCode: '',
             city: '',
             state: '',
-            gitLink: '',
+            resume: null,
             password: '',
             confirmPassword: '',
             passwordsMatch: true
         };
 
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.onChange = this.onChange.bind(this)
+        this.fileUp = this.fileUp.bind(this)
+    }
+
+    onChange = event => {
+        this.setState({file:event.target.files[0]})
+    }
+
+    fileUp(file) {
+        // Make this so that it's not hardcoded to jbutt@gmail.com
+        const url = 'http://34.73.221.154:8080/user/jbutt@gmail.com/resume';
+        const formData = new FormData();
+        formData.append('file',file)
+        const config = {
+            headers: {
+                'content-type': 'multipart/form-data'
+            }
+        }
+        return uploadResume(formData)
     }
 
     handleSubmit = event => {
@@ -57,9 +76,15 @@ class SignUp extends Component {
             };
 
             addCandidate(payload).then(res => {
+                console.log("The following is the response for Signup:");
                 console.log(res);
                 console.log(res.data.result);
             });
+
+            this.fileUp(this.state.file).then((response) => {
+                console.log("The following is the response for file upload:");
+                console.log(response.data);
+            })
         }
     };
 
@@ -146,14 +171,6 @@ class SignUp extends Component {
                                         required
                                     />
                                     <Input
-                                        type={"text"}
-                                        name={"gitlink"}
-                                        id={"gitlink"}
-                                        placeholder={"Git Link"}
-                                        defaultValue={this.state.gitLink}
-                                        onChange={(event) => this.setState({gitLink: event.target.value})}
-                                    />
-                                    <Input
                                         type={"password"}
                                         name={"password"}
                                         id={"password"}
@@ -169,6 +186,14 @@ class SignUp extends Component {
                                         placeholder={"Confirm Password"}
                                         defaultValue={this.state.confirmPassword}
                                         onChange={(event) => this.setState({confirmPassword: event.target.value})}
+                                        required
+                                    />
+                                    <Input
+                                        type={"file"}
+                                        name={"resume"}
+                                        id={"resume"}
+                                        defaultValue={this.state.gitLink}
+                                        onChange={this.onChange}
                                         required
                                     />
                                     <ConditionalAlert visible={!this.state.passwordsMatch} message={"Passwords must match!"}/>

@@ -1,6 +1,6 @@
 import React from 'react';
 import '../../../styles/AllCandidates.css';
-import {getUsers} from '../../services.js';
+import {getUsers} from '../../components/services.js';
 import { Link } from 'react-router-dom';
 
 export default class Candidates extends React.Component {
@@ -27,7 +27,7 @@ export default class Candidates extends React.Component {
                             <th>Last</th>
                             <th>Email</th>
                             <th>Phone Number</th>
-                            <th>Application Status <i class="upArrow"></i><i class="downArrow"></i></th>
+                            <th>Application Status <i className="upArrow"></i><i className="downArrow"></i></th>
                         </tr>
                         {this.state.candidates.map(candidate =>
                             <tr>

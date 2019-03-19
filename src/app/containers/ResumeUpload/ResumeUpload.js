@@ -34,7 +34,7 @@ class resumeUpload extends Component {
                 'content-type': 'multipart/form-data'
             }
         }
-        return  uploadResume(formData)
+        return uploadResume(formData)
     }
     render() {
         return (
