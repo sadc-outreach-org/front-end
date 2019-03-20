@@ -26,14 +26,13 @@ class resumeUpload extends Component {
         this.setState({file:event.target.files[0]})
     }
     fileUp(file) {
-        const url = 'http://34.73.221.154:8080/user/jbutt@gmail.com/resume';
         const formData = new FormData();
         formData.append('file',file)
-        const config = {
-            headers: {
-                'content-type': 'multipart/form-data'
-            }
-        }
+        // const config = {
+        //     headers: {
+        //         'content-type': 'multipart/form-data'
+        //     }
+        // }
         return uploadResume(formData)
     }
     render() {

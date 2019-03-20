@@ -43,16 +43,19 @@ class SignUp extends Component {
         this.setState({file:event.target.files[0]})
     }
 
-    fileUp(file) {
-        // Make this so that it's not hardcoded to jbutt@gmail.com
+    fileUp(userID, file) {
         const formData = new FormData();
+        console.log("This is the user ID pushed to fileUP method: " + userID);
         formData.append('file',file)
-        const config = {
-            headers: {
-                'content-type': 'multipart/form-data'
-            }
-        }
-        return uploadResume(this.state.userID, formData)
+        /* Jerry had this in his resume upload stuff but it's unused and will
+        cause errors in CircleCI. Will remove when verified it's not needed
+         */
+        // const config = {
+        //     headers: {
+        //         'content-type': 'multipart/form-data'
+        //     }
+        // }
+        return uploadResume(userID, formData);
     }
 
     handleSubmit = event => {
@@ -79,14 +82,14 @@ class SignUp extends Component {
                 console.log("The following is the response for Signup:");
                 console.log(res);
                 console.log(res.data.result);
-                // this.setState({userID : res.data.result.candidateID});
-                this.setState({userID : 40})
+                console.log("Candidate ID from add candidate call: " + res.data.result.candidateID);
+                this.setState({userID : res.data.result.candidateID});
+                this.fileUp(res.data.result.candidateID, this.state.file).then((response) => {
+                    console.log("The following is the response for file upload:");
+                    console.log(response);
+                    console.log(response.data.result);
+                })
             });
-
-            this.fileUp(this.state.file).then((response) => {
-                console.log("The following is the response for file upload:");
-                console.log(response.data);
-            })
         }
     };
 
