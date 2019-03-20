@@ -22,6 +22,6 @@ export const getResume = () => {
     //axios.get(site.concat(user,"/resume"))
 };
 
-export const uploadResume = (pdfFile) => {
-    return axios.post(site.concat(user,"/resume"), pdfFile);
+export const uploadResume = (userID, pdfFile) => {
+    return axios.post(site.concat(userID,"/resume"), pdfFile);
 };
