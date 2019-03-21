@@ -1,11 +1,11 @@
 import axios from 'axios';
-
 const API_URL = "http://34.73.221.154:8080";
 var fakeUser = "1";
 var site = "http://34.73.221.154:8080/users/";
 
 
 export const getUsers = () => {
+
     return axios.get(`${API_URL}/users`);
 }
 
