@@ -27,10 +27,8 @@ class Login extends Component {
         login(payload).then(res => {
                 console.log(res);
                 console.log(res.data.result);
-                if(res.status === "OK"){
-                    //<Link to={`/user/${res.result.profile.email}/info`}/>
-                 } else {
-
+                if(res.status === 200){
+                    this.props.history.push('/c-dashboard/profile', {});
                  }
             })
     };
