@@ -1,10 +1,7 @@
 import React, {Component} from 'react';
 import {Button, Form, Input} from 'reactstrap';
-import { uploadResume} from '../../components/services';
-//pdf Type: application/pdf
-//new File(["foo"], "foo.txt", {
-//   type: "text/plain",
-// });
+import { uploadResume} from '../../services.js';
+
 
 class resumeUpload extends Component {
     constructor(props) {

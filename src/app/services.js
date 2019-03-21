@@ -1,5 +1,4 @@
 import axios from 'axios';
-
 const API_URL = "http://34.73.221.154:8080";
 var fakeUser = "1";
 var site = "http://34.73.221.154:8080/users/";
@@ -20,6 +19,7 @@ export const login = (payload) => {
 // TODO: Don't hardcode the user ID
 export const getResume = () => {
     return  axios(site.concat(fakeUser,"/resume"), {
+
         method: 'GET',
         responseType: 'blob' //Force to receive data in a Blob Format
     })
