@@ -40,6 +40,8 @@ class resume extends Component {
 
             //Create a Blob from the PDF Stream
 
+
+
             const file = new Blob(
                 [res.data],
                 {type: 'application/pdf'});
@@ -54,6 +56,8 @@ class resume extends Component {
                 console.log(error);
             });
     }
+
+
 
 
 
