@@ -26,3 +26,7 @@ export const getResume = () => {
 export const uploadResume = (pdfFile) => {
     return axios.post(site.concat(user,"/resume"), pdfFile);
 };
+
+export const getJobs = () => {
+    return axios.get(`${API_URL}/jobs`);
+}
