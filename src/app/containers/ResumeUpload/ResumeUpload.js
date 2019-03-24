@@ -25,12 +25,13 @@ class resumeUpload extends Component {
     fileUp(file) {
         const formData = new FormData();
         formData.append('file',file)
+        console.log("File be up")
         // const config = {
         //     headers: {
         //         'content-type': 'multipart/form-data'
         //     }
         // }
-        return uploadResume(formData)
+        return uploadResume("1",formData)
     }
     render() {
         return (
