@@ -7,7 +7,6 @@ var site = "http://34.73.221.154:8080/users/";
 
 
 export const getUsers = () => {
-
     return axios.get(`${API_URL}/users`);
 }
 
@@ -22,6 +21,7 @@ export const login = (payload) => {
 // TODO: Don't hardcode the user ID
 export const getResume = () => {
     return  axios(site.concat("1","/resume"), {
+
         method: 'GET',
         responseType: 'blob' //Force to receive data in a Blob Format
     })
