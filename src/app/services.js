@@ -25,6 +25,7 @@ export const getResume = () => {
     return  axios(site.concat(fakeUser,"/resume"), {
 
 
+
         method: 'GET',
         responseType: 'blob' //Force to receive data in a Blob Format
     })

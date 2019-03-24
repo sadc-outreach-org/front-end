@@ -1,9 +1,36 @@
 import React, { Component } from 'react';
+
 //import resumeFile from '../../../images/Resume_2018_Dec_18_Gerardo_Gonzalez.pdf';
 import {getResume} from '../../services.js';
 //import {Thumbnail} from 'react-thumbnail';
 
 
+
+
+//Thumbnail
+const fs = require("fs")
+const { join } = require("path")
+const pdf = require("../index")
+
+//with buffer
+pdf(fs.readFileSync(join(__dirname, "pdf", "test.pdf")), {
+    compress: {
+        type:"JPEG",
+        quality: 70
+    }
+})
+    .then(data /*is a buffer*/ => data.pipe(fs.createWriteStream(join(__dirname, "previews", "previewBuffer.jpg"))))
+    .catch(err => console.error(err))
+
+// //with stream
+pdf(fs.createReadStream(join(__dirname, "pdf", "test.pdf")), {
+    compress: {
+        type:"JPEG",
+        quality: 70
+    }
+})
+    .then(data /*is a buffer*/ => data.pipe(fs.createWriteStream(join(__dirname, "previews", "previewStream.jpg"))))
+    .catch(err => console.error(err))
 
 class resume extends Component {
     constructor(props) {
@@ -20,7 +47,6 @@ class resume extends Component {
 
 //Create a Blob from the PDF Stream
             const pdf = new Blob(
-
                 [res.data],
                 {type: 'application/pdf'});
             console.log("    ");
@@ -34,7 +60,9 @@ class resume extends Component {
             const fileURL = URL.createObjectURL(pdf);
 //Open the URL on new Window
 
+
             window.open(fileURL, "_blank");
+
 
         })
             .catch(error => {
@@ -44,10 +72,15 @@ class resume extends Component {
 
 
 
+
+
+
     render() {
+
         let {file} = this.state;
         console.log(file)
         const fileURL = URL.createObjectURL(file);
+
 
         return (
     <div>
