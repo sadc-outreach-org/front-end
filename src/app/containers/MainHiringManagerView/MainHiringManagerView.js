@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import '../../../styles/side-menu.css';
 import AllCandidates from '../../components/Candidates/Candidates';
+import Jobs from '/Users/samanthaortiz/WebstormProjects/front-end/src/app/components/Jobs/Jobs.js';
 import SideMenu, {Item} from 'react-sidemenu';
 import {Route, HashRouter} from "react-router-dom";
 
@@ -17,7 +18,8 @@ class MainCandidateProfileView extends Component {
                     </SideMenu>
                     <div className={"main-hiring-manager-content"}>
                         <Route path={"/applicants"} component={AllCandidates}/>
-                        {/*<Route path={"/applications"} component={Applications}/>*/}
+                       <Route path={"/jobs"} component={Jobs}/>
+                       {/*<Route path={"/applications"} component={Applications}/>*/}
                     </div>
                 </div>
             </HashRouter>
