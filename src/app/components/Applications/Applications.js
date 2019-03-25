@@ -17,8 +17,8 @@ const customStyling = {
 };
 
 export default class Applications extends React.Component {
-    constructor () {
-        super();
+    constructor (props) {
+        super(props);
         this.state = {
             applications: [],
             show: false

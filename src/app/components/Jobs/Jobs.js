@@ -4,26 +4,30 @@ import {getJobs, getReqsForJob} from '../../services.js';
 import { Link } from 'react-router-dom';
 
 export default class Jobs extends React.Component {
-    constructor () {
-        super();
+    constructor (props) {
+        super(props);
         this.state = {
             jobs: [],
+            reqs: []
         };
 
         this.handleJobClick = this.handleJobClick.bind(this);
     }
 
-    handleJobClick = (jobID) => {
-        console.log(jobID + "was clicked");
-    }
+    handleJobClick(jobID) {
+        console.log(jobID + " was clicked");
+        getReqsForJob(jobID).then(res => {
+            const reqs = res.data.result;
+            console.log(reqs);
+        })
+    };
 
     componentDidMount() {
         getJobs().then(res => {
             const jobs = res.data.result;
             this.setState({jobs});
-            console.log(res.data.result);
         })
-    }
+    };
 
     render() {
         return (
@@ -37,7 +41,7 @@ export default class Jobs extends React.Component {
                         <th>Job Title</th>
                     </tr>
                     {this.state.jobs.map(job =>
-                        <tr onClick = {this.handleJobClick(job.id)}>
+                        <tr onClick={() => this.handleJobClick(job.jobID)}>
                             <td>
                                 
                             </td>

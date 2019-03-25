@@ -1,5 +1,4 @@
 import React from 'react';
-// import '../../../styles/AllJobs.css';
 import '../../../styles/AllRequisitions.css';
 import {getRequisitions} from '../../services.js';
 import { Link } from 'react-router-dom';
@@ -13,7 +12,6 @@ export default class Jobs extends React.Component {
         getRequisitions().then(res => {
             const requisitions = res.data.result;
             this.setState({requisitions});
-            console.log(res.data.result);
         })
     }
 
@@ -34,9 +32,7 @@ export default class Jobs extends React.Component {
 
                             </td>
                             <td>
-                                <Link to={`#`}>
-                                    {requisition.title}
-                                </Link>
+                                {requisition.title}
                             </td>
                         </tr>)
                     }
