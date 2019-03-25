@@ -21,6 +21,7 @@ html, body {
   max-width: 15%;
   float: left;
   width: 100%;
+  position: fixed;
 }
 
 .Side-menu .children {
