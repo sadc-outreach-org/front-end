@@ -32,7 +32,16 @@ export const uploadResume = (user, pdfFile) => {
 
 export const getJobs = () => {
     return axios.get(`${API_URL}/jobs`);
+}
 
 export const getUser = (userID) => {
     return axios.get(`${API_URL}/users/${userID}`);
+}
+
+export const getRequisitions = () => {
+    return axios.get(`${API_URL}/requisitions`);
+}
+
+export const getReqsForJob = (jobID) => {
+    return axios.get(`${API_URL}/jobs/${jobID}/requisitions`);
 }

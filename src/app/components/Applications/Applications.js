@@ -1,5 +1,4 @@
 import React from 'react';
-// import axios from "axios";
 import '../../../styles/ApplicationStatus.css';
 import ApplicationStatus from '../ApplicationStatus/ApplicationStatus';
 import Modal from 'react-modal';
@@ -18,8 +17,8 @@ const customStyling = {
 };
 
 export default class Applications extends React.Component {
-    constructor () {
-        super();
+    constructor (props) {
+        super(props);
         this.state = {
             applications: [],
             show: false

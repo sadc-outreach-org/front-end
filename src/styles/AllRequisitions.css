@@ -1,4 +1,4 @@
-.jobContainer table {
+.requisitionsContainer table {
     font-family: arial, sans-serif;
     border-collapse: collapse;
     width: 50%!important;
@@ -6,13 +6,9 @@
     margin: auto!important;
 }
 
-.jobContainer {
+.requisitionsContainer {
     background-color: white;
     height: 100vh;
-}
-
-.jobContainer .resetButton {
-    margin-left: 20%;
 }
 
 table {
@@ -32,10 +28,6 @@ td {
     border: 1px solid #dddddd;
     text-align: left;
     padding: 8px;
-}
-
-tr:hover {
-    cursor: pointer;
 }
 
 th {
@@ -67,4 +59,31 @@ tr:nth-child(even) {
     transform:translate(44%, 10%);
     margin-bottom: 12px;
     margin-top: 75px;
+}
+
+.upArrow {
+    border: solid black;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    margin-right: 15px;
+    margin-left: 10px;
+    padding: 3px;
+    transform: rotate(-135deg);
+}
+
+.downArrow {
+    border: solid black;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    margin-bottom: 3px;
+    padding: 3px;
+    transform: rotate(45deg);
+}
+
+.upArrow:hover {
+    cursor: pointer;
+}
+
+.downArrow:hover {
+    cursor: pointer;
 }
