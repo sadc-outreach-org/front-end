@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { Link } from 'react-router-dom';
 import logo from '../../../images/heb-red.png';
 import {Button, Form, FormGroup, Input, Container, Row, Col} from 'reactstrap';
 import '../../../styles/Login.css';
@@ -26,6 +27,9 @@ class Login extends Component {
         login(payload).then(res => {
                 console.log(res);
                 console.log(res.data.result);
+                if(res.status === 200){
+                    this.props.history.push('/c-dashboard/profile', {});
+                 }
             })
     };
 

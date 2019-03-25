@@ -1,32 +1,38 @@
 import axios from 'axios';
 
 const API_URL = "http://34.73.221.154:8080";
-var user = "1";
+var fakeUser = "1";
 var site = "http://34.73.221.154:8080/users/";
 
 
 export const getUsers = () => {
-    return axios.get(`${API_URL}/user/users`);
+    return axios.get(`${API_URL}/users`);
 }
 
 export const addCandidate = (payload) => {
-    return axios.post(`${API_URL}/user/signup`, payload);
+    return axios.post(`${API_URL}/users/signup`, payload);
 }
 
 export const login = (payload) => {
-    return axios.post(`${API_URL}/user/login`, payload);
+    return axios.post(`${API_URL}/users/login`, payload);
 }
+
+// TODO: Don't hardcode the user ID
 export const getResume = () => {
-    return  axios(site.concat(user,"/resume"), {
+    return  axios(site.concat(fakeUser,"/resume"), {
         method: 'GET',
         responseType: 'blob' //Force to receive data in a Blob Format
     })
     //axios.get(site.concat(user,"/resume"))
 };
-export const uploadResume = (pdfFile) => {
+
+export const uploadResume = (user, pdfFile) => {
     return axios.post(site.concat(user,"/resume"), pdfFile);
 };
 
 export const getJobs = () => {
     return axios.get(`${API_URL}/jobs`);
+
+export const getUser = (userID) => {
+    return axios.get(`${API_URL}/users/${userID}`);
 }
