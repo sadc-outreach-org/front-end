@@ -1,7 +1,6 @@
 import React from 'react';
 import '../../../styles/AllJobs.css';
 import {getJobs, getRequisitions, getReqsForJob} from '../../services.js';
-import { Link } from 'react-router-dom';
 
 export default class Jobs extends React.Component {
     constructor (props) {
