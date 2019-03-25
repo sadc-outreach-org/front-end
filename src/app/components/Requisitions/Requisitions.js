@@ -26,7 +26,7 @@ export default class Jobs extends React.Component {
                     <tbody>
                     <tr>
                         <th>Order</th>
-                        <th>Job Title</th>
+                        <th>Requisition Title</th>
                     </tr>
                     {this.state.requisitions.map(requisition =>
                         <tr>

@@ -15,7 +15,7 @@ class MainCandidateView extends Component {
                     <SideMenu>
                         <Item divider={true} label="Actions" value="segment1"/>
                         <Item label="Profile" value="/profile"></Item>
-                        <Item label="Application Status" value="/applications"></Item>
+                        <Item label="Application" value="/applications"></Item>
                     </SideMenu>
                     <div className={"main-candidate-content"}>
                         <Route path={"/profile"} component={CandidateProfileInfo}/>

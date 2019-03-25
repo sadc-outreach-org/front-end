@@ -30,6 +30,10 @@ td {
     padding: 8px;
 }
 
+tr:hover {
+    cursor: pointer;
+}
+
 th {
     text-align: center;
     border: 1px solid #dddddd;

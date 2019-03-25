@@ -1,12 +1,21 @@
 import React from 'react';
 import '../../../styles/AllJobs.css';
-import {getJobs} from '../../services.js';
+import {getJobs, getReqsForJob} from '../../services.js';
 import { Link } from 'react-router-dom';
 
 export default class Jobs extends React.Component {
-    state = {
-        jobs: []
-    };
+    constructor () {
+        super();
+        this.state = {
+            jobs: [],
+        };
+
+        this.handleJobClick = this.handleJobClick.bind(this);
+    }
+
+    handleJobClick = (jobID) => {
+        console.log(jobID + "was clicked");
+    }
 
     componentDidMount() {
         getJobs().then(res => {
@@ -28,14 +37,12 @@ export default class Jobs extends React.Component {
                         <th>Job Title</th>
                     </tr>
                     {this.state.jobs.map(job =>
-                        <tr>
+                        <tr onClick = {this.handleJobClick(job.id)}>
                             <td>
                                 
                             </td>
                             <td>
-                                <Link to={`/user/${job.title}/info`}>
-                                    {job.title}
-                                </Link>
+                                {job.title}
                             </td>
                         </tr>)
                     }
