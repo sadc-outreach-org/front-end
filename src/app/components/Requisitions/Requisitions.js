@@ -2,7 +2,7 @@ import React from 'react';
 import '../../../styles/AllRequisitions.css';
 import {getRequisitions} from '../../services.js';
 
-export default class Jobs extends React.Component {
+export default class Requisitions extends React.Component {
     state = {
         requisitions: []
     };
