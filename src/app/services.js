@@ -45,3 +45,7 @@ export const getRequisitions = () => {
 export const getReqsForJob = (jobID) => {
     return axios.get(`${API_URL}/jobs/${jobID}/requisitions`);
 }
+
+export const getApplicationsForReq = (reqID) => {
+    return axios.get(`${API_URL}/requisitions/${reqID}/applications`);
+}

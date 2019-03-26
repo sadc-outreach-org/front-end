@@ -15,8 +15,6 @@ export default class Jobs extends React.Component {
     }
 
     handleJobClick(jobID) {
-        console.log(jobID + " was clicked");
-
         getReqsForJob(jobID).then(res => {
             const reqs = res.data.result;
             this.setState({reqs: reqs})
