@@ -10,9 +10,9 @@ export default class Candidates extends React.Component {
 
     componentDidMount() {
         getUsers().then(res => {
-                const candidates = res.data.result;
-                this.setState({candidates});
-            })
+            const candidates = res.data.result;
+            this.setState({candidates});
+        })
     }
 
     render() {
@@ -26,24 +26,24 @@ export default class Candidates extends React.Component {
                             <th>First</th>
                             <th>Last</th>
                             <th>Email</th>
-                            <th>Phone Number</th>
                             <th>Application Status <i className="upArrow"></i><i className="downArrow"></i></th>
                         </tr>
                         {this.state.candidates.map(candidate =>
                             <tr>
                                 <td>
+                                    {/*TODO update this to redirect to profile page*/}
                                     <Link to={`/user/${candidate.email}/info`}>
                                         {candidate.firstName}
                                     </Link>
                                 </td>
                                 <td>
+                                    {/*TODO update this to redirect to profile page*/}
                                     <Link to={`/user/${candidate.email}/info`}>
                                         {candidate.lastName}
                                     </Link>
                                 </td>
                                 <td>{candidate.email}</td>
-                                <td>{candidate.phoneNum}</td>
-                                <td>{candidate.phoneNum}</td>
+                                <td>{candidate.status}</td>
                             </tr>)
                         }
                     </tbody>

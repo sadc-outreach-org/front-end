@@ -26,6 +26,9 @@ class Login extends Component {
         login(payload).then(res => {
                 console.log(res);
                 console.log(res.data.result);
+                if(res.status === 200){
+                    this.props.history.push('/c-dashboard/profile', {});
+                 }
             })
     };
 

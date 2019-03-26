@@ -1,0 +1,70 @@
+.jobContainer table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 50%!important;
+    background-color: white!important;
+    margin: auto!important;
+}
+
+.jobContainer {
+    background-color: white;
+    height: 100vh;
+}
+
+.jobContainer .resetButton {
+    margin-left: 20%;
+}
+
+table {
+    counter-reset: rowNumber;
+}
+
+
+table tr td:first-child::before {
+    content: counter(rowNumber);
+    counter-increment: rowNumber;
+    min-width: 1em;
+    margin-right: 0.5em;
+}
+
+
+td {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:hover {
+    cursor: pointer;
+}
+
+th {
+    text-align: center;
+    border: 1px solid #dddddd;
+    padding: 8px;
+}
+
+th:hover {
+    cursor: default;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+
+#jobsHeader {
+    color: black;
+    float: left;
+    transform: translate(20%, 10%);
+}
+
+#searchInput {
+    width: 500px;
+    font-size: 16px;
+    padding-left: 20px;
+    border: 1px solid #ddd;
+    /*margin-left: 225px;*/
+    transform:translate(44%, 10%);
+    margin-bottom: 12px;
+    margin-top: 75px;
+}
