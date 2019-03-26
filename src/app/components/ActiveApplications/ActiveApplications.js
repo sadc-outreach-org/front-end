@@ -39,7 +39,7 @@ export default class ActiveApplications extends React.Component {
                         <th>Requisitions</th>
                     </tr>
                     {this.state.reqs.map(req =>
-                        <tr onClick={() => this.handleReqClick()}>
+                        <tr onClick={() => this.handleReqClick(req.requisitionID)}>
                             <td>
                                 {req.title}
                             </td>
@@ -51,15 +51,24 @@ export default class ActiveApplications extends React.Component {
                 <table>
                     <tbody>
                     <tr>
+                        <th>Application ID</th>
                         <th>Candidate</th>
                         <th>Position</th>
-                        <th>Requisition No.</th>
                         <th>Application Status</th>
                     </tr>
                     {this.state.applications.map(app =>
                         <tr>
                             <td>
-                                {app.title}
+                                {app.applicationID}
+                            </td>
+                            <td>
+                                {app.candidate.firstName + " " + app.candidate.lastName}
+                            </td>
+                            <td>
+                                {app.requisition.title}
+                            </td>
+                            <td>
+                                {app.status}
                             </td>
                         </tr>
                     )}
