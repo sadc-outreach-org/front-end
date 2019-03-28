@@ -6,8 +6,8 @@ import SideMenu, {Item} from 'react-sidemenu';
 import CandidateProfileInfo from '../../components/CandidateProfileInfo/CandidateProfileInfo';
 import Applications from '../../components/Applications/Applications';
 import {Route, HashRouter} from "react-router-dom";
-import {Modal} from 'react-modal';
-import ApplicationStatus from "../../components/ApplicationStatus/ApplicationStatus";
+import Modal from 'react-modal';
+import NotificationList from "../../components/Notifications/NotificationList";
 
 class MainCandidateView extends Component {
     constructor () {
@@ -37,9 +37,14 @@ class MainCandidateView extends Component {
                             <Route path={"/applications"} component={Applications}/>
                         </div>
                     </div>
-
                 </HashRouter>
-
+                <Modal
+                    isOpen={this.state.showModal}
+                    contentLabel="Notifications"
+                >
+                    <div className="modalCloseButton" onClick={this.handleCloseModal}/>
+                    <NotificationList/>
+                </Modal>
             </div>
         )
     }
