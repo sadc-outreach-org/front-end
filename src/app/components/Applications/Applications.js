@@ -21,7 +21,7 @@ export default class Applications extends React.Component {
         super(props);
         this.state = {
             applications: [],
-            show: false
+            showModal: false
         };
 
         this.handleOpenModal = this.handleOpenModal.bind(this);

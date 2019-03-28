@@ -1,0 +1,54 @@
+.candidateProfileModalButtons {
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    bottom: 0;
+}
+
+#candidateProfileModalButton1 {
+    float: left;
+    width: 50%;
+}
+
+#candidateProfileModalButton2 {
+    float: right;
+    width: 50%;
+}
+
+.candidateProfileModalContainer {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+
+.candidateProfileModalContainer button {
+    border: none;
+    outline: none;
+    height: 40px;
+    background: #fb2525;
+    color: #fff;
+    font-size: 18px;
+    width: 300px;
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+}
+
+.candidateProfileModalContainer button:hover {
+    cursor: pointer;
+    background: #C9271E;
+    color: #fff;
+}
+
+.candidateProfileModalContainer h1 {
+    padding: 10% 0 0 0;
+    margin: 0;
+    text-align: center;
+}
+
+.candidateProfileModalContainer p {
+    text-align: center;
+    font-size: 20px;
+}
