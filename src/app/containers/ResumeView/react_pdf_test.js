@@ -1,47 +1,38 @@
 import React, { Component } from 'react';
-
+//import Thumbnail from 'react-thumbnail';
 //import resumeFile from '../../../images/Resume_2018_Dec_18_Gerardo_Gonzalez.pdf';
 import {getResume} from '../../services.js';
-//import {Thumbnail} from 'react-thumbnail';
+import '../../../styles/ApplicationStatus.css';
+import Pdf_modal from '../../components/Modal/resume_modal';
+import Modal from 'react-modal';
 
 
-
-
-//Thumbnail
-const fs = require("fs")
-const { join } = require("path")
-const pdf = require("../index")
-
-//with buffer
-pdf(fs.readFileSync(join(__dirname, "pdf", "test.pdf")), {
-    compress: {
-        type:"JPEG",
-        quality: 70
+Modal.defaultStyles.overlay.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+const customStyling = {
+    content : {
+        top: '35%',
+        left: '50%',
+        // right: 'auto',
+        // bottom: 'auto',
+        transform: 'translate(-50%, -50%)'
     }
-})
-    .then(data /*is a buffer*/ => data.pipe(fs.createWriteStream(join(__dirname, "previews", "previewBuffer.jpg"))))
-    .catch(err => console.error(err))
+};
 
-// //with stream
-pdf(fs.createReadStream(join(__dirname, "pdf", "test.pdf")), {
-    compress: {
-        type:"JPEG",
-        quality: 70
-    }
-})
-    .then(data /*is a buffer*/ => data.pipe(fs.createWriteStream(join(__dirname, "previews", "previewStream.jpg"))))
-    .catch(err => console.error(err))
 
-class resume extends Component {
+export default class Applications extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             file: new File([""], "resume.pdf", {
                 type: "application/pdf",
-            })
+            }),
+            url: "",
+            isShowing: false
         };
+        this.handleOpenModal = this.handleOpenModal.bind(this);
+        this.handleCloseModal = this.handleCloseModal.bind(this);
+        this.print_pdf = this.print_pdf.bind(this);
     }
-
     componentDidMount() {
         getResume().then(res => {
 
@@ -49,51 +40,54 @@ class resume extends Component {
             const pdf = new Blob(
                 [res.data],
                 {type: 'application/pdf'});
-            console.log("    ");
-            console.log(res.data);
-            console.log("    ");
-            console.log(pdf);
             //Save state of file
             this.setState({file : pdf});
-
 //Build a URL from the file
             const fileURL = URL.createObjectURL(pdf);
+            this.setState({url : fileURL});
 //Open the URL on new Window
-
-
-            window.open(fileURL, "_blank");
-
-
+            //window.open(fileURL, "_parent ");
         })
             .catch(error => {
                 console.log(error);
             });
     }
-
-
-
-
-
+    handleOpenModal () {
+        this.setState({showModal: true})
+    }
+    handleCloseModal () {
+        this.setState({showModal: false})
+    }
+    print_pdf () {
+        window.frames["printf"].focus();
+        window.frames["printf"].print();
+    }
 
     render() {
-
-        let {file} = this.state;
-        console.log(file)
+        let {file, url, isShowing} = this.state;
         const fileURL = URL.createObjectURL(file);
 
 
         return (
-    <div>
-        {/*<Thumbnail>*/}
-            {/*width={250}*/}
-            {/*height={250}*/}
-            {/*page={fileURL}*/}
-            {/*scale={4}*/}
-        {/*</Thumbnail>*/}
-        <iframe title="PDF" src = {fileURL}/>
-    </div>
+            <div>
+                        <iframe id = "pdfFrame" title="PDF" src = {fileURL} scrolling="auto." />
+                <button text = "Click me" onClick={this.handleOpenModal}></button>
+                <div>
+                    <Modal
+                        isOpen={this.state.showModal}
+                        ariaHideApp={false}
+                        style={customStyling}
+                        contentLabel="Minimal Modal Example"
+                    >
+                        <div className="modalCloseButton" onClick={this.handleCloseModal}/>
+                        <Pdf_modal file = {this.state.file}/>
+                        <div className="printf" onClick={this.print_pdf} />
+                    </Modal>
+
+                </div>
+
+            </div>
         )
 
     }
 }
-export default resume;
