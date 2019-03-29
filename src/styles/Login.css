@@ -1,7 +1,7 @@
 .loginContainer {
     background-color: #EE2E24;
-    margin: 0;
-    padding: 0;
+    height: 100%;
+    width: 100%;
 }
 
 .hebLogo {
@@ -78,6 +78,6 @@
     color: #ffc107;
 }
 
-.title{
+.title {
     color: black;
 }

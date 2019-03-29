@@ -22,7 +22,8 @@ class CandidateProfileInfo extends Component {
     }
 
     componentDidMount() {
-        axios.get('http://cloud-25.cs.trinity.edu:8080/cmorale1/info')
+        console.log("Candidate ID: " + this.props.candidateID);
+        axios.get('http://34.73.221.154:8080/users/'+this.props.candidateID)
             .then(res => {
                 const user = res.data.result;
                 this.setState({user});
@@ -138,6 +139,7 @@ class CandidateProfileInfo extends Component {
                                 type={"text"}
                                 id={"zip"}
                                 className={"profileField"}
+                                placeholder={"Zip Code"}
                                 defaultValue={this.state.zipCode}
                                 onChange={(event) => this.setState({zipCode: event.target.value})}
                             />

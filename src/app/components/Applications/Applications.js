@@ -1,8 +1,8 @@
 import React from 'react';
 import '../../../styles/ApplicationStatus.css';
 import ApplicationStatus from '../ApplicationStatus/ApplicationStatus';
+import {getApplicationsForUser} from '../../services.js';
 import Modal from 'react-modal';
-// import {getApplications} from services.js
 
 Modal.defaultStyles.overlay.backgroundColor = 'rgba(0, 0, 0, 0.7)';
 
