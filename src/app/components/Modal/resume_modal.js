@@ -1,7 +1,8 @@
 
 import React from 'react';
-import '../../../styles/ApplicationStatus.css';
-import pdf from '../../../images/Resume_2018_Dec_18_Gerardo_Gonzalez.pdf'
+import pdf from '../../containers/ResumeView/Resume_2018_Dec_18_Gerardo_Gonzalez.pdf'
+import '../../../styles/pdf_modal.css';
+
 
 export default class resume_modal extends React.Component {
     state = {
@@ -15,8 +16,8 @@ export default class resume_modal extends React.Component {
         const fileURL = URL.createObjectURL(this.props.file);
         //window.open(fileURL, "_parent ");
         return (
-            <div className={"applicationStatusContainer"}>
-                <iframe  src = {fileURL} frameborder="0"/>
+            <div className={"applicationResume"} id="modalPDF">
+                <iframe  id = "IframeOnModal" src = {fileURL} width="95%" height="750px" frameborder="0"/>
             </div>
         )
     }

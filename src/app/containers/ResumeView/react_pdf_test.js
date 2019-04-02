@@ -2,16 +2,19 @@ import React, { Component } from 'react';
 //import Thumbnail from 'react-thumbnail';
 //import resumeFile from '../../../images/Resume_2018_Dec_18_Gerardo_Gonzalez.pdf';
 import {getResume} from '../../services.js';
-import '../../../styles/ApplicationStatus.css';
+import '../../../styles/pdf_modal.css';
 import Pdf_modal from '../../components/Modal/resume_modal';
 import Modal from 'react-modal';
+import { Document, Page } from 'react-pdf';
+
 
 
 Modal.defaultStyles.overlay.backgroundColor = 'rgba(0, 0, 0, 0.7)';
 const customStyling = {
     content : {
-        top: '35%',
+        top: '50%',
         left: '50%',
+        height: '800px',
         // right: 'auto',
         // bottom: 'auto',
         transform: 'translate(-50%, -50%)'
@@ -27,7 +30,7 @@ export default class Applications extends React.Component {
                 type: "application/pdf",
             }),
             url: "",
-            isShowing: false
+            isShowing: false,
         };
         this.handleOpenModal = this.handleOpenModal.bind(this);
         this.handleCloseModal = this.handleCloseModal.bind(this);
@@ -69,16 +72,12 @@ export default class Applications extends React.Component {
 
 
         return (
-            <div>
-                        <iframe id = "pdfFrame" title="PDF" src = {fileURL} scrolling="auto." />
-                <button text = "Click me" onClick={this.handleOpenModal}></button>
-                <div>
-                    <Modal
-                        isOpen={this.state.showModal}
-                        ariaHideApp={false}
-                        style={customStyling}
-                        contentLabel="Minimal Modal Example"
-                    >
+
+            <div class="iframe-container">
+                <iframe title="PDF" src = {fileURL}  />
+                <button text = "Click me"  onClick={this.handleOpenModal}></button>
+                <div >
+                    <Modal isOpen={this.state.showModal} ariaHideApp={false} style={customStyling} contentLabel="Minimal Modal Example">
                         <div className="modalCloseButton" onClick={this.handleCloseModal}/>
                         <Pdf_modal file = {this.state.file}/>
                         <div className="printf" onClick={this.print_pdf} />
@@ -87,6 +86,7 @@ export default class Applications extends React.Component {
                 </div>
 
             </div>
+
         )
 
     }
