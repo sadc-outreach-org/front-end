@@ -1,5 +1,4 @@
 import React from 'react';
-// import axios from "axios";
 import '../../../styles/ApplicationStatus.css';
 import ApplicationStatus from '../ApplicationStatus/ApplicationStatus';
 import Modal from 'react-modal';
@@ -18,16 +17,15 @@ const customStyling = {
 };
 
 export default class Applications extends React.Component {
-    constructor () {
-        super();
+    constructor (props) {
+        super(props);
         this.state = {
             applications: [],
-            show: false
+            showModal: false
         };
 
         this.handleOpenModal = this.handleOpenModal.bind(this);
         this.handleCloseModal = this.handleCloseModal.bind(this);
-        this.print_pdf = this.print_pdf.bind(this);
     }
 
     // componentDidMount() {
@@ -95,7 +93,6 @@ export default class Applications extends React.Component {
                 >
                     <div className="modalCloseButton" onClick={this.handleCloseModal}/>
                     <ApplicationStatus/>
-                    <div className="Print Button" />
                 </Modal>
             </div>
         );

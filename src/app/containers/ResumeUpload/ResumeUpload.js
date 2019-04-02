@@ -1,7 +1,10 @@
 import React, {Component} from 'react';
 import {Button, Form, Input} from 'reactstrap';
-import { uploadResume} from '../../services.js';
-
+import { uploadResume} from '../../components/services';
+//pdf Type: application/pdf
+//new File(["foo"], "foo.txt", {
+//   type: "text/plain",
+// });
 
 class resumeUpload extends Component {
     constructor(props) {
@@ -25,13 +28,12 @@ class resumeUpload extends Component {
     fileUp(file) {
         const formData = new FormData();
         formData.append('file',file)
-        console.log("File be up")
         // const config = {
         //     headers: {
         //         'content-type': 'multipart/form-data'
         //     }
         // }
-        return uploadResume("1",formData)
+        return uploadResume(formData)
     }
     render() {
         return (

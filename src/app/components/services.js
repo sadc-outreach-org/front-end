@@ -1,10 +1,8 @@
 import axios from 'axios';
+
 var user = "1";
 var site = "http://34.73.221.154:8080/users/";
-//http://34.73.221.154:8080/users/{userID}/resume
-
-//'http://34.73.221.154:8080/user/jbutt@gmail.com/resume'
-
+const API_URL = "http://34.73.221.154:8080";
 
 export const getUsers = () => {
     return axios.get('http://34.73.221.154:8080/users/');
@@ -22,7 +20,14 @@ export const getResume = () => {
     //axios.get(site.concat(user,"/resume"))
 };
 
-
 export const uploadResume = (userID, pdfFile) => {
     return axios.post(site.concat(userID,"/resume"), pdfFile);
 };
+
+export const getNotifications = (userID) => {
+    return axios.get(site.concat("/getNotifications?userid=", userID));
+};
+
+export const getCandidateInfo = (candidateID) => {
+    return axios.get(`${API_URL}/users/${candidateID}`);
+}
