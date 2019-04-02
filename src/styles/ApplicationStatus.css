@@ -1,5 +1,6 @@
 .application-header {
     color: black;
+    text-align: center;
 }
 
 .application-p {
@@ -19,7 +20,14 @@
 
 #githubSubmissionLink {
     display: block;
+    width: 300px;
+    padding-top: 2px;
+    padding-bottom: 2px;
     clear: both;
+}
+
+#gitHubSubmissionButton {
+    float: right;
 }
 
 .modalCloseButton {
@@ -142,6 +150,10 @@
 
 .candidateApplicationsTable th:hover {
     cursor: default;
+}
+
+.candidateApplicationsTable tr:hover {
+    cursor: pointer;
 }
 
 .candidateApplicationsTable tr:nth-child(even) {

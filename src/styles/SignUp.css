@@ -32,14 +32,14 @@
     margin-bottom: 20px;
 }
 
-.signupContainer input[type="email"], input[type="password"], input[type="text"] {
-    border: none;
-    border-bottom: 1px solid #000;
-    background: transparent;
-    outline: none;
-    height: 40px;
-    font-size: 16px;
-}
+/*.signupContainer input[type="email"], input[type="password"], input[type="text"] {*/
+    /*border: none;*/
+    /*border-bottom: 1px solid #000;*/
+    /*background: transparent;*/
+    /*outline: none;*/
+    /*height: 40px;*/
+    /*font-size: 16px;*/
+/*}*/
 
 .submitSignup {
     border: none;
