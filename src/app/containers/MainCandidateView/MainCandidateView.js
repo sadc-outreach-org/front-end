@@ -10,10 +10,11 @@ import Modal from 'react-modal';
 import NotificationList from "../../components/Notifications/NotificationList";
 
 class MainCandidateView extends Component {
-    constructor () {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
-            showModal: false
+            showModal: false,
+            candidateID: 30
         };
 
         this.handleOpenModal = this.handleOpenModal.bind(this);
@@ -24,11 +25,11 @@ class MainCandidateView extends Component {
         return(
             <div>
                 <HashRouter>
-                    <div className={"profileSideNavComponent"}>
+                    <div>
                         <SideMenu>
                             <Item divider={true} label="Actions" value="segment1"/>
                             <Item label="Profile" value="/profile"></Item>
-                            <Item label="Application Status" value="/applications"></Item>
+                            <Item label="Applications" value="/applications"></Item>
                             <Item divider={true} label={"Notifications"}/>
                             <Item label={"Notifications"} onClick={this.handleOpenModal}/>
                         </SideMenu>
