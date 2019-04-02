@@ -1,0 +1,10 @@
+.mainCandidateViewContainer {
+    height: 100vh;
+    width: 100%;
+}
+
+.mainCandidateContent {
+    height: 100vh;
+    float: right;
+    width: 85%;
+}

@@ -10,8 +10,6 @@ const customStyling = {
     content : {
         top: '35%',
         left: '50%',
-        // right: 'auto',
-        // bottom: 'auto',
         transform: 'translate(-50%, -50%)'
     }
 };
@@ -62,9 +60,9 @@ export default class Applications extends React.Component {
 
     render() {
         return (
-            <div className={"tableContainer"}>
-                <table>
-                    <h1 className={"applicationsHeader"}>Applications</h1>
+            <div className={"candidateApplicationsContainer"}>
+                <h1 className={"applicationsHeader"}>Applications</h1>
+                <table className={"candidateApplicationsTable"}>
                     <tr>
                         <th>Requisition</th>
                         <th>Date Applied</th>

@@ -45,9 +45,8 @@ export default class Jobs extends React.Component {
         return (
             <div className={"jobContainer"}>
                 <h1 id={"jobsHeader"}>Jobs</h1>
-                <input type={"text"} id={"searchInput"} onKeyUp={console.log("typed")} placeholder={"Search by title"} title={"Type in a title"}/>
-                <button className={"resetButton"} onClick={() => this.handleResetClick()}>Reset</button>
-                <table>
+                {/*<button className={"resetButton"} onClick={() => this.handleResetClick()}>Reset</button>*/}
+                <table className={"jobsTable"}>
                     <tbody>
                     <tr>
                         <th>Order</th>
@@ -56,7 +55,7 @@ export default class Jobs extends React.Component {
                     {this.state.jobs.map(job =>
                         <tr onClick={() => this.handleJobClick(job.jobID)}>
                             <td>
-                                
+
                             </td>
                             <td>
                                 {job.title}
@@ -65,11 +64,10 @@ export default class Jobs extends React.Component {
                     }
                     </tbody>
                 </table>
-                <br/>
-                <table>
+                <table className={"jobsRequisitionsTable"}>
                     <tbody>
                     <tr>
-                        <th>Requisition</th>
+                        <th>Requisitions</th>
                     </tr>
                     {this.state.reqs.map(req =>
                         <tr>

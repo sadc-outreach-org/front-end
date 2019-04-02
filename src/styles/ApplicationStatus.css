@@ -1,7 +1,3 @@
-.applicationStatusContainer {
-    width: 100%;
-}
-
 .application-header {
     color: black;
 }
@@ -124,3 +120,40 @@
     background-color: #55b776;
 }
 
+.candidateApplicationsTable {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 60%;
+    background-color: white;
+    margin: auto;
+}
+
+.candidateApplicationsTable td {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+.candidateApplicationsTable th {
+    text-align: center;
+    border: 1px solid #dddddd;
+    padding: 8px;
+}
+
+.candidateApplicationsTable th:hover {
+    cursor: default;
+}
+
+.candidateApplicationsTable tr:nth-child(even) {
+    background-color: #dddddd;
+}
+
+#applicationsHeader {
+    color: black;
+    text-align: center;
+}
+
+.candidateApplicationsContainer {
+    background-color: white;
+    text-align: center;
+}

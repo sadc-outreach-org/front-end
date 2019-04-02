@@ -6,6 +6,7 @@ import SideMenu, {Item} from 'react-sidemenu';
 import CandidateProfileInfo from '../../components/CandidateProfileInfo/CandidateProfileInfo';
 import Applications from '../../components/Applications/Applications';
 import {Route, HashRouter} from "react-router-dom";
+import '../../../styles/MainCandidateView.css';
 import Modal from 'react-modal';
 import NotificationList from "../../components/Notifications/NotificationList";
 
@@ -23,7 +24,7 @@ class MainCandidateView extends Component {
 
     render() {
         return(
-            <div>
+            <div className={"mainCandidateViewContainer"}>
                 <HashRouter>
                     <div>
                         <SideMenu>
@@ -33,7 +34,7 @@ class MainCandidateView extends Component {
                             <Item divider={true} label={"Notifications"}/>
                             <Item label={"Notifications"} onClick={this.handleOpenModal}/>
                         </SideMenu>
-                        <div className={"main-candidate-content"}>
+                        <div className={"mainCandidateContent"}>
                             <Route path={"/profile"} component={CandidateProfileInfo}/>
                             <Route path={"/applications"} component={Applications}/>
                         </div>
