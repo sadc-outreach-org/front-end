@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-//import resumeFile from '../../../images/Resume_2018_Dec_18_Gerardo_Gonzalez.pdf';
 import {getResume} from "../../components/services";
 
 
