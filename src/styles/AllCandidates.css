@@ -1,4 +1,4 @@
-table {
+.candidatesTable {
     font-family: arial, sans-serif;
     border-collapse: collapse;
     width: 60%;
@@ -6,39 +6,43 @@ table {
     margin: auto;
 }
 
-td {
+.candidatesTable td {
     border: 1px solid #dddddd;
     text-align: left;
     padding: 8px;
 }
 
-th {
+.candidatesTable th {
     text-align: center;
     border: 1px solid #dddddd;
     padding: 8px;
 }
 
-th:hover {
+.candidatesTable th:hover {
     cursor: default;
 }
 
-tr:nth-child(even) {
+.candidatesTable tr:nth-child(even) {
     background-color: #dddddd;
 }
 
 #applicantsHeader {
     color: black;
-    float: left;
-    display: none;
+    text-align: center;
 }
 
-#searchInput {
+.candidatesContainer {
+    background-color: white;
+    text-align: center;
+}
+
+#candidateSearchInput {
     width: 500px;
     font-size: 16px;
     padding-left: 20px;
     border: 1px solid #ddd;
-    margin-bottom: 12px;
-    margin-top: 12px;
+    text-align: left;
+    margin-bottom: 10px;
 }
 
 .upArrow {

@@ -17,9 +17,9 @@ export default class Requisitions extends React.Component {
     render() {
         return (
             <div className={"requisitionsContainer"}>
-                <h1 id={"requisitionsHeader"}>Jobs</h1>
-                <input type={"text"} id={"searchInput"} onKeyUp={console.log("typed")} placeholder={"Search by title"} title={"Type in a title"}/>
-                <table>
+                <h1 id={"requisitionsHeader"}>Requisitions</h1>
+                <input type={"text"} id={"requisitionsSearchInput"} onKeyUp={console.log("typed")} placeholder={"Search by title"} title={"Type in a title"}/>
+                <table className={"requisitionsTable"}>
                     <tbody>
                     <tr>
                         <th>Order</th>

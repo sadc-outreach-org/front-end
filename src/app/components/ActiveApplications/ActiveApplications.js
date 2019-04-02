@@ -1,5 +1,5 @@
 import React from 'react';
-// import '../../../styles/ActiveApplications.css';
+import '../../../styles/ActiveApplications.css';
 import {getRequisitions, getApplicationsForReq} from '../../services.js';
 
 export default class ActiveApplications extends React.Component {
@@ -31,9 +31,9 @@ export default class ActiveApplications extends React.Component {
     render() {
         return (
             <div className={"activeApplicationsContainer"}>
-                <h1 id={"activeApplicationsHeader"}>Jobs</h1>
-                <input type={"text"} id={"searchInput"} onKeyUp={console.log("typed")} placeholder={"Search by title"} title={"Type in a title"}/>
-                <table>
+                <h1 id={"activeApplicationsHeader"}>Active Applications</h1>
+                {/*<input type={"text"} id={"activeApplicationsSearchInput"} onKeyUp={console.log("typed")} placeholder={"Search by title"} title={"Type in a title"}/>*/}
+                <table className={"requisitionsActiveApplicationsTable"}>
                     <tbody>
                     <tr>
                         <th>Requisitions</th>
@@ -47,8 +47,7 @@ export default class ActiveApplications extends React.Component {
                     }
                     </tbody>
                 </table>
-                <br/>
-                <table>
+                <table className={"activeApplicationsTable"}>
                     <tbody>
                     <tr>
                         <th>Application ID</th>

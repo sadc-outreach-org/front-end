@@ -1,58 +1,63 @@
-.requisitionsContainer table {
+.activeApplicationsContainer table {
     font-family: arial, sans-serif;
     border-collapse: collapse;
-    width: 50%;
+    width: 49%;
     background-color: white;
-    margin: auto;
+    float: left;
+    text-align: center;
 }
 
-.requisitionsContainer {
+.activeApplicationsContainer {
     background-color: white;
     height: 100vh;
     text-align: center;
 }
 
-.requisitionsTable {
+.requisitionsActiveApplicationsTable {
     counter-reset: rowNumber;
+    margin-right: 10px;
+    margin-left: 10px;
 }
 
-.requisitionsTable tr td:first-child::before {
+.activeApplicationsContainer table tr td:first-child::before {
     content: counter(rowNumber);
     counter-increment: rowNumber;
     min-width: 1em;
     margin-right: 0.5em;
 }
 
-.requisitionsTable td {
+.activeApplicationsContainer td {
     border: 1px solid #dddddd;
     text-align: left;
     padding: 8px;
 }
 
-.requisitionsTable th {
+.activeApplicationsContainer tr:hover {
+    cursor: pointer;
+}
+
+.activeApplicationsContainer th {
     text-align: center;
     border: 1px solid #dddddd;
     padding: 8px;
 }
 
-.requisitionsTable th:hover {
+.activeApplicationsContainer th:hover {
     cursor: default;
 }
 
-.requisitionsTable tr:nth-child(even) {
+.activeApplicationsContainer tr:nth-child(even) {
     background-color: #dddddd;
 }
 
-#jobsHeader {
+#activeApplicationsHeader {
     color: black;
     text-align: center;
 }
 
-#requisitionsSearchInput {
+#jobsSearchInput {
     width: 500px;
     font-size: 16px;
     padding-left: 20px;
     border: 1px solid #ddd;
-    text-align: left;
-    margin-bottom: 10px;
 }

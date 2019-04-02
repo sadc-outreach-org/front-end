@@ -51,10 +51,10 @@ export default class Candidates extends React.Component {
 
     render() {
         return (
-            <div className={"tableContainer"}>
+            <div className={"candidatesContainer"}>
                 <h1 id={"applicantsHeader"}>Applicants</h1>
-                <input type={"text"} id={"searchInput"} onKeyUp={console.log("typed")} placeholder={"Search by name"} title={"Type in a name"}/>
-                <table>
+                <input type={"text"} id={"candidateSearchInput"} onKeyUp={console.log("typed")} placeholder={"Search by name"} title={"Type in a name"}/>
+                <table className={"candidatesTable"}>
                     <tbody>
                         <tr>
                             <th>First</th>
@@ -64,12 +64,8 @@ export default class Candidates extends React.Component {
                         </tr>
                         {this.state.candidates.map(candidate =>
                             <tr onClick={() => this.handleOpenModal(candidate.candidateID)}>
-                                <td>
-                                    {candidate.firstName}
-                                </td>
-                                <td>
-                                    {candidate.lastName}
-                                </td>
+                                <td>{candidate.firstName}</td>
+                                <td>{candidate.lastName}</td>
                                 <td>{candidate.email}</td>
                                 <td>{candidate.status}</td>
                             </tr>)
