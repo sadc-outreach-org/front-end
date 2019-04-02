@@ -8,9 +8,9 @@ import { Document, Page } from 'react-pdf';
 Modal.defaultStyles.overlay.backgroundColor = 'rgba(0, 0, 0, 0.7)';
 const customStyling = {
     content : {
-        top: '50%',
+        top: '50.5%',
         left: '50%',
-        height: '800px',
+        height: '750px',
         // right: 'auto',
         // bottom: 'auto',
         transform: 'translate(-50%, -50%)'

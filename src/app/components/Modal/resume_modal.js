@@ -15,7 +15,7 @@ export default class resume_modal extends React.Component {
         //window.open(fileURL, "_parent ");
         return (
             <div className={"applicationResume"} id="modalPDF">
-                <iframe  id = "IframeOnModal" src = {fileURL} width="95%" height="750px" frameborder="0"/>
+                <iframe  id = "IframeOnModal" src = {fileURL} width="95%" height="725px" frameborder="0"/>
             </div>
         )
     }
