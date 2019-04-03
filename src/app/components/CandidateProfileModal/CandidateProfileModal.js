@@ -1,31 +1,51 @@
 import React from 'react';
-import {getJobs} from '../../services.js';
+import {getJobs, addJobToCandidate} from '../../services.js';
 import '../../../styles/CandidateProfileModal.css';
-import {getCandidateInfo} from "../services";
 
-export default class ApplicationStatus extends React.Component {
+export default class CandidateProfileModal extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             showAddToReq: false,
+            showSuccess: false,
             jobs: [],
             buttonText1: "Send Email",
-            buttonText2: "Assign to New Requisition"
+            buttonText2: "Assign to New Requisition",
+            selectedReq: ''
         };
 
         this.handleAddToReqClick = this.handleAddToReqClick.bind(this);
         this.handleCancelClick = this.handleCancelClick.bind(this);
     }
 
-    handleAddToReqClick () {
-        this.setState({buttonText1: "Cancel"});
-        this.setState({buttonText2: "Assign"});
-        this.setState({showAddToReq: true});
-        getJobs().then(res => {
-            const jobs = res.data.result;
-            this.setState({jobs: jobs});
-            console.log(jobs);
-        })
+    handleAddToReqClick (candidateID, jobTitle) {
+        if(this.state.showAddToReq === false) {
+            this.setState({buttonText1: "Cancel"});
+            this.setState({buttonText2: "Assign"});
+            this.setState({showAddToReq: true});
+            getJobs().then(res => {
+                const jobs = res.data.result;
+                this.setState({jobs: jobs});
+            })
+        }
+
+        if(this.state.showAddToReq === true) {
+            this.setState({showSuccess: true});
+            console.log("Job Title: " + jobTitle);
+            this.state.jobs.map(job => {
+                if(jobTitle === job.title) {
+                    console.log(job.jobID);
+                    let payload = {
+                        jobID: job.jobID,
+                        candidateID: candidateID
+                    };
+                    console.log(payload);
+                    addJobToCandidate(job.jobID, payload).then(res => {
+                        console.log(res.data.result);
+                    });
+                }
+            });
+        }
     }
 
     handleCancelClick () {
@@ -33,6 +53,7 @@ export default class ApplicationStatus extends React.Component {
             this.setState({showAddToReq: false});
             this.setState({buttonText1: "Send Email"});
             this.setState({buttonText2: "Assign to New Requisition"});
+            this.setState({showSuccess: false});
         }
     }
 
@@ -44,10 +65,21 @@ export default class ApplicationStatus extends React.Component {
                 <p><strong>Phone:</strong>{" " + this.props.info.phoneNum}</p>
                 <p><strong>Address:</strong>{" " + this.props.info.streetAddress}</p>
                 <p><strong>Location:</strong>{" " + this.props.info.city + ", " + this.props.info.state}</p>
-                <p hidden={!this.state.showAddToReq}>Conditional Text!</p>
+                <div className={"addReqToCandidateText"} hidden={!this.state.showAddToReq}>
+                    <p>Assign <strong>{this.props.info.firstName}</strong> to:
+                    <select id={"reqSelection"}>
+                        {this.state.jobs.map(job =>
+                            <option>
+                                {job.title}
+                            </option>
+                        )};
+                    </select>?
+                    </p>
+                    <p hidden={!this.state.showSuccess}>Candidate successfully added.</p>
+                </div>
                 <div className={"candidateProfileModalButtons"}>
                     <button id={"candidateProfileModalButton1"} onClick={this.handleCancelClick}><a href={"mailto:"+this.props.info.email}>{this.state.buttonText1}</a></button>
-                    <button id={"candidateProfileModalButton2"} onClick={this.handleAddToReqClick}>{this.state.buttonText2}</button>
+                    <button id={"candidateProfileModalButton2"} onClick={() => this.handleAddToReqClick(this.props.info.candidateID, document.getElementById("reqSelection").value)}>{this.state.buttonText2}</button>
                 </div>
             </div>
         )

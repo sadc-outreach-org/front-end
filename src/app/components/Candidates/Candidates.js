@@ -32,7 +32,6 @@ export default class Candidates extends React.Component {
         getCandidateInfo(candidateID).then(res => {
             const info = res.data.result;
             this.setState({info: info});
-            console.log(info);
         })
         this.setState({showModal: true})
     }
