@@ -17,7 +17,6 @@ export const login = (payload) => {
     return axios.post(`${API_URL}/users/login`, payload);
 }
 
-// TODO: Don't hardcode the user ID
 export const getResume = () => {
     return  axios(site.concat(fakeUser,"/resume"), {
         method: 'GET',

@@ -1,11 +1,14 @@
 import React from 'react';
+import {getJobs} from '../../services.js';
 import '../../../styles/CandidateProfileModal.css';
+import {getCandidateInfo} from "../services";
 
 export default class ApplicationStatus extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             showAddToReq: false,
+            jobs: [],
             buttonText1: "Send Email",
             buttonText2: "Assign to New Requisition"
         };
@@ -18,6 +21,11 @@ export default class ApplicationStatus extends React.Component {
         this.setState({buttonText1: "Cancel"});
         this.setState({buttonText2: "Assign"});
         this.setState({showAddToReq: true});
+        getJobs().then(res => {
+            const jobs = res.data.result;
+            this.setState({jobs: jobs});
+            console.log(jobs);
+        })
     }
 
     handleCancelClick () {
@@ -36,7 +44,7 @@ export default class ApplicationStatus extends React.Component {
                 <p><strong>Phone:</strong>{" " + this.props.info.phoneNum}</p>
                 <p><strong>Address:</strong>{" " + this.props.info.streetAddress}</p>
                 <p><strong>Location:</strong>{" " + this.props.info.city + ", " + this.props.info.state}</p>
-                <p>Conditional Text!</p>
+                <p hidden={!this.state.showAddToReq}>Conditional Text!</p>
                 <div className={"candidateProfileModalButtons"}>
                     <button id={"candidateProfileModalButton1"} onClick={this.handleCancelClick}><a href={"mailto:"+this.props.info.email}>{this.state.buttonText1}</a></button>
                     <button id={"candidateProfileModalButton2"} onClick={this.handleAddToReqClick}>{this.state.buttonText2}</button>
