@@ -10,6 +10,11 @@
     width: 50%;
 }
 
+#candidateProfileModalButton1 a {
+    text-decoration: none;
+    color: white;
+}
+
 #candidateProfileModalButton2 {
     float: right;
     width: 50%;
