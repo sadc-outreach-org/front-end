@@ -41,7 +41,7 @@ export default class CandidateProfileModal extends React.Component {
                     };
                     console.log(payload);
                     addJobToCandidate(job.jobID, payload).then(res => {
-                        console.log(res.data.result);
+                        console.log(res);
                     });
                 }
             });
