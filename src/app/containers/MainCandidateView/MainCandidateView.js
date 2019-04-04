@@ -29,8 +29,8 @@ class MainCandidateView extends Component {
                     <div>
                         <SideMenu>
                             <Item divider={true} label="Actions" value="segment1"/>
-                            <Item label="Profile" value="/profile"></Item>
-                            <Item label="Applications" value="/applications"></Item>
+                            <Item label="Profile" value="profile"></Item>
+                            <Item label="Applications" value="applications"></Item>
                             <Item divider={true} label={"Notifications"}/>
                             <Item label={"Notifications"} onClick={this.handleOpenModal}/>
                         </SideMenu>
