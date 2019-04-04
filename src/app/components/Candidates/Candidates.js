@@ -10,6 +10,7 @@ const customStyling = {
     content : {
         top: '40%',
         left: '50%',
+        height: '70%',
         padding: 0,
         transform: 'translate(-50%, -50%)'
     }
