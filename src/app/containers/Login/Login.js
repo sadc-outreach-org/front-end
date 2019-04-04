@@ -27,7 +27,12 @@ class Login extends Component {
                 console.log(res);
                 console.log(res.data.result);
                 if(res.status === 200){
-                    this.props.history.push('/c-dashboard/profile', {});
+                    if(res.data.result.role === "Candidate")
+                        this.props.history.push('/c-dashboard/profile', {});
+                    else if(res.data.result.role === "Admin")
+                        this.props.history.push('/hm-dashboard/profile', {});
+                    else
+                        console.log("Successfully logged in but user is not a candidate or admin!");
                  }
             })
     };

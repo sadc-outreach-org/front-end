@@ -14,7 +14,7 @@ export const addCandidate = (payload) => {
 };
 
 export const login = (payload) => {
-    return axios.post(`${API_URL}/users/login`, payload);
+    return axios.post(`${API_URL}/login`, payload);
 };
 
 export const getResume = () => {
