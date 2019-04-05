@@ -26,6 +26,10 @@
     background-color: #dddddd;
 }
 
+.candidatesTable tr:hover {
+    cursor: pointer;
+}
+
 #applicantsHeader {
     color: black;
     text-align: center;

@@ -10,6 +10,7 @@ const customStyling = {
     content : {
         top: '40%',
         left: '50%',
+        height: '70%',
         padding: 0,
         transform: 'translate(-50%, -50%)'
     }
@@ -32,7 +33,6 @@ export default class Candidates extends React.Component {
         getCandidateInfo(candidateID).then(res => {
             const info = res.data.result;
             this.setState({info: info});
-            console.log(info);
         })
         this.setState({showModal: true})
     }
