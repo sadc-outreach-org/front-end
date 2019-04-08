@@ -8,6 +8,22 @@ export const getUsers = () => {
     return axios.get('http://34.73.221.154:8080/users/');
 };
 
+export const sortUsersByApplication = () => {
+    return axios.get('http://34.73.221.154:8080/users?orderBy=status&sort=desc');
+};
+
+export const sortUsersByFirstName = () => {
+    return axios.get('http://34.73.221.154:8080/users?orderBy=firstName&sort=asc');
+};
+
+export const sortUsersByLastName = () => {
+    return axios.get('http://34.73.221.154:8080/users?orderBy=lastName&sort=asc');
+};
+
+export const sortUsersByEmail = () => {
+    return axios.get('http://34.73.221.154:8080/users?orderBy=email&sort=asc');
+};
+
 export const addCandidate = (payload) => {
     return axios.post('http://34.73.221.154:8080/users/signup', payload);
 };

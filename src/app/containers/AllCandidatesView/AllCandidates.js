@@ -3,6 +3,7 @@ import '../../../styles/AllCandidates.css';
 import Candidates from '../../components/Candidates/Candidates';
 import {Input} from 'reactstrap';
 
+
 class AllCandidates extends Component {
     constructor(props) {
         super(props);
@@ -10,6 +11,8 @@ class AllCandidates extends Component {
 
         };
     }
+
+
 
     render() {
         return (
