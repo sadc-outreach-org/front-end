@@ -17,12 +17,14 @@ export const login = (payload) => {
     return axios.post(`${API_URL}/login`, payload);
 };
 
+
 export const submitGitLink = (payload, appID) => {
     return axios.post(`${API_URL}/applications/${appID}/gitLink`, payload);
 };
 
 export const getResume = () => {
     return  axios(site.concat(fakeUser,"/resume"), {
+
         method: 'GET',
         responseType: 'blob' //Force to receive data in a Blob Format
     })

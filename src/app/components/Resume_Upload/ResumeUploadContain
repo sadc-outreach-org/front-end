@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Button, Form, Input} from 'reactstrap';
 import { uploadResume} from '../../components/services';
 
-export default class resumeUpload extends React.Component {
+export default class resumeUploadContain extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -28,13 +28,15 @@ export default class resumeUpload extends React.Component {
     }
     render() {
         return (
-            <Form id = "resumeUploadForm" onSubmit={this.onFileSubmit}>
-                <Input id = "resumeUploadInput" type="file" name = "file" onChange={this.onChange}/>
-                <Button
-                    type={"submit"}
-                    className={"submitResumeUpload btn-block"}
-                >UPLOAD</Button>
-            </Form>
+            <div>
+                <Form id = "resumeUploadForm" onSubmit={this.onFileSubmit}>
+                    <Input id = "resumeUploadInput" type="file" name = "file" onChange={this.onChange}/>
+                    <Button
+                        type={"submit"}
+                        className={"submitResumeUpload btn-block"}
+                    >UPLOAD</Button>
+                </Form>
+            </div>
         );
     }
 }
