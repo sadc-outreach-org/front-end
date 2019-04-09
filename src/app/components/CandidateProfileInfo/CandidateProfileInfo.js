@@ -1,12 +1,36 @@
 import React, {Component} from 'react';
 import '../../../styles/CandidateProfile.css';
-import {Input, Button} from 'reactstrap';
+import {Input, Button, Form} from 'reactstrap';
 import axios from 'axios';
+import {getResume} from '../../services.js';
+import '../../../styles/pdf_modal.css';
+import Pdf_modal from '../../components/Modal/resume_modal';
+import Modal from 'react-modal';
+//import Form from "reactstrap/src/Form";
+import {uploadResume} from "../services";
+
+Modal.defaultStyles.overlay.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+const customStyling = {
+    content : {
+        top: '50.5%',
+        left: '50%',
+        height: '750px',
+        // right: 'auto',
+        // bottom: 'auto',
+        transform: 'translate(-50%, -50%)',
+
+    }
+};
 
 class CandidateProfileInfo extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            file: new File([""], "resume.pdf", {
+                type: "application/pdf",
+            }),
+            url: "",
+            isShowing: false,
             user: [],
             userName: '',
             firstName: '',
@@ -19,6 +43,11 @@ class CandidateProfileInfo extends Component {
             phoneNumber: '',
             githubLink: '',
         };
+        this.handleOpenModal = this.handleOpenModal.bind(this);
+        this.handleCloseModal = this.handleCloseModal.bind(this);
+        this.onFileSubmit = this.onFileSubmit.bind(this)
+        this.onChange = this.onChange.bind(this)
+        this.fileUp = this.fileUp.bind(this)
     }
 
     componentDidMount() {
@@ -38,10 +67,47 @@ class CandidateProfileInfo extends Component {
                 this.setState({phoneNumber : user.phoneNumber});
                 this.setState({githubLink : user.githubLink});
             })
+        getResume('1').then(res => {
+            //Create a Blob from the PDF Stream
+            const pdf = new Blob(
+                [res.data],
+                {type: 'application/pdf'});
+            //Save state of file
+            this.setState({file : pdf});
+            //Build a URL from the file
+            const fileURL = URL.createObjectURL(pdf);
+            this.setState({url : fileURL});
+        })
+            .catch(error => {
+                console.log(error);
+            });
+
+    }
+    //Resume Modal
+    handleOpenModal () {
+        this.setState({showModal: true})
+    }
+    handleCloseModal () {
+        this.setState({showModal: false})
+    }
+    //Resume Upload
+    onFileSubmit = event => {
+        event.preventDefault()
+        this.fileUp(this.state.file).then((response) => {
+            console.log(response.data);
+        })
+    }
+    onChange = event => {
+        this.setState({file:event.target.files[0]})
+    }
+    fileUp(file) {
+        const formData = new FormData();
+        formData.append('file',file)
+        return uploadResume(1,formData)
     }
 
     render() {
-        let {userName, firstName, lastName, email, streetAddress, zipCode, state, city, phoneNumber, githubLink} = this.state;
+        let {file, url, isShowing, userName, firstName, lastName, email, streetAddress, zipCode, state, city, phoneNumber, githubLink} = this.state;
         let disableUpdateButton = firstName !== this.state.user.firstName
             || lastName !== this.state.user.lastName
             || userName !== this.state.user.userName
@@ -52,6 +118,9 @@ class CandidateProfileInfo extends Component {
             || city !== this.state.user.city
             || phoneNumber !== this.state.user.phoneNumber
             || githubLink !== this.state.user.githubLink;
+        const fileURL = URL.createObjectURL(file);
+        const sample = 'http://unec.edu.az/application/uploads/2014/12/pdf-sample.pdf'
+        const type = 'pdf';
 
         return (
             <div className={"profileView"}>
@@ -152,6 +221,27 @@ class CandidateProfileInfo extends Component {
                                 defaultValue={this.state.githubLink}
                                 onChange={(event) => this.setState({githubLink: event.target.value})}
                             />
+                            <label htmlFor="">Resume Upload</label>
+                          <div>
+                            <Form id = "resumeUploadForm" onSubmit={this.onFileSubmit}>
+                                <Input id = "resumeUploadInput" type="file" name = "file" onChange={this.onChange}/>
+                                <Button
+                                    type={"submit"}
+                                    className={"submitResumeUpload btn-block"}
+                                >UPLOAD</Button>
+                            </Form>
+                          </div>
+                                <div >
+                                <iframe title="PDF" src = {fileURL}  />
+                                <button text = "Click me"  onClick={this.handleOpenModal}></button>
+                                    <div >
+                                        <Modal isOpen={this.state.showModal} ariaHideApp={false} style={customStyling} contentLabel="Minimal Modal Example">
+                                            <div className="modalCloseButton" onClick={this.handleCloseModal}/>
+                                            <Pdf_modal file = {this.state.file}/>
+                                            <div className="printf" onClick={this.print_pdf} />
+                                        </Modal>
+                                    </div>
+                                </div>
                         </div>
                         <Button
                             type={"submit"}
@@ -159,6 +249,7 @@ class CandidateProfileInfo extends Component {
                             disabled={!disableUpdateButton}
                         >UPDATE</Button>
                     </div>
+
                 </div>
             </div>
         )

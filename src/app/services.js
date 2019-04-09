@@ -17,8 +17,8 @@ export const login = (payload) => {
     return axios.post(`${API_URL}/login`, payload);
 };
 
-export const getResume = () => {
-    return  axios(site.concat(fakeUser,"/resume"), {
+export const getResume = (user) => {
+    return  axios(site.concat(user,"/resume"), {
         method: 'GET',
         responseType: 'blob' //Force to receive data in a Blob Format
     })
