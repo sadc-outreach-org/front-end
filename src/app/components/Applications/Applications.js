@@ -19,18 +19,20 @@ export default class Applications extends React.Component {
         super(props);
         this.state = {
             applications: [],
+            clickedApplication: null,
+            clickedApplicationTitle: '',
             showModal: false
         };
 
         this.handleOpenModal = this.handleOpenModal.bind(this);
         this.handleCloseModal = this.handleCloseModal.bind(this);
+        this.handleAppClick = this.handleAppClick.bind(this);
     }
 
     componentDidMount() {
         getApplicationsForUser(localStorage.getItem("userID")).then(res => {
             const applications = res.data.result;
             this.setState({applications : applications});
-            console.log(applications);
         })
     }
 
@@ -43,21 +45,15 @@ export default class Applications extends React.Component {
         this.setState({showModal: false})
     }
 
-    handleAppClick = event => {
-        event.preventDefault();
-        // let payload = {
-        //     email: this.state.email,
-        //     password: this.state.password
-        // };
-
-        console.log("Row Clicked!");
-
-        // axios.post("http://cloud-25.cs.trinity.edu:8080/user/login", payload)
-        //     .then(res => {
-        //         console.log(res);
-        //         console.log(res.data.result);
-        //     })
-    };
+    handleAppClick (singleApplication) {
+        // this.handleOpenModal().then();
+        console.log("Entire Application Passed: " + JSON.stringify(singleApplication));
+        console.log("Title received from passed application parameter: " + singleApplication.requisition.title);
+        this.setState({clickedApplication: singleApplication});
+        this.setState({clickedApplicationTitle: singleApplication.requisition.title});
+        console.log("Clicked Application Title: " + this.state.clickedApplicationTitle);
+        console.log("Clicked Application: " + this.state.clickedApplication);
+    }
 
     render() {
         return (
@@ -70,18 +66,13 @@ export default class Applications extends React.Component {
                         <th>Status</th>
                     </tr>
                     <tbody>
-                    {this.state.candidates.map(application =>
-                    <tr>
+                    {this.state.applications.map(application =>
+                    <tr onClick={() => this.handleAppClick(application)}>
                         <td>{application.requisition.title}</td>
-                        {/*<td>{candidate.email}</td>*/}
-                        {/*<td>{candidate.phoneNumber}</td>*/}
+                        <td>{application.createdAt}</td>
+                        <td>{application.status}</td>
                     </tr>)
                     }
-                    <tr onClick={this.handleOpenModal}>
-                        <td>Developer I</td>
-                        <td>Feb. 2, 2019</td>
-                        <td>Ready for Interview</td>
-                    </tr>
                     </tbody>
                 </table>
                 <Modal
