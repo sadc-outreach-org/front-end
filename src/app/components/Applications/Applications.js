@@ -26,12 +26,13 @@ export default class Applications extends React.Component {
         this.handleCloseModal = this.handleCloseModal.bind(this);
     }
 
-    // componentDidMount() {
-    //     getUsers().then(res => {
-    //         const candidates = res.data.result;
-    //         this.setState({candidates});
-    //     })
-    // }
+    componentDidMount() {
+        getApplicationsForUser(localStorage.getItem("userID")).then(res => {
+            const applications = res.data.result;
+            this.setState({applications : applications});
+            console.log(applications);
+        })
+    }
 
     handleOpenModal () {
         this.setState({showModal: true})
@@ -69,13 +70,13 @@ export default class Applications extends React.Component {
                         <th>Status</th>
                     </tr>
                     <tbody>
-                    {/*{this.state.candidates.map(application =>*/}
-                    {/*<tr>*/}
-                    {/*/!*<td>{candidate.firstName}</td>*!/*/}
-                    {/*/!*<td>{candidate.email}</td>*!/*/}
-                    {/*/!*<td>{candidate.phoneNumber}</td>*!/*/}
-                    {/*</tr>)*/}
-                    {/*}*/}
+                    {this.state.candidates.map(application =>
+                    <tr>
+                        <td>{application.requisition.title}</td>
+                        {/*<td>{candidate.email}</td>*/}
+                        {/*<td>{candidate.phoneNumber}</td>*/}
+                    </tr>)
+                    }
                     <tr onClick={this.handleOpenModal}>
                         <td>Developer I</td>
                         <td>Feb. 2, 2019</td>

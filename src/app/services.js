@@ -49,8 +49,8 @@ export const getApplicationsForReq = (reqID) => {
     return axios.get(`${API_URL}/requisitions/${reqID}/applications`);
 };
 
-export const getApplicationsForUser = (candidateID) => {
-    return axios.get(`${API_URL}/users/${candidateID}/applications`);
+export const getApplicationsForUser = (userID) => {
+    return axios.get(`${API_URL}/users/${userID}/applications`);
 };
 
 export const addJobToCandidate = (jobID, payload) => {

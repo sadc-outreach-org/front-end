@@ -18,12 +18,12 @@ class CandidateProfileInfo extends Component {
             city: '',
             phoneNumber: '',
             githubLink: '',
+            candidateID: ''
         };
     }
 
     componentDidMount() {
-        console.log("Candidate ID: " + this.props.candidateID);
-        axios.get('http://34.73.221.154:8080/users/'+this.props.candidateID)
+        axios.get('http://34.73.221.154:8080/users/'+localStorage.getItem("userID"))
             .then(res => {
                 const user = res.data.result;
                 this.setState({user});

@@ -26,6 +26,9 @@ class Login extends Component {
         login(payload).then(res => {
                 console.log(res);
                 console.log(res.data.result);
+                localStorage.setItem("userID", res.data.result.id);
+                let id = localStorage.getItem("userID");
+                console.log("User ID of logged in user: " + id);
                 if(res.status === 200){
                     if(res.data.result.role === "Candidate")
                         this.props.history.push('/c-dashboard/profile', {});
