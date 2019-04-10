@@ -29,6 +29,7 @@ export default class Jobs extends React.Component {
         })
     };
 
+
     componentDidMount() {
         getJobs().then(res => {
             const jobs = res.data.result;
@@ -55,7 +56,7 @@ export default class Jobs extends React.Component {
                     {this.state.jobs.map(job =>
                         <tr onClick={() => this.handleJobClick(job.jobID)}>
                             <td>
-
+                                HEB-8750-
                             </td>
                             <td>
                                 {job.title}
