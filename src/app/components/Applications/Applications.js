@@ -6,14 +6,6 @@ import Modal from 'react-modal';
 
 Modal.defaultStyles.overlay.backgroundColor = 'rgba(0, 0, 0, 0.7)';
 
-const customStyling = {
-    content : {
-        top: '50%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)'
-    }
-};
-
 export default class Applications extends React.Component {
     constructor (props) {
         super(props);
@@ -40,8 +32,6 @@ export default class Applications extends React.Component {
 
     handleAppClick (singleApplication) {
         this.setState({clickedApplication: singleApplication}, function() {
-            console.log("Callback function: " + this.state.clickedApplication.requisition.title);
-            console.log("App Clicked: " + JSON.stringify(this.state.clickedApplication));
             this.setState({showModal: true});
         });
     }
@@ -72,7 +62,7 @@ export default class Applications extends React.Component {
                     contentLabel="Minimal Modal Example"
                 >
                     <div className="modalCloseButton" onClick={this.handleCloseModal}/>
-                    <ApplicationStatus/>
+                    <ApplicationStatus clickedApplication={this.state.clickedApplication}/>
                 </Modal>
             </div>
         );

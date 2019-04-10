@@ -21,8 +21,6 @@ class Login extends Component {
             password: this.state.password
         };
 
-        console.log(payload);
-
         login(payload).then(res => {
                 console.log(res);
                 console.log(res.data.result);
