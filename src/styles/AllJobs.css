@@ -23,7 +23,8 @@
     margin-left: 10px;
 }
 
-.jobContainer table tr td:first-child::before {
+
+.jobsTable tr td:first-child::after {
     content: counter(rowNumber);
     counter-increment: rowNumber;
     min-width: 1em;

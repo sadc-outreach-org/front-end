@@ -8,20 +8,36 @@ export const getUsers = () => {
     return axios.get('http://34.73.221.154:8080/users/');
 };
 
-export const sortUsersByApplication = () => {
+export const sortUsersByApplicationDesc = () => {
     return axios.get('http://34.73.221.154:8080/users?orderBy=status&sort=desc');
 };
 
-export const sortUsersByFirstName = () => {
+export const sortUsersByApplicationAsc = () => {
+    return axios.get('http://34.73.221.154:8080/users?orderBy=status&sort=asc');
+};
+
+export const sortUsersByFirstNameAsc = () => {
     return axios.get('http://34.73.221.154:8080/users?orderBy=firstName&sort=asc');
 };
 
-export const sortUsersByLastName = () => {
+export const sortUsersByFirstNameDesc = () => {
+    return axios.get('http://34.73.221.154:8080/users?orderBy=firstName&sort=desc');
+};
+
+export const sortUsersByLastNameAsc = () => {
     return axios.get('http://34.73.221.154:8080/users?orderBy=lastName&sort=asc');
 };
 
-export const sortUsersByEmail = () => {
+export const sortUsersByLastNameDesc = () => {
+    return axios.get('http://34.73.221.154:8080/users?orderBy=lastName&sort=desc');
+};
+
+export const sortUsersByEmailAsc = () => {
     return axios.get('http://34.73.221.154:8080/users?orderBy=email&sort=asc');
+};
+
+export const sortUsersByEmailDesc = () => {
+    return axios.get('http://34.73.221.154:8080/users?orderBy=email&sort=desc');
 };
 
 export const addCandidate = (payload) => {

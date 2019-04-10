@@ -3,7 +3,13 @@ import '../../../styles/AllCandidates.css';
 import {getUsers, getCandidateInfo, sortUsersByApplication} from '../../components/services.js';
 import Modal from 'react-modal';
 import CandidateProfileModal from '../CandidateProfileModal/CandidateProfileModal';
-import {sortUsersByEmail, sortUsersByFirstName, sortUsersByLastName} from "../../components/services";
+import {
+    sortUsersByApplicationAsc,
+    sortUsersByApplicationDesc,
+    sortUsersByEmail, sortUsersByEmailAsc, sortUsersByEmailDesc,
+    sortUsersByFirstName, sortUsersByFirstNameAsc, sortUsersByFirstNameDesc,
+    sortUsersByLastName, sortUsersByLastNameAsc, sortUsersByLastNameDesc
+} from "../../components/services";
 
 
 
@@ -45,29 +51,57 @@ export default class Candidates extends React.Component {
         this.setState({showModal: false})
     }
 
+    sortCandidatebyAppStatusAsc() {
+        sortUsersByApplicationAsc().then(res => {
+            const candidates = res.data.result;
+            this.setState({candidates: candidates});
+        })
+    }
+
     componentDidMount() {
-        sortUsersByApplication().then(res => {
+        sortUsersByApplicationDesc().then(res => {
             const candidates = res.data.result;
             this.setState({candidates: candidates});
         })
     }
 
-    sortCandidatebyFirstName() {
-        sortUsersByFirstName().then(res => {
+    sortCandidatebyFirstNameDesc() {
+        sortUsersByFirstNameDesc().then(res => {
             const candidates = res.data.result;
             this.setState({candidates: candidates});
         })
     }
 
-    sortCandidatebyLastName() {
-        sortUsersByLastName().then(res => {
+    sortCandidatebyFirstNameAsc() {
+        sortUsersByFirstNameAsc().then(res => {
             const candidates = res.data.result;
             this.setState({candidates: candidates});
         })
     }
 
-    sortCandidatebyEmail() {
-        sortUsersByEmail().then(res => {
+    sortCandidateByLastNameDesc() {
+        sortUsersByLastNameDesc().then(res => {
+            const candidates = res.data.result;
+            this.setState({candidates: candidates});
+        })
+    }
+
+    sortCandidatebyLastNameAsc() {
+        sortUsersByLastNameAsc().then(res => {
+            const candidates = res.data.result;
+            this.setState({candidates: candidates});
+        })
+    }
+
+    sortCandidatebyEmailDesc() {
+        sortUsersByEmailDesc().then(res => {
+            const candidates = res.data.result;
+            this.setState({candidates: candidates});
+        })
+    }
+
+    sortCandidatebyEmailAsc() {
+        sortUsersByEmailAsc().then(res => {
             const candidates = res.data.result;
             this.setState({candidates: candidates});
         })
@@ -83,10 +117,10 @@ export default class Candidates extends React.Component {
                 <table className={"candidatesTable"}>
                     <tbody>
                         <tr>
-                            <th onClick={() => this.sortCandidatebyFirstName()}>First</th>
-                            <th onClick={() => this.sortCandidatebyLastName()}>Last</th>
-                            <th onClick={() => this.sortCandidatebyEmail()}>Email</th>
-                            <th onClick={() => this.componentDidMount()}>Application Status<i className="upArrow"></i><i className="downArrow"></i></th>
+                            <th>First<i className="upArrow" onClick={() => this.sortCandidatebyFirstNameAsc()}></i><i className="downArrow" onClick={() => this.sortCandidatebyFirstNameDesc()}></i></th>
+                            <th>Last<i className="upArrow" onClick={() => this.sortCandidatebyLastNameAsc()}></i><i className="downArrow" onClick={() => this.sortCandidateByLastNameDesc()}></i></th>
+                            <th>Email<i className="upArrow" onClick={() => this.sortCandidatebyEmailAsc()}></i><i className="downArrow" onClick={() => this.sortCandidatebyEmailDesc()}></i></th>
+                            <th>Application Status<i className="upArrow"onClick={() => this.sortCandidatebyAppStatusAsc()} ></i><i className="downArrow" onClick={() => this.componentDidMount()}></i></th>
                         </tr>
                         {this.state.candidates.map(candidate =>
                             <tr onClick={() => this.handleOpenModal(candidate.candidateID)}>
