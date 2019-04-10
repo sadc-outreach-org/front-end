@@ -27,7 +27,11 @@ export default class Applications extends React.Component {
     }
 
     handleCloseModal () {
-        this.setState({showModal: false})
+        this.setState({showModal: false});
+        getApplicationsForUser(localStorage.getItem("userID")).then(res => {
+            const applications = res.data.result;
+            this.setState({applications : applications});
+        })
     }
 
     handleAppClick (singleApplication) {

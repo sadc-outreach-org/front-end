@@ -49,7 +49,7 @@ export default class ApplicationStatus extends React.Component {
                             id={"gitHubSubmitField"}
                             placeholder={"Github Repo Link"}
                             defaultValue={this.props.clickedApplication.gitLink}
-                            onChange={(event) => this.setState({email: event.target.value})}
+                            onChange={(event) => this.setState({gitLink: event.target.value})}
                             required
                         />
                         <Button
