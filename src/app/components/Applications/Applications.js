@@ -6,57 +6,39 @@ import Modal from 'react-modal';
 
 Modal.defaultStyles.overlay.backgroundColor = 'rgba(0, 0, 0, 0.7)';
 
-const customStyling = {
-    content : {
-        top: '50%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)'
-    }
-};
-
 export default class Applications extends React.Component {
     constructor (props) {
         super(props);
         this.state = {
             applications: [],
+            clickedApplication: [],
             showModal: false
         };
 
-        this.handleOpenModal = this.handleOpenModal.bind(this);
         this.handleCloseModal = this.handleCloseModal.bind(this);
+        this.handleAppClick = this.handleAppClick.bind(this);
     }
 
-    // componentDidMount() {
-    //     getUsers().then(res => {
-    //         const candidates = res.data.result;
-    //         this.setState({candidates});
-    //     })
-    // }
-
-    handleOpenModal () {
-        this.setState({showModal: true})
+    componentDidMount() {
+        getApplicationsForUser(localStorage.getItem("userID")).then(res => {
+            const applications = res.data.result;
+            this.setState({applications : applications});
+        })
     }
-
 
     handleCloseModal () {
-        this.setState({showModal: false})
+        this.setState({showModal: false});
+        getApplicationsForUser(localStorage.getItem("userID")).then(res => {
+            const applications = res.data.result;
+            this.setState({applications : applications});
+        })
     }
 
-    handleAppClick = event => {
-        event.preventDefault();
-        // let payload = {
-        //     email: this.state.email,
-        //     password: this.state.password
-        // };
-
-        console.log("Row Clicked!");
-
-        // axios.post("http://cloud-25.cs.trinity.edu:8080/user/login", payload)
-        //     .then(res => {
-        //         console.log(res);
-        //         console.log(res.data.result);
-        //     })
-    };
+    handleAppClick (singleApplication) {
+        this.setState({clickedApplication: singleApplication}, function() {
+            this.setState({showModal: true});
+        });
+    }
 
     render() {
         return (
@@ -69,18 +51,13 @@ export default class Applications extends React.Component {
                         <th>Status</th>
                     </tr>
                     <tbody>
-                    {/*{this.state.candidates.map(application =>*/}
-                    {/*<tr>*/}
-                    {/*/!*<td>{candidate.firstName}</td>*!/*/}
-                    {/*/!*<td>{candidate.email}</td>*!/*/}
-                    {/*/!*<td>{candidate.phoneNumber}</td>*!/*/}
-                    {/*</tr>)*/}
-                    {/*}*/}
-                    <tr onClick={this.handleOpenModal}>
-                        <td>Developer I</td>
-                        <td>Feb. 2, 2019</td>
-                        <td>Ready for Interview</td>
-                    </tr>
+                    {this.state.applications.map(application =>
+                    <tr onClick={() => {this.handleAppClick(application)}}>
+                        <td>{application.requisition.title}</td>
+                        <td>{application.createdAt}</td>
+                        <td>{application.status}</td>
+                    </tr>)
+                    }
                     </tbody>
                 </table>
                 <Modal
@@ -89,7 +66,7 @@ export default class Applications extends React.Component {
                     contentLabel="Minimal Modal Example"
                 >
                     <div className="modalCloseButton" onClick={this.handleCloseModal}/>
-                    <ApplicationStatus/>
+                    <ApplicationStatus clickedApplication={this.state.clickedApplication}/>
                 </Modal>
             </div>
         );
