@@ -1,8 +1,11 @@
 import React from 'react';
 import '../../../styles/AllCandidates.css';
-import {getUsers, getCandidateInfo} from '../../components/services.js';
+import {getUsers, getCandidateInfo, sortUsersByApplication} from '../../components/services.js';
 import Modal from 'react-modal';
 import CandidateProfileModal from '../CandidateProfileModal/CandidateProfileModal';
+import {sortUsersByEmail, sortUsersByFirstName, sortUsersByLastName} from "../../components/services";
+
+
 
 Modal.defaultStyles.overlay.backgroundColor = 'rgba(0, 0, 0, 0.7)';
 
@@ -43,11 +46,34 @@ export default class Candidates extends React.Component {
     }
 
     componentDidMount() {
-        getUsers().then(res => {
+        sortUsersByApplication().then(res => {
             const candidates = res.data.result;
             this.setState({candidates: candidates});
         })
     }
+
+    sortCandidatebyFirstName() {
+        sortUsersByFirstName().then(res => {
+            const candidates = res.data.result;
+            this.setState({candidates: candidates});
+        })
+    }
+
+    sortCandidatebyLastName() {
+        sortUsersByLastName().then(res => {
+            const candidates = res.data.result;
+            this.setState({candidates: candidates});
+        })
+    }
+
+    sortCandidatebyEmail() {
+        sortUsersByEmail().then(res => {
+            const candidates = res.data.result;
+            this.setState({candidates: candidates});
+        })
+    }
+
+
 
     render() {
         return (
@@ -57,10 +83,10 @@ export default class Candidates extends React.Component {
                 <table className={"candidatesTable"}>
                     <tbody>
                         <tr>
-                            <th>First</th>
-                            <th>Last</th>
-                            <th>Email</th>
-                            <th>Application Status <i className="upArrow"></i><i className="downArrow"></i></th>
+                            <th onClick={() => this.sortCandidatebyFirstName()}>First</th>
+                            <th onClick={() => this.sortCandidatebyLastName()}>Last</th>
+                            <th onClick={() => this.sortCandidatebyEmail()}>Email</th>
+                            <th onClick={() => this.componentDidMount()}>Application Status<i className="upArrow"></i><i className="downArrow"></i></th>
                         </tr>
                         {this.state.candidates.map(candidate =>
                             <tr onClick={() => this.handleOpenModal(candidate.candidateID)}>

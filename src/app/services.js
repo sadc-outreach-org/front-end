@@ -41,6 +41,10 @@ export const getUser = (userID) => {
     return axios.get(`${API_URL}/users/${userID}`);
 };
 
+// export const sortCandidateByApplicationStatus = (candidateID) => {
+// //     return axios.get(`${API_URL}/users/${candidateID}/applications`);
+// // };
+
 export const getRequisitions = () => {
     return axios.get(`${API_URL}/requisitions`);
 };

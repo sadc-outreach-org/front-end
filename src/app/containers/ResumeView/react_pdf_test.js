@@ -3,6 +3,7 @@ import {getResume} from '../../services.js';
 import '../../../styles/pdf_modal.css';
 import Pdf_modal from '../../components/Modal/resume_modal';
 import Modal from 'react-modal';
+import FileViewer from 'react-file-viewer';
 import { Document, Page } from 'react-pdf';
 
 Modal.defaultStyles.overlay.backgroundColor = 'rgba(0, 0, 0, 0.7)';
@@ -13,7 +14,8 @@ const customStyling = {
         height: '750px',
         // right: 'auto',
         // bottom: 'auto',
-        transform: 'translate(-50%, -50%)'
+        transform: 'translate(-50%, -50%)',
+
     }
 };
 
@@ -65,6 +67,8 @@ export default class Applications extends React.Component {
     render() {
         let {file, url, isShowing} = this.state;
         const fileURL = URL.createObjectURL(file);
+        const sample = 'http://unec.edu.az/application/uploads/2014/12/pdf-sample.pdf'
+        const type = 'pdf';
 
 
         return (
@@ -72,6 +76,10 @@ export default class Applications extends React.Component {
             <div class="iframe-container">
                 <iframe title="PDF" src = {fileURL}  />
                 <button text = "Click me"  onClick={this.handleOpenModal}></button>
+                <FileViewer
+                    fileType={sample}
+                    filePath={fileURL}
+                    />
                 <div >
                     <Modal isOpen={this.state.showModal} ariaHideApp={false} style={customStyling} contentLabel="Minimal Modal Example">
                         <div className="modalCloseButton" onClick={this.handleCloseModal}/>
