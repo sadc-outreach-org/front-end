@@ -19,12 +19,10 @@ export default class Applications extends React.Component {
         super(props);
         this.state = {
             applications: [],
-            clickedApplication: null,
-            clickedApplicationTitle: '',
+            clickedApplication: [],
             showModal: false
         };
 
-        this.handleOpenModal = this.handleOpenModal.bind(this);
         this.handleCloseModal = this.handleCloseModal.bind(this);
         this.handleAppClick = this.handleAppClick.bind(this);
     }
@@ -36,23 +34,16 @@ export default class Applications extends React.Component {
         })
     }
 
-    handleOpenModal () {
-        this.setState({showModal: true})
-    }
-
-
     handleCloseModal () {
         this.setState({showModal: false})
     }
 
     handleAppClick (singleApplication) {
-        // this.handleOpenModal().then();
-        console.log("Entire Application Passed: " + JSON.stringify(singleApplication));
-        console.log("Title received from passed application parameter: " + singleApplication.requisition.title);
-        this.setState({clickedApplication: singleApplication});
-        this.setState({clickedApplicationTitle: singleApplication.requisition.title});
-        console.log("Clicked Application Title: " + this.state.clickedApplicationTitle);
-        console.log("Clicked Application: " + this.state.clickedApplication);
+        this.setState({clickedApplication: singleApplication}, function() {
+            console.log("Callback function: " + this.state.clickedApplication.requisition.title);
+            console.log("App Clicked: " + JSON.stringify(this.state.clickedApplication));
+            this.setState({showModal: true});
+        });
     }
 
     render() {
@@ -67,7 +58,7 @@ export default class Applications extends React.Component {
                     </tr>
                     <tbody>
                     {this.state.applications.map(application =>
-                    <tr onClick={() => this.handleAppClick(application)}>
+                    <tr onClick={() => {this.handleAppClick(application)}}>
                         <td>{application.requisition.title}</td>
                         <td>{application.createdAt}</td>
                         <td>{application.status}</td>
