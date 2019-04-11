@@ -22,8 +22,8 @@ export const submitGitLink = (payload, appID) => {
     return axios.post(`${API_URL}/applications/${appID}/gitLink`, payload);
 };
 
-export const getResume = () => {
-    return  axios(site.concat(fakeUser,"/resume"), {
+export const getResume = (UserID) => {
+    return  axios(site.concat(UserID,"/resume"), {
 
         method: 'GET',
         responseType: 'blob' //Force to receive data in a Blob Format

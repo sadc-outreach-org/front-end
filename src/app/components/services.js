@@ -1,6 +1,5 @@
 import axios from 'axios';
 
-var user = "1";
 var site = "http://34.73.221.154:8080/users/";
 const API_URL = "http://34.73.221.154:8080";
 
@@ -44,8 +43,8 @@ export const addCandidate = (payload) => {
     return axios.post('http://34.73.221.154:8080/users/signup', payload);
 };
 
-export const getResume = () => {
-    return  axios(site.concat(user,"/resume"), {
+export const getResume = (userID) => {
+    return  axios(site.concat(userID,"/resume"), {
         method: 'GET',
         responseType: 'blob' //Force to receive data in a Blob Format
     })
