@@ -44,6 +44,7 @@ export default class ApplicationStatus extends React.Component {
                     <li className={"progressbar-item"}>Attend Interview</li>
                     <li className={"progressbar-item"}>Wait for Response</li>
                 </ul>
+                <div className={"applicationStatusStepSpace"}>
                 <h2 className={"application-subheader"}>Step 1: Submit Code for Review</h2>
                 <p className={"application-p"}>Coding Challenge: Write a program that prints out "Hello World!"</p>
                 <Form onSubmit={this.handleGitSubmit}>
