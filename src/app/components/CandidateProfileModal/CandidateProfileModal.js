@@ -61,10 +61,10 @@ export default class CandidateProfileModal extends React.Component {
         return (
             <div className={"candidateProfileModalContainer"}>
                 <h1>{this.props.info.firstName + " " + this.props.info.lastName}</h1>
-                <p><strong>Email: </strong><a href={"mailto:"+this.props.info.email}>{this.props.info.email}</a></p>
-                <p><strong>Phone:</strong>{" " + this.props.info.phoneNum}</p>
-                <p><strong>Address:</strong>{" " + this.props.info.streetAddress}</p>
-                <p><strong>Location:</strong>{" " + this.props.info.city + ", " + this.props.info.state}</p>
+                <p hidden = {this.props.readyForInterview}><strong>Email: </strong><a href={"mailto:"+this.props.info.email}>{this.props.info.email}</a></p>
+                <p hidden = {this.props.readyForInterview}><strong>Phone:</strong>{" " + this.props.info.phoneNum}</p>
+                <p hidden = {this.props.readyForInterview}><strong>Address:</strong>{" " + this.props.info.streetAddress}</p>
+                <p hidden = {this.props.readyForInterview}><strong>Location:</strong>{" " + this.props.info.city + ", " + this.props.info.state}</p>
                 <div className={"addReqToCandidateText"} hidden={!this.state.showAddToReq}>
                     <p>Assign <strong>{this.props.info.firstName}</strong> to:
                     <select id={"reqSelection"}>
