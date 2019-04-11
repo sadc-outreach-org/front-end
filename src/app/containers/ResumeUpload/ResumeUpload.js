@@ -25,6 +25,7 @@ export default class resumeUpload extends React.Component {
         const formData = new FormData();
         formData.append('file',file)
         return uploadResume( 57,formData)
+
     }
     render() {
         return (

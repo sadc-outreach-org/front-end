@@ -35,6 +35,7 @@ export default class Applications extends React.Component {
     componentDidMount() {
         getResume(57).then(res => {
 
+
 //Create a Blob from the PDF Stream
             const pdf = new Blob(
                 [res.data],

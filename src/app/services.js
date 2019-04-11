@@ -25,6 +25,7 @@ export const submitGitLink = (payload, appID) => {
 export const getResume = (UserID) => {
     return  axios(site.concat(UserID,"/resume"), {
 
+
         method: 'GET',
         responseType: 'blob' //Force to receive data in a Blob Format
     })

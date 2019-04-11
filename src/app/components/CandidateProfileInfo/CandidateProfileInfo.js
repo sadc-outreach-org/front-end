@@ -2,12 +2,12 @@ import React, {Component} from 'react';
 import '../../../styles/CandidateProfile.css';
 import {Input, Button, Form} from 'reactstrap';
 import axios from 'axios';
+import {getResume} from '../../services.js';
 import '../../../styles/pdf_modal.css';
 import Pdf_modal from '../../components/Modal/resume_modal';
 import Modal from 'react-modal';
 //import Form from "reactstrap/src/Form";
-import {uploadResume} from '../../services';
-import {getResume} from '../../services';
+import {uploadResume} from "../services";
 
 Modal.defaultStyles.overlay.backgroundColor = 'rgba(0, 0, 0, 0.7)';
 const customStyling = {
@@ -67,9 +67,11 @@ class CandidateProfileInfo extends Component {
                 this.setState({phoneNumber : user.phoneNumber});
                 this.setState({githubLink : user.githubLink});
             })
+
         getResume(localStorage.getItem("userID")).then(res => {
             //Create a Blob from the PDF Stream
             console.log(localStorage.getItem("userID"))
+
             const pdf = new Blob(
                 [res.data],
                 {type: 'application/pdf'});
@@ -106,6 +108,7 @@ class CandidateProfileInfo extends Component {
         formData.append('file',file)
         console.log(localStorage.getItem("userID"))
         return uploadResume(localStorage.getItem("userID"),formData)
+
     }
 
     render() {
