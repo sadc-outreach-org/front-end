@@ -11,8 +11,6 @@ import {
     sortUsersByLastName, sortUsersByLastNameAsc, sortUsersByLastNameDesc
 } from "../../components/services";
 
-
-
 Modal.defaultStyles.overlay.backgroundColor = 'rgba(0, 0, 0, 0.7)';
 
 const customStyling = {
@@ -30,25 +28,44 @@ export default class Candidates extends React.Component {
         super(props);
         this.state = {
             candidates: [],
+            currentCandidate: [],
             info: [],
-            showModal: false
+            showModal: false,
+            readyForInterview: false
         };
 
         this.handleOpenModal = this.handleOpenModal.bind(this);
         this.handleCloseModal = this.handleCloseModal.bind(this);
     }
 
-    handleOpenModal (candidateID) {
+    //---------CALENDAR----------
+    state = {
+        date: new Date(),
+        showCalendar: false
+    };
+
+    handleOpenModal (candidate, candidateID, status) {
         getCandidateInfo(candidateID).then(res => {
             const info = res.data.result;
             this.setState({info: info});
-        })
-        this.setState({showModal: true})
+        });
+        this.setState({currentCandidate: candidate});
+        this.setState({showModal: true});
+        if(status === "Schedule Interview") {
+            this.setState({readyForInterview: true}, function() {
+                // this.setState({showCalendar: true});
+            });
+        } else {
+            this.setState({readyForInterview: false}, function() {
+                this.setState({showCalendar: false});
+            });
+        }
+
     }
 
-
     handleCloseModal () {
-        this.setState({showModal: false})
+        this.setState({showModal: false});
+        this.setState({readyForInterview: false});
     }
 
     sortCandidatebyAppStatusAsc() {
@@ -107,13 +124,11 @@ export default class Candidates extends React.Component {
         })
     }
 
-
-
     render() {
         return (
             <div className={"candidatesContainer"}>
                 <h1 id={"applicantsHeader"}>Applicants</h1>
-                <input type={"text"} id={"candidateSearchInput"} onKeyUp={console.log("typed")} placeholder={"Search by name"} title={"Type in a name"}/>
+                <input type={"text"} id={"candidateSearchInput"} placeholder={"Search by name"} title={"Type in a name"}/>
                 <table className={"candidatesTable"}>
                     <tbody>
                         <tr>
@@ -123,13 +138,14 @@ export default class Candidates extends React.Component {
                             <th>Application Status<i className="upArrow"onClick={() => this.sortCandidatebyAppStatusAsc()} ></i><i className="downArrow" onClick={() => this.componentDidMount()}></i></th>
                         </tr>
                         {this.state.candidates.map(candidate =>
-                            <tr onClick={() => this.handleOpenModal(candidate.candidateID)}>
+                            <tr onClick={() => this.handleOpenModal(candidate, candidate.candidateID, candidate.status)}>
                                 <td>{candidate.firstName}</td>
                                 <td>{candidate.lastName}</td>
                                 <td>{candidate.email}</td>
                                 <td>{candidate.status}</td>
                             </tr>)
                         }
+
                     </tbody>
                 </table>
                 <Modal
@@ -139,7 +155,7 @@ export default class Candidates extends React.Component {
                     contentLabel=""
                 >
                     <div className="modalCloseButton" onClick={this.handleCloseModal}/>
-                    <CandidateProfileModal info={this.state.info}/>
+                    <CandidateProfileModal info={this.state.info} currentCandidate={this.state.currentCandidate} readyForInterview={this.state.readyForInterview}/>
                 </Modal>
             </div>
         )
