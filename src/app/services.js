@@ -68,3 +68,7 @@ export const addJobToCandidate = (jobID, payload) => {
 export const setInterviewForApplication = (appID, payload) => {
     return axios.post(`${API_URL}/applications/${appID}/interviewTime`, payload);
 };
+
+export const getApplicationDetails = (appID) => {
+    return axios.get(`${API_URL}/applications/${appID}`);
+}

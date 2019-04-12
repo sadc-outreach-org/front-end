@@ -23,6 +23,7 @@ export default class ApplicationStatus extends React.Component {
         let steps = document.getElementsByClassName("progressbar-item");
         let i;
         for(i = 0; i < steps.length; i++) {
+
             if(steps[i].innerHTML.includes(this.props.clickedApplication.status)) {
                 steps[i].className = steps[i].className+" active";
             } else {
@@ -51,9 +52,11 @@ export default class ApplicationStatus extends React.Component {
 
     handleGitSubmit = event => {
         event.preventDefault();
+
         let payload = {
             gitLink: this.state.gitLink
         };
+
         submitGitLink(payload, this.props.clickedApplication.applicationID);
         this.setState({showUpdated: true});
     };
