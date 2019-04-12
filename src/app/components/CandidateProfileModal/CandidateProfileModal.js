@@ -40,7 +40,7 @@ export default class CandidateProfileModal extends React.Component {
         if(this.state.showAddToReq === true) {
             this.setState({showSuccess: true});
             console.log("Job Title: " + jobTitle);
-            this.state.jobs.map(job => {
+            this.state.jobs.forEach(job => {
                 if(jobTitle === job.title) {
                     console.log(job.jobID);
                     let payload = {
@@ -76,6 +76,7 @@ export default class CandidateProfileModal extends React.Component {
         if(modifier === 'PM') {
             hours = parseInt(hours, 10) + 12;
         }
+        hours = this.addZ(hours);
         return `${hours}:${minutes}`;
     };
 
@@ -86,26 +87,21 @@ export default class CandidateProfileModal extends React.Component {
         } else if(this.state.showCalendar === true) {
             getApplicationsForUser(this.props.info.candidateID).then(res => {
                const applications = res.data.result;
-               console.log("All Applications: " + JSON.stringify(applications));
-               applications.map(app => {
-                  console.log(app.status);
+               applications.forEach(app => {
                   if(app.status === this.props.currentCandidate.status) {
                       currentApplications.push(app);
                   }
                });
-               console.log("Current apps: " + JSON.stringify(currentApplications[0]));
+
+                let payload = {
+                    "interviewTime": this.state.date.getFullYear()+"-"
+                        +this.addZ(this.state.date.getMonth()+1)+"-"
+                        +this.addZ(this.state.date.getDay())+" "
+                        +this.convertTime12to24(document.getElementById("timeSelection").value)+":00"
+                };
+
+                setInterviewForApplication(currentApplications[0].applicationID, payload);
             });
-            let payload = {
-                "interviewTime": this.state.date.getFullYear()+"-"
-                    +this.addZ(this.state.date.getMonth()+1)+"-"
-                    +this.addZ(this.state.date.getDay())+" "
-                    +this.convertTime12to24(document.getElementById("timeSelection").value)+":00"
-            };
-            // setInterviewForApplication(currentApplications[0].status, payload).then(res => {
-            //     console.log("Set Interview Response: " + res);
-            // });
-            // TODO: Get the status of the top-most application
-            console.log("First item: " + currentApplications[0].applicationID);
         }
     }
 

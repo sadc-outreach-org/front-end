@@ -47,7 +47,6 @@ export default class Candidates extends React.Component {
     handleOpenModal (candidate, candidateID, status) {
         getCandidateInfo(candidateID).then(res => {
             const info = res.data.result;
-            console.log(info);
             this.setState({info: info});
         });
         this.setState({currentCandidate: candidate});
