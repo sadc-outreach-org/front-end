@@ -30,11 +30,6 @@
     cursor: pointer;
 }
 
-.calendarContainer {
-    margin-left: 150px;
-    margin-top: -350px;
-}
-
 #applicantsHeader {
     color: black;
     text-align: center;

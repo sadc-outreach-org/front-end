@@ -44,41 +44,30 @@ export default class Candidates extends React.Component {
     state = {
         date: new Date(),
         showCalendar: false
-    }
-
-    onChange = date => this.setState({ date: date })
-
+    };
 
     handleOpenModal (candidateID, status) {
         getCandidateInfo(candidateID).then(res => {
             const info = res.data.result;
             this.setState({info: info});
-        })
+        });
         this.setState({showModal: true});
-        console.log("status: " + status)
+        console.log("status: " + status);
         if(status === "Schedule Interview") {
-            this.setState({showCalendar: true}, function(){
-                console.log("Calendar should say true ? : " + this.state.showCalendar)
-            })
             this.setState({readyForInterview: true}, function() {
-                console.log("ready for interview? : " + this.state.readyForInterview)
-            })
-            console.log("status says schedule interview: " + this.state.showCalendar)
+                // this.setState({showCalendar: true});
+            });
         } else {
-            this.setState({showCalendar: false}, function(){
-                console.log("Calendar should say false ? : " + this.state.showCalendar)
-            })
             this.setState({readyForInterview: false}, function() {
-                console.log("ready for interview? : " + this.state.readyForInterview)
-            })
+                this.setState({showCalendar: false});
+            });
         }
 
     }
 
-
-
     handleCloseModal () {
-        this.setState({showModal: false})
+        this.setState({showModal: false});
+        this.setState({readyForInterview: false});
     }
 
     sortCandidatebyAppStatusAsc() {
@@ -137,8 +126,6 @@ export default class Candidates extends React.Component {
         })
     }
 
-
-
     render() {
         return (
             <div className={"candidatesContainer"}>
@@ -152,7 +139,6 @@ export default class Candidates extends React.Component {
                             <th>Email<i className="upArrow" onClick={() => this.sortCandidatebyEmailAsc()}></i><i className="downArrow" onClick={() => this.sortCandidatebyEmailDesc()}></i></th>
                             <th>Application Status<i className="upArrow"onClick={() => this.sortCandidatebyAppStatusAsc()} ></i><i className="downArrow" onClick={() => this.componentDidMount()}></i></th>
                         </tr>
-
                         {this.state.candidates.map(candidate =>
                             <tr onClick={() => this.handleOpenModal(candidate.candidateID, candidate.status)}>
                                 <td>{candidate.firstName}</td>
@@ -170,19 +156,16 @@ export default class Candidates extends React.Component {
                     style={customStyling}
                     contentLabel=""
                 >
-
                     <div className="modalCloseButton" onClick={this.handleCloseModal}/>
                     <CandidateProfileModal info={this.state.info} readyForInterview = {this.state.readyForInterview}/>
-
-                    <div hidden={!this.state.showCalendar}>
-                        <Calendar
-                            className={"calendarContainer"}
-                            //onChange={this.onChange}
-                            value={this.state.date}
-                            onClickDay={() => this.onChange()}
-
-                        />
-                    </div>
+                    {/*<div hidden={!this.state.showCalendar}>*/}
+                        {/*<Calendar*/}
+                            {/*className={"calendarContainer"}*/}
+                            {/*//onChange={this.onChange}*/}
+                            {/*value={this.state.date}*/}
+                            {/*onClickDay={() => this.onChange()}*/}
+                        {/*/>*/}
+                    {/*</div>*/}
                 </Modal>
             </div>
         )
