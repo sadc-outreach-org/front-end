@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import logo from '../../../images/heb-red.png';
 import {Button, Form, FormGroup, Input, Container, Row, Col, Alert} from 'reactstrap';
 import '../../../styles/SignUp.css';
-import {addCandidate, uploadResume} from '../../components/services';
+import {updatePassword} from '../../components/services';
 
 const ConditionalAlert = ({visible, message})=> {
     if(visible){
@@ -20,75 +20,33 @@ class SignUp extends Component {
 
         this.state = {
             email: '',
-            firstName: '',
-            lastName: '',
-            phoneNum: '',
-            streetAddress: '',
-            zipCode: '',
-            city: '',
-            state: '',
-            resume: null,
-            password: '',
+            oldPassword: '',
+            newPassword: '',
             confirmPassword: '',
             passwordsMatch: true,
             userID: ''
         };
 
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.onChange = this.onChange.bind(this)
-        this.fileUp = this.fileUp.bind(this)
-    }
-
-    onChange = event => {
-        this.setState({file:event.target.files[0]})
-    }
-
-    fileUp(userID, file) {
-        const formData = new FormData();
-        console.log("This is the user ID pushed to fileUP method: " + userID);
-        formData.append('file',file)
-        /* Jerry had this in his resume upload stuff but it's unused and will
-        cause errors in CircleCI. Will remove when verified it's not needed
-         */
-        // const config = {
-        //     headers: {
-        //         'content-type': 'multipart/form-data'
-        //     }
-        // }
-        return uploadResume(userID, formData);
     }
 
     handleSubmit = event => {
         event.preventDefault();
 
-        if(this.state.password !== this.state.confirmPassword) {
+        if(this.state.newPassword !== this.state.confirmPassword) {
             this.setState({passwordsMatch: false});
         } else {
             this.setState({passwordsMatch: true});
             let payload = {
                 email: this.state.email,
-                password: this.state.password,
-                firstName: this.state.firstName,
-                lastName: this.state.lastName,
-                streetAddress: this.state.streetAddress,
-                zipCode: this.state.zipCode,
-                city: this.state.city,
-                state: this.state.state,
-                phoneNum: this.state.phoneNum,
-                gitLink: this.state.githubLink
+                oldPassword: this.state.oldPassword,
+                newPassword: this.state.newPassword
             };
 
-            addCandidate(payload).then(res => {
+            updatePassword(payload).then(res => {
                 console.log("The following is the response for Signup:");
                 console.log(res);
                 console.log(res.data.result);
-                console.log("Candidate ID from add candidate call: " + res.data.result.candidateID);
-                this.setState({userID : res.data.result.candidateID});
-                this.fileUp(res.data.result.candidateID, this.state.file).then((response) => {
-                    console.log("The following is the response for file upload:");
-                    console.log(response);
-                    console.log(response.data.result);
-                })
                 if(res.status === 200) {
                     this.props.history.push('/login', {});
                 }
@@ -105,25 +63,7 @@ class SignUp extends Component {
                         <Col xs={"12"} md={{size: 6, offset: 3}} lg={{size: 4, offset: 4}}>
                             <Form onSubmit={this.handleSubmit}>
                                 <FormGroup>
-                                    <h1 className={"title"}>Sign Up</h1>
-                                    <Input
-                                        type={"text"}
-                                        name={"firstname"}
-                                        id={"firstname"}
-                                        placeholder={"First Name"}
-                                        defaultValue={this.state.firstName}
-                                        onChange={(event) => this.setState({firstName: event.target.value})}
-                                        required
-                                    />
-                                    <Input
-                                        type={"text"}
-                                        name={"lastname"}
-                                        id={"lastname"}
-                                        placeholder={"Last Name"}
-                                        defaultValue={this.state.lastName}
-                                        onChange={(event) => this.setState({lastName: event.target.value})}
-                                        required
-                                    />
+                                    <h1 className={"title"}>Update Password</h1>
                                     <Input
                                         type={"email"}
                                         name={"email"}
@@ -134,57 +74,21 @@ class SignUp extends Component {
                                         required
                                     />
                                     <Input
-                                        type={"text"}
-                                        name={"phonenumber"}
-                                        id={"phonenumber"}
-                                        placeholder={"Phone Number"}
-                                        defaultValue={this.state.phoneNum}
-                                        onChange={(event) => this.setState({phoneNum: event.target.value})}
-                                        required
-                                    />
-                                    <Input
-                                        type={"text"}
-                                        name={"streetaddress"}
-                                        id={"streetaddress"}
-                                        placeholder={"Street Address"}
-                                        defaultValue={this.state.streetAddress}
-                                        onChange={(event) => this.setState({streetAddress: event.target.value})}
-                                        required
-                                    />
-                                    <Input
-                                        type={"text"}
-                                        name={"zipcode"}
-                                        id={"zipcode"}
-                                        placeholder={"Zip Code"}
-                                        defaultValue={this.state.zipCode}
-                                        onChange={(event) => this.setState({zipCode: event.target.value})}
-                                        required
-                                    />
-                                    <Input
-                                        type={"text"}
-                                        name={"city"}
-                                        id={"city"}
-                                        placeholder={"City"}
-                                        defaultValue={this.state.city}
-                                        onChange={(event) => this.setState({city: event.target.value})}
-                                        required
-                                    />
-                                    <Input
-                                        type={"text"}
-                                        name={"state"}
-                                        id={"state"}
-                                        placeholder={"State"}
-                                        defaultValue={this.state.state}
-                                        onChange={(event) => this.setState({state: event.target.value})}
+                                        type={"password"}
+                                        name={"password"}
+                                        id={"password"}
+                                        placeholder={"Old Password"}
+                                        defaultValue={this.state.oldPassword}
+                                        onChange={(event) => this.setState({oldPassword: event.target.value})}
                                         required
                                     />
                                     <Input
                                         type={"password"}
                                         name={"password"}
                                         id={"password"}
-                                        placeholder={"Password"}
+                                        placeholder={"New Password"}
                                         defaultValue={this.state.password}
-                                        onChange={(event) => this.setState({password: event.target.value})}
+                                        onChange={(event) => this.setState({newPassword: event.target.value})}
                                         required
                                     />
                                     <Input
@@ -196,20 +100,11 @@ class SignUp extends Component {
                                         onChange={(event) => this.setState({confirmPassword: event.target.value})}
                                         required
                                     />
-                                    <Input
-                                        type={"file"}
-                                        name={"resume"}
-                                        id={"resume"}
-                                        defaultValue={this.state.gitLink}
-                                        onChange={this.onChange}
-                                        required
-                                    />
                                     <ConditionalAlert visible={!this.state.passwordsMatch} message={"Passwords must match!"}/>
                                     <Button
                                         type={"submit"}
                                         className={"submitSignup btn-block"}
-                                    >SIGN UP</Button>
-                                    <a href={"/"}>Already have an account?</a>
+                                    >UPDATE PASSWORD</Button>
                                 </FormGroup>
                             </Form>
                         </Col>
