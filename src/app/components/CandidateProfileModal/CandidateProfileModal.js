@@ -1,7 +1,9 @@
 import React from 'react';
-import {getJobs, addJobToCandidate} from '../../services.js';
+import {getJobs, addJobToCandidate, setInterviewForApplication, getApplicationsForUser} from '../../services.js';
 import '../../../styles/CandidateProfileModal.css';
 import Calendar from "react-calendar";
+
+const currentApplications = [];
 
 export default class CandidateProfileModal extends React.Component {
     constructor(props) {
@@ -15,7 +17,8 @@ export default class CandidateProfileModal extends React.Component {
             selectedReq: '',
             showInfo: true,
             showCalendar : false,
-            date: new Date()
+            date: new Date(),
+            currentApplication: []
         };
 
         this.handleAddToReqClick = this.handleAddToReqClick.bind(this);
@@ -62,13 +65,47 @@ export default class CandidateProfileModal extends React.Component {
         }
     }
 
+    addZ(n){return n<10? '0'+n:''+n;}
+
+    convertTime12to24 = (time12h) => {
+        const [time, modifier] = time12h.split(' ');
+        let [hours, minutes] = time.split(':');
+        if(hours === '12') {
+            hours = '00';
+        }
+        if(modifier === 'PM') {
+            hours = parseInt(hours, 10) + 12;
+        }
+        return `${hours}:${minutes}`;
+    };
+
     handleScheduleClick () {
         if(this.state.showCalendar === false) {
             this.setState({showInfo: false});
             this.setState({showCalendar: true});
         } else if(this.state.showCalendar === true) {
-            console.log("Date selected: " + this.state.date + document.getElementById("timeSelection").value);
-            console.log("Month/Day/Year Selected: " + this.state.date.getMonth() + ' ' + this.state.date.getDay() + ' ' + this.state.date.getFullYear());
+            getApplicationsForUser(this.props.info.candidateID).then(res => {
+               const applications = res.data.result;
+               console.log("All Applications: " + JSON.stringify(applications));
+               applications.map(app => {
+                  console.log(app.status);
+                  if(app.status === this.props.currentCandidate.status) {
+                      currentApplications.push(app);
+                  }
+               });
+               console.log("Current apps: " + JSON.stringify(currentApplications[0]));
+            });
+            let payload = {
+                "interviewTime": this.state.date.getFullYear()+"-"
+                    +this.addZ(this.state.date.getMonth()+1)+"-"
+                    +this.addZ(this.state.date.getDay())+" "
+                    +this.convertTime12to24(document.getElementById("timeSelection").value)+":00"
+            };
+            // setInterviewForApplication(currentApplications[0].status, payload).then(res => {
+            //     console.log("Set Interview Response: " + res);
+            // });
+            // TODO: Get the status of the top-most application
+            console.log("First item: " + currentApplications[0].applicationID);
         }
     }
 
