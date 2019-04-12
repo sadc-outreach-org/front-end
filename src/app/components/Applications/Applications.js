@@ -12,6 +12,7 @@ export default class Applications extends React.Component {
         this.state = {
             applications: [],
             clickedApplication: [],
+            codingChallengeInfo: [],
             showModal: false
         };
 
@@ -39,8 +40,7 @@ export default class Applications extends React.Component {
             this.setState({showModal: true});
         });
         getApplicationDetails(singleApplication.applicationID).then(res => {
-            console.log("Application ID: " + res.data.result.applicationID);
-           console.log("Application Coding Challenge Title: " + res.data.result.requisition.codingChallenges[0].name);
+            this.setState({codingChallengeInfo: res.data.result.requisition.codingChallenges[0]});
         });
     }
 
@@ -70,7 +70,7 @@ export default class Applications extends React.Component {
                     contentLabel="Minimal Modal Example"
                 >
                     <div className="modalCloseButton" onClick={this.handleCloseModal}/>
-                    <ApplicationStatus clickedApplication={this.state.clickedApplication}/>
+                    <ApplicationStatus clickedApplication={this.state.clickedApplication} codingChallengeInfo={this.state.codingChallengeInfo}/>
                 </Modal>
             </div>
         );

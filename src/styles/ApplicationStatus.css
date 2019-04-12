@@ -16,6 +16,11 @@
     margin-right: 10%;
 }
 
+.application-step-header {
+    margin-bottom: -10px;
+    padding: 0;
+}
+
 .applicationUpdated p {
     color: white;
     font-size: 20px;
@@ -30,8 +35,11 @@
 
 .applicationStatusStepSpace {
     height: 100%;
-    width: 100%;
     text-align: center;
+}
+
+.challenge-header {
+    margin-bottom: -0.5%;
 }
 
 #githubSubmissionLink {

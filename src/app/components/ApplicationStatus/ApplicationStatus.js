@@ -73,9 +73,10 @@ export default class ApplicationStatus extends React.Component {
                 <div className={"applicationStatusStepSpace"}>
                     <div className={"applicationStepCard"}>
                         <h2 className={"application-step-header"}>{this.props.clickedApplication.status}</h2>
-                        <p className={"application-step-p"} hidden={!this.state.showCodingChallenge}>Please complete the following coding challenge and submit using the form below.</p>
+                        <p className={"application-step-p"} hidden={!this.state.showCodingChallenge}>Please complete the following coding challenge and submit using the form below:{console.log("Coding Challenge Info: " + JSON.stringify(this.props.codingChallengeInfo))}</p>
                         <div hidden={!this.state.showCodingChallenge}>
-                            <p>Write a program that prints out "Hello World!"</p>
+                            <h2 className={"challenge-header"}><u>Your Challenge</u></h2>
+                            <p className={"application-step-p"}><strong>{this.props.codingChallengeInfo.name}</strong> - {this.props.codingChallengeInfo.description}</p>
                             <Form onSubmit={this.handleGitSubmit} className={"form-inline"}>
                                 <FormGroup>
                                     <Input
@@ -99,7 +100,8 @@ export default class ApplicationStatus extends React.Component {
                             <p>If you have any questions, please email the hiring manager at: <a href={"mailto:"+this.props.clickedApplication.requisition.admin.email}>{this.props.clickedApplication.requisition.admin.email}</a></p>
                         </div>
                         <div hidden={!this.state.showAttendInterviewText}>
-                            <p>Congratulations! Your interview is set for April 28, 2019 at 3:00 PM</p>
+                            {/*<p>Congratulations! Your interview is set for April 28, 2019 at 3:00 PM{console.log("Application Info: " + JSON.stringify(this.props.clickedApplication))}</p>*/}
+                            <p>Congratulations! Your interview is set for <strong>{this.props.clickedApplication.interviewTime}</strong></p>
                             <p>Please arrive at the HEB Headquarters no later than the stated time.</p>
                         </div>
                     </div>
