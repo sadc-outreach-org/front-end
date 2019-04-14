@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import '../../../styles/CandidateProfile.css';
 import {Input, Button} from 'reactstrap';
 import axios from 'axios';
+import {updateCandidateProfile} from '../../services.js'
 
 class CandidateProfileInfo extends Component {
     constructor(props) {
@@ -26,6 +27,7 @@ class CandidateProfileInfo extends Component {
         axios.get('http://34.73.221.154:8080/users/'+localStorage.getItem("userID"))
             .then(res => {
                 const user = res.data.result;
+                console.log("User Data: " + JSON.stringify(user));
                 this.setState({user});
                 this.setState({userName : user.userName});
                 this.setState({firstName : user.firstName});
@@ -37,12 +39,30 @@ class CandidateProfileInfo extends Component {
                 this.setState({city : user.city});
                 this.setState({phoneNumber : user.phoneNumber});
                 this.setState({githubLink : user.githubLink});
+                this.setState({candidateID: user.candidateID});
             })
+    }
+
+    handleUpdateButton() {
+        let payload = {
+            email: this.state.email,
+            firstName: this.state.firstName,
+            lastName: this.state.lastName,
+            streetAddress: this.state.streetAddress,
+            zipCode: this.state.zipCode,
+            state: this.state.state,
+            city: this.state.city,
+            phoneNum: this.state.phoneNum
+        };
+        updateCandidateProfile(this.state.candidateID, payload).then(res => {
+            console.log("Update Profile Response: " + JSON.stringify(res));
+        });
     }
 
     render() {
         let {userName, firstName, lastName, email, streetAddress, zipCode, state, city, phoneNumber, githubLink} = this.state;
-        let disableUpdateButton = firstName !== this.state.user.firstName
+        let disableUpdateButton =
+            firstName !== this.state.user.firstName
             || lastName !== this.state.user.lastName
             || userName !== this.state.user.userName
             || email !== this.state.user.email
@@ -156,6 +176,7 @@ class CandidateProfileInfo extends Component {
                         <Button
                             type={"submit"}
                             className={"btn-submit"}
+                            onClick={() => this.handleUpdateButton()}
                             disabled={!disableUpdateButton}
                         >UPDATE</Button>
                     </div>

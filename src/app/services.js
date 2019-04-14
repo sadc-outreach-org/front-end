@@ -71,4 +71,8 @@ export const setInterviewForApplication = (appID, payload) => {
 
 export const getApplicationDetails = (appID) => {
     return axios.get(`${API_URL}/applications/${appID}`);
-}
+};
+
+export const updateCandidateProfile = (userID, payload) => {
+    return axios.post(`${API_URL}/users/${userID}`, payload);
+};
