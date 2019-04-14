@@ -35,7 +35,7 @@ jobs:
 
       - run:
           name: Creating a Build
-          command: npm run-script build
+          command: CI=false npm run-script build
 
       - run:
           name: Copy GCP Key to a File
