@@ -13,13 +13,13 @@
     height: 140px;
 
 }
-.iframe-container  button {
+.iframe-container  .modalOpen {
     opacity: 0.3;
     position:relative;
-    right:18.5%;
-    bottom:100px;
+    right:20%;
+    bottom:80px;
     transition: 0.5s;
-    opacity: 0;
+    opacity: 1;
     padding: 10% 7.5%;
 }
 

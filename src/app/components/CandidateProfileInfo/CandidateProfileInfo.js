@@ -184,8 +184,17 @@ class CandidateProfileInfo extends Component {
                                 <br/>
                             </div>
                             <div className="iframe-container">
+                                <Form id = "resumeUploadForm" onSubmit={this.onFileSubmit}>
+                                    <Input id = "resumeUploadInput" type="file" name = "file" onChange={this.onChange}/>
+                                    <Button
+                                        type={"submit"}
+                                        className={"submitResumeUpload btn-block"}
+                                    >UPLOAD</Button>
+                                </Form>
                                 <iframe title="PDF" src={fileURL+'#view=Fit&toolbar=0&statusbar=0&messages=0&navpanes=0&scrollbar=0'}/>
-                                <button text="Click me" onClick={this.handleOpenModal}></button>
+                                <button text="Click me" className="modalOpen" onClick={this.handleOpenModal}></button>
+
+
                                 <div>
                                     <Modal isOpen={this.state.showModal} ariaHideApp={false} style={customStyling}
                                            contentLabel="Minimal Modal Example">
@@ -233,6 +242,7 @@ class CandidateProfileInfo extends Component {
                                 defaultValue={this.state.zipCode}
                                 onChange={(event) => this.setState({zipCode: event.target.value})}
                             />
+<<<<<<< HEAD
                             <label htmlFor="">Resume Upload</label>
                               <div >
                                 <Form id = "resumeUploadForm" onSubmit={this.onFileSubmit}>
@@ -243,6 +253,17 @@ class CandidateProfileInfo extends Component {
                                     >UPLOAD</Button>
                                 </Form>
                               </div>
+=======
+                            <label htmlFor="">Github</label>
+                            <Input
+                                type={"text"}
+                                id={"github"}
+                                className={"profileField"}
+                                placeholder={"Github Link"}
+                                defaultValue={this.state.githubLink}
+                                onChange={(event) => this.setState({githubLink: event.target.value})}
+                            />
+>>>>>>> 3e7f5d7ea2d940208db0488fc6a0ed3b3822bbad
                         </div>
                         <Button
                             type={"submit"}
