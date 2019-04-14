@@ -84,7 +84,6 @@ class CandidateProfileInfo extends Component {
             .catch(error => {
                 console.log(error);
             });
-
     }
     //Resume Modal
     handleOpenModal () {
@@ -108,7 +107,6 @@ class CandidateProfileInfo extends Component {
         formData.append('file',file)
         console.log(localStorage.getItem("userID"))
         return uploadResume(localStorage.getItem("userID"),formData)
-
     }
 
     render() {
@@ -179,6 +177,22 @@ class CandidateProfileInfo extends Component {
                                 defaultValue={this.state.phoneNumber}
                                 onChange={(event) => this.setState({phoneNumber: event.target.value})}
                             />
+                            <label htmlFor="">Resume</label>
+                            <div>
+                                <br/>
+                            </div>
+                            <div className="iframe-container">
+                                <iframe title="PDF" src={fileURL+'#view=Fit&toolbar=0&statusbar=0&messages=0&navpanes=0&scrollbar=0'}/>
+                                <button text="Click me" onClick={this.handleOpenModal}></button>
+                                <div>
+                                    <Modal isOpen={this.state.showModal} ariaHideApp={false} style={customStyling}
+                                           contentLabel="Minimal Modal Example">
+                                        <div className="modalCloseButton" onClick={this.handleCloseModal}/>
+                                        <Pdf_modal file={this.state.file}/>
+                                        <div className="printf" onClick={this.print_pdf}/>
+                                    </Modal>
+                                </div>
+                            </div>
                         </div>
                         <div className={"column"}>
                             <label htmlFor="">Last Name</label>
@@ -227,26 +241,15 @@ class CandidateProfileInfo extends Component {
                                 onChange={(event) => this.setState({githubLink: event.target.value})}
                             />
                             <label htmlFor="">Resume Upload</label>
-                          <div>
-                            <Form id = "resumeUploadForm" onSubmit={this.onFileSubmit}>
-                                <Input id = "resumeUploadInput" type="file" name = "file" onChange={this.onChange}/>
-                                <Button
-                                    type={"submit"}
-                                    className={"submitResumeUpload btn-block"}
-                                >UPLOAD</Button>
-                            </Form>
-                          </div>
-                                <div >
-                                <iframe title="PDF" src = {fileURL}  />
-                                <button text = "Click me"  onClick={this.handleOpenModal}></button>
-                                    <div >
-                                        <Modal isOpen={this.state.showModal} ariaHideApp={false} style={customStyling} contentLabel="Minimal Modal Example">
-                                            <div className="modalCloseButton" onClick={this.handleCloseModal}/>
-                                            <Pdf_modal file = {this.state.file}/>
-                                            <div className="printf" onClick={this.print_pdf} />
-                                        </Modal>
-                                    </div>
-                                </div>
+                              <div >
+                                <Form id = "resumeUploadForm" onSubmit={this.onFileSubmit}>
+                                    <Input id = "resumeUploadInput" type="file" name = "file" onChange={this.onChange}/>
+                                    <Button
+                                        type={"submit"}
+                                        className={"submitResumeUpload btn-block"}
+                                    >UPLOAD</Button>
+                                </Form>
+                              </div>
                         </div>
                         <Button
                             type={"submit"}
@@ -254,7 +257,6 @@ class CandidateProfileInfo extends Component {
                             disabled={!disableUpdateButton}
                         >UPDATE</Button>
                     </div>
-
                 </div>
             </div>
         )
