@@ -1,7 +1,7 @@
 import React from 'react';
 import '../../../styles/ApplicationStatus.css';
 import ApplicationStatus from '../ApplicationStatus/ApplicationStatus';
-import {getApplicationsForUser} from '../../services.js';
+import {getApplicationsForUser, getApplicationDetails} from '../../services.js';
 import Modal from 'react-modal';
 
 Modal.defaultStyles.overlay.backgroundColor = 'rgba(0, 0, 0, 0.7)';
@@ -12,6 +12,7 @@ export default class Applications extends React.Component {
         this.state = {
             applications: [],
             clickedApplication: [],
+            codingChallengeInfo: [],
             showModal: false
         };
 
@@ -37,6 +38,9 @@ export default class Applications extends React.Component {
     handleAppClick (singleApplication) {
         this.setState({clickedApplication: singleApplication}, function() {
             this.setState({showModal: true});
+        });
+        getApplicationDetails(singleApplication.applicationID).then(res => {
+            this.setState({codingChallengeInfo: res.data.result.requisition.codingChallenges[0]});
         });
     }
 
@@ -66,7 +70,7 @@ export default class Applications extends React.Component {
                     contentLabel="Minimal Modal Example"
                 >
                     <div className="modalCloseButton" onClick={this.handleCloseModal}/>
-                    <ApplicationStatus clickedApplication={this.state.clickedApplication}/>
+                    <ApplicationStatus clickedApplication={this.state.clickedApplication} codingChallengeInfo={this.state.codingChallengeInfo}/>
                 </Modal>
             </div>
         );
