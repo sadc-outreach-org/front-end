@@ -8,6 +8,7 @@ import Pdf_modal from '../../components/Modal/resume_modal';
 import Modal from 'react-modal';
 //import Form from "reactstrap/src/Form";
 import {uploadResume} from "../services";
+import {updateCandidateProfile} from '../../services.js'
 
 Modal.defaultStyles.overlay.backgroundColor = 'rgba(0, 0, 0, 0.7)';
 const customStyling = {
@@ -55,6 +56,7 @@ class CandidateProfileInfo extends Component {
         axios.get('http://34.73.221.154:8080/users/'+localStorage.getItem("userID"))
             .then(res => {
                 const user = res.data.result;
+                console.log("User Data: " + JSON.stringify(user));
                 this.setState({user});
                 this.setState({userName : user.userName});
                 this.setState({firstName : user.firstName});
@@ -66,6 +68,7 @@ class CandidateProfileInfo extends Component {
                 this.setState({city : user.city});
                 this.setState({phoneNumber : user.phoneNumber});
                 this.setState({githubLink : user.githubLink});
+                this.setState({candidateID: user.candidateID});
             })
 
         getResume(localStorage.getItem("userID")).then(res => {
@@ -107,6 +110,22 @@ class CandidateProfileInfo extends Component {
         formData.append('file',file)
         console.log(localStorage.getItem("userID"))
         return uploadResume(localStorage.getItem("userID"),formData)
+    }
+
+    handleUpdateButton() {
+        let payload = {
+            email: this.state.email,
+            firstName: this.state.firstName,
+            lastName: this.state.lastName,
+            streetAddress: this.state.streetAddress,
+            zipCode: this.state.zipCode,
+            state: this.state.state,
+            city: this.state.city,
+            phoneNum: this.state.phoneNum
+        };
+        updateCandidateProfile(this.state.candidateID, payload).then(res => {
+            console.log("Update Profile Response: " + JSON.stringify(res));
+        });
     }
 
     render() {
@@ -254,6 +273,7 @@ class CandidateProfileInfo extends Component {
                         <Button
                             type={"submit"}
                             className={"btn-submit"}
+                            onClick={() => this.handleUpdateButton()}
                             disabled={!disableUpdateButton}
                         >UPDATE</Button>
                     </div>
