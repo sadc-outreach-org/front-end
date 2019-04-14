@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import {getResume} from '../../services.js';
+import {getResume} from '../../services';
 import '../../../styles/pdf_modal.css';
 import Pdf_modal from '../../components/Modal/resume_modal';
 import Modal from 'react-modal';
-import FileViewer from 'react-file-viewer';
 import { Document, Page } from 'react-pdf';
 
 Modal.defaultStyles.overlay.backgroundColor = 'rgba(0, 0, 0, 0.7)';
@@ -32,10 +31,10 @@ export default class Applications extends React.Component {
         };
         this.handleOpenModal = this.handleOpenModal.bind(this);
         this.handleCloseModal = this.handleCloseModal.bind(this);
-        this.print_pdf = this.print_pdf.bind(this);
     }
     componentDidMount() {
-        getResume().then(res => {
+        getResume(57).then(res => {
+
 
 //Create a Blob from the PDF Stream
             const pdf = new Blob(
@@ -59,10 +58,6 @@ export default class Applications extends React.Component {
     handleCloseModal () {
         this.setState({showModal: false})
     }
-    print_pdf () {
-        window.frames["printf"].focus();
-        window.frames["printf"].print();
-    }
 
     render() {
         let {file, url, isShowing} = this.state;
@@ -76,10 +71,6 @@ export default class Applications extends React.Component {
             <div class="iframe-container">
                 <iframe title="PDF" src = {fileURL}  />
                 <button text = "Click me"  onClick={this.handleOpenModal}></button>
-                <FileViewer
-                    fileType={sample}
-                    filePath={fileURL}
-                    />
                 <div >
                     <Modal isOpen={this.state.showModal} ariaHideApp={false} style={customStyling} contentLabel="Minimal Modal Example">
                         <div className="modalCloseButton" onClick={this.handleCloseModal}/>
