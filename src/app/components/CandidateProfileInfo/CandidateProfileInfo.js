@@ -201,8 +201,17 @@ class CandidateProfileInfo extends Component {
                                 <br/>
                             </div>
                             <div className="iframe-container">
+                                <Form id = "resumeUploadForm" onSubmit={this.onFileSubmit}>
+                                    <Input id = "resumeUploadInput" type="file" name = "file" onChange={this.onChange}/>
+                                    <Button
+                                        type={"submit"}
+                                        className={"submitResumeUpload btn-block"}
+                                    >UPLOAD</Button>
+                                </Form>
                                 <iframe title="PDF" src={fileURL+'#view=Fit&toolbar=0&statusbar=0&messages=0&navpanes=0&scrollbar=0'}/>
-                                <button text="Click me" onClick={this.handleOpenModal}></button>
+                                <button text="Click me" className="modalOpen" onClick={this.handleOpenModal}></button>
+
+
                                 <div>
                                     <Modal isOpen={this.state.showModal} ariaHideApp={false} style={customStyling}
                                            contentLabel="Minimal Modal Example">
@@ -259,16 +268,6 @@ class CandidateProfileInfo extends Component {
                                 defaultValue={this.state.githubLink}
                                 onChange={(event) => this.setState({githubLink: event.target.value})}
                             />
-                            <label htmlFor="">Resume Upload</label>
-                              <div >
-                                <Form id = "resumeUploadForm" onSubmit={this.onFileSubmit}>
-                                    <Input id = "resumeUploadInput" type="file" name = "file" onChange={this.onChange}/>
-                                    <Button
-                                        type={"submit"}
-                                        className={"submitResumeUpload btn-block"}
-                                    >UPLOAD</Button>
-                                </Form>
-                              </div>
                         </div>
                         <Button
                             type={"submit"}
