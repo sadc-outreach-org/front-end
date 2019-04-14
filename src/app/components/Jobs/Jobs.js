@@ -1,6 +1,7 @@
 import React from 'react';
 import '../../../styles/AllJobs.css';
 import {getJobs, getRequisitions, getReqsForJob} from '../../services.js';
+import logo from "../../../images/heb-red.png";
 
 export default class Jobs extends React.Component {
     constructor (props) {
@@ -45,6 +46,9 @@ export default class Jobs extends React.Component {
     render() {
         return (
             <div className={"jobContainer"}>
+                <div className={"addNewCandidateImage"}>
+                    <img src={logo} className={"smallHebLogo"} alt={"hebLogo"}/>
+                </div>
                 <h1 id={"jobsHeader"}>Jobs</h1>
                 {/*<button className={"resetButton"} onClick={() => this.handleResetClick()}>Reset</button>*/}
                 <table className={"jobsTable"}>
