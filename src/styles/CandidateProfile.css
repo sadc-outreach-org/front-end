@@ -65,14 +65,26 @@
     margin-top: 2%;
 }
 
-
-#temp-nav {
-    color: white;
-    background-color: gray;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    margin: 0;
+#updateSuccessContainer {
+    margin-top: 10px;
+    border: 2px solid darkgreen;
+    background-color: seagreen;
+    text-align: center;
 }
+
+#updateSuccessText {
+    color: white;
+    font-weight: bold;
+}
+
+/*.updateProfileSuccessContainer {*/
+    /*border: 2px solid darkgreen;*/
+    /*background-color: lightgreen;*/
+/*}*/
+
+/*.updateProfileSuccessContainer p {*/
+    /*color: white;*/
+/*}*/
 
 .profile-header {
     color: black;
