@@ -37,9 +37,10 @@
     position: relative;
 }
 
+
 .calendarContainer {
-    margin-left: 30%;
-    margin-top: 50px;
+    margin-left: 23%;
+    margin-top: 18px;
     margin-bottom: 20px;
 }
 
@@ -61,6 +62,25 @@
     margin: 0;
     padding: 0;
 }
+
+.react-calendar__month-view__weekdays {
+    color:#fff;
+}
+
+.react-calendar {
+    background: #fb2525 !important;
+    /*color: #000000 !important;*/
+}
+
+.react-calendar__month-view__days__day {
+    color: #fff !important;
+}
+
+.react-calendar__navigation button {
+    background: #FFFFFF !important;
+    color: #000000 !important;
+}
+
 
 .candidateProfileModalContainer button:hover {
     cursor: pointer;
