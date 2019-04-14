@@ -242,10 +242,6 @@ class CandidateProfileInfo extends Component {
                                 defaultValue={this.state.zipCode}
                                 onChange={(event) => this.setState({zipCode: event.target.value})}
                             />
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 9d0fa146d458dd82d231b8db24ecf49f1603349b
                             <label htmlFor="">Resume Upload</label>
                               <div >
                                 <Form id = "resumeUploadForm" onSubmit={this.onFileSubmit}>
@@ -256,20 +252,6 @@ class CandidateProfileInfo extends Component {
                                     >UPLOAD</Button>
                                 </Form>
                               </div>
-<<<<<<< HEAD
-=======
-                            <label htmlFor="">Github</label>
-                            <Input
-                                type={"text"}
-                                id={"github"}
-                                className={"profileField"}
-                                placeholder={"Github Link"}
-                                defaultValue={this.state.githubLink}
-                                onChange={(event) => this.setState({githubLink: event.target.value})}
-                            />
->>>>>>> 3e7f5d7ea2d940208db0488fc6a0ed3b3822bbad
-=======
->>>>>>> 9d0fa146d458dd82d231b8db24ecf49f1603349b
                         </div>
                         <Button
                             type={"submit"}
