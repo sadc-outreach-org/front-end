@@ -57,8 +57,16 @@ export default class CandidateProfileModal extends React.Component {
     }
 
     handleCancelClick () {
+        this.props.changeInterviewState();
+
         if(this.state.showAddToReq === true) {
             this.setState({showAddToReq: false});
+            this.setState({buttonText1: "Send Email"});
+            this.setState({buttonText2: "Assign to New Requisition"});
+            this.setState({showSuccess: false});
+        }
+        if(this.state.showCalendar === true) {
+            this.setState({showCalendar: false});
             this.setState({buttonText1: "Send Email"});
             this.setState({buttonText2: "Assign to New Requisition"});
             this.setState({showSuccess: false});
@@ -81,10 +89,15 @@ export default class CandidateProfileModal extends React.Component {
     };
 
     handleScheduleClick () {
+        this.props.changeInterviewState();
+
         if(this.state.showCalendar === false) {
             this.setState({showInfo: false});
+            this.setState({buttonText1: "Cancel"});
+            this.setState({buttonText2: "Schedule"});
             this.setState({showCalendar: true});
         } else if(this.state.showCalendar === true) {
+
             getApplicationsForUser(this.props.info.candidateID).then(res => {
                const applications = res.data.result;
                applications.forEach(app => {
@@ -122,18 +135,21 @@ export default class CandidateProfileModal extends React.Component {
                     />
                 </div>
                 <div hidden={!this.state.showCalendar}>
-                    <select id={"timeSelection"}>
-                        <option>9:00 AM</option>
-                        <option>10:00 AM</option>
-                        <option>11:00 AM</option>
-                        <option>12:00 PM</option>
-                        <option>1:00 PM</option>
-                        <option>2:00 PM</option>
-                        <option>3:00 PM</option>
-                        <option>4:00 PM</option>
-                        <option>5:00 PM</option>
-                    </select>
+                    <div className={"timeSelect"}>
+                        <select id={"timeSelection"}>
+                            <option>9:00 AM</option>
+                            <option>10:00 AM</option>
+                            <option>11:00 AM</option>
+                            <option>12:00 PM</option>
+                            <option>1:00 PM</option>
+                            <option>2:00 PM</option>
+                            <option>3:00 PM</option>
+                            <option>4:00 PM</option>
+                            <option>5:00 PM</option>
+                         </select>
+                    </div>
                 </div>
+
                 <div hidden={!this.props.readyForInterview}><button onClick={this.handleScheduleClick}>Schedule Interview</button></div>
                 <div className={"addReqToCandidateText"} hidden={!this.state.showAddToReq}>
                     <p>Assign <strong>{this.props.info.firstName}</strong> to:

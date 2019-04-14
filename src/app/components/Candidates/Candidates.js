@@ -33,7 +33,7 @@ export default class Candidates extends React.Component {
             showModal: false,
             readyForInterview: false
         };
-
+        this.changeInterviewState = this.changeInterviewState.bind(this);
         this.handleOpenModal = this.handleOpenModal.bind(this);
         this.handleCloseModal = this.handleCloseModal.bind(this);
     }
@@ -43,6 +43,10 @@ export default class Candidates extends React.Component {
         date: new Date(),
         showCalendar: false
     };
+
+    changeInterviewState() {
+        this.setState({readyForInterview: !this.state.readyForInterview});
+    }
 
     handleOpenModal (candidate, candidateID, status) {
         getCandidateInfo(candidateID).then(res => {
@@ -155,7 +159,7 @@ export default class Candidates extends React.Component {
                     contentLabel=""
                 >
                     <div className="modalCloseButton" onClick={this.handleCloseModal}/>
-                    <CandidateProfileModal info={this.state.info} currentCandidate={this.state.currentCandidate} readyForInterview={this.state.readyForInterview}/>
+                    <CandidateProfileModal info={this.state.info} currentCandidate={this.state.currentCandidate} readyForInterview={this.state.readyForInterview} changeInterviewState={this.changeInterviewState}/>
                 </Modal>
             </div>
         )
