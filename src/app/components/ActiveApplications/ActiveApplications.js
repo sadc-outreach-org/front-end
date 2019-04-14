@@ -1,6 +1,7 @@
 import React from 'react';
 import '../../../styles/ActiveApplications.css';
 import {getRequisitions, getApplicationsForReq} from '../../services.js';
+import logo from "../../../images/heb-red.png";
 
 export default class ActiveApplications extends React.Component {
     constructor (props) {
@@ -31,6 +32,9 @@ export default class ActiveApplications extends React.Component {
     render() {
         return (
             <div className={"activeApplicationsContainer"}>
+                <div className={"addNewCandidateImage"}>
+                    <img src={logo} className={"smallHebLogo"} alt={"hebLogo"}/>
+                </div>
                 <h1 id={"activeApplicationsHeader"}>Active Applications</h1>
                 {/*<input type={"text"} id={"activeApplicationsSearchInput"} onKeyUp={console.log("typed")} placeholder={"Search by title"} title={"Type in a title"}/>*/}
                 <table className={"requisitionsActiveApplicationsTable"}>

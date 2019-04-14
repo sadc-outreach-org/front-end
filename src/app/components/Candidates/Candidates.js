@@ -1,4 +1,5 @@
 import React from 'react';
+import logo from '../../../images/heb-red.png';
 import '../../../styles/AllCandidates.css';
 import {getUsers, getCandidateInfo, sortUsersByApplication} from '../../components/services.js';
 import Modal from 'react-modal';
@@ -127,6 +128,9 @@ export default class Candidates extends React.Component {
     render() {
         return (
             <div className={"candidatesContainer"}>
+                <div className={"addNewCandidateImage"}>
+                    <img src={logo} className={"smallHebLogo"} alt={"hebLogo"}/>
+                </div>
                 <h1 id={"applicantsHeader"}>Applicants</h1>
                 <input type={"text"} id={"candidateSearchInput"} placeholder={"Search by name"} title={"Type in a name"}/>
                 <table className={"candidatesTable"}>
