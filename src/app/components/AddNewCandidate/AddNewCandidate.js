@@ -190,7 +190,7 @@ class AddNewCandidate extends React.Component {
                                     <Button
                                         type={"submit"}
                                         className={"submitSignup btn-block"}
-                                    >ADD CANDIDATE</Button>
+                                    >SUBMIT</Button>
                                 </FormGroup>
                             </Form>
                         </Col>
