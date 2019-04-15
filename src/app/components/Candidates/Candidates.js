@@ -31,7 +31,8 @@ export default class Candidates extends React.Component {
             currentCandidate: [],
             info: [],
             showModal: false,
-            readyForInterview: false
+            readyForInterview: false,
+            initialReadyForInterview: false
         };
         this.changeInterviewState = this.changeInterviewState.bind(this);
         this.handleOpenModal = this.handleOpenModal.bind(this);
@@ -45,7 +46,12 @@ export default class Candidates extends React.Component {
     };
 
     changeInterviewState() {
-        this.setState({readyForInterview: !this.state.readyForInterview});
+        if(this.state.readyForInterview === true) {
+            this.setState({readyForInterview: false})
+        } else if(this.state.readyForInterview === false) {
+            this.setState({readyForInterview: true});
+        }
+        // this.setState({readyForInterview: !this.state.readyForInterview});
     }
 
     handleOpenModal (candidate, candidateID, status) {
@@ -57,11 +63,12 @@ export default class Candidates extends React.Component {
         this.setState({showModal: true});
         if(status === "Schedule Interview") {
             this.setState({readyForInterview: true}, function() {
-                // this.setState({showCalendar: true});
+                this.setState({initialReadyForInterview: true});
             });
         } else {
             this.setState({readyForInterview: false}, function() {
                 this.setState({showCalendar: false});
+                this.setState({initialReadyForInterview: false});
             });
         }
     }
@@ -69,6 +76,10 @@ export default class Candidates extends React.Component {
     handleCloseModal () {
         this.setState({showModal: false});
         this.setState({readyForInterview: false});
+        sortUsersByApplicationDesc().then(res => {
+            const candidates = res.data.result;
+            this.setState({candidates: candidates});
+        })
     }
 
     sortCandidatebyAppStatusAsc() {
@@ -160,7 +171,7 @@ export default class Candidates extends React.Component {
                     contentLabel=""
                 >
                     <div className="modalCloseButton" onClick={this.handleCloseModal}/>
-                    <CandidateProfileModal info={this.state.info} currentCandidate={this.state.currentCandidate} readyForInterview={this.state.readyForInterview} changeInterviewState={this.changeInterviewState}/>
+                    <CandidateProfileModal info={this.state.info} currentCandidate={this.state.currentCandidate} initialReadyForInterview={this.state.initialReadyForInterview} readyForInterview={this.state.readyForInterview} changeInterviewState={this.changeInterviewState}/>
                 </Modal>
             </div>
         )

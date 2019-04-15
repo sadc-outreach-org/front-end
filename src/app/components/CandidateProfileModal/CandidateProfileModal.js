@@ -12,64 +12,115 @@ export default class CandidateProfileModal extends React.Component {
             showAddToReq: false,
             showSuccess: false,
             jobs: [],
-            buttonText1: "Send Email",
-            buttonText2: "Assign to New Requisition",
+            leftButtonText: "Send Email",
+            rightButtonText: "Assign to New Requisition",
             selectedReq: '',
             showInfo: true,
             showCalendar : false,
             date: new Date(),
-            currentApplication: []
+            currentApplication: [],
+            scheduleSuccessText: "Interview Scheduled. "
         };
 
-        this.handleAddToReqClick = this.handleAddToReqClick.bind(this);
-        this.handleCancelClick = this.handleCancelClick.bind(this);
+        this.handleRightButtonClick = this.handleRightButtonClick.bind(this);
+        this.handleLeftButtonClick = this.handleLeftButtonClick.bind(this);
         this.handleScheduleClick = this.handleScheduleClick.bind(this);
     }
 
-    handleAddToReqClick (candidateID, jobTitle) {
-        if(this.state.showAddToReq === false) {
-            this.setState({buttonText1: "Cancel"});
-            this.setState({buttonText2: "Assign"});
-            this.setState({showAddToReq: true});
-            getJobs().then(res => {
-                const jobs = res.data.result;
-                this.setState({jobs: jobs});
-            })
+    handleRightButtonClick(candidateID, jobTitle) {
+
+        if(this.state.rightButtonText === "Assign to New Requisition") {
+
+            console.log("Assign to New Req Clicked");
+            this.setState({leftButtonText : "Cancel"});
+            this.setState({rightButtonText : "Assign"});
+            if(this.props.initialReadyForInterview === true) {
+                this.props.changeInterviewState();
+            }
+            if(this.state.showAddToReq === false) {
+                this.setState({showAddToReq : true});
+                getJobs().then(res => {
+                    const jobs = res.data.result;
+                    this.setState({jobs: jobs});
+                })
+            }
+
+            if(this.props.readyForInterview === true) {
+                this.props.changeInterviewState();
+            }
+
+        } else if(this.state.rightButtonText === "Schedule") {
+
+            console.log("Scheduled");
+            this.setState({leftButtonText : "Send Email"});
+            this.setState({rightButtonText : "Assign to New Requisition"});
+            this.setState({showCalendar: false});
+            this.setState({showInfo: true});
+            this.setState({showSuccess: true});
+
+            getApplicationsForUser(this.props.info.candidateID).then(res => {
+                const applications = res.data.result;
+                applications.forEach(app => {
+                    if(app.status === this.props.currentCandidate.status) {
+                        currentApplications.push(app);
+                    }
+                });
+
+                let payload = {
+                    "interviewTime": this.state.date.getFullYear()+"-"
+                        +this.addZ(this.state.date.getMonth()+1)+"-"
+                        +this.addZ(this.state.date.getDay())+" "
+                        +this.convertTime12to24(document.getElementById("timeSelection").value)+":00"
+                };
+
+                setInterviewForApplication(currentApplications[0].applicationID, payload).then(res => {
+                    console.log("Set Interview: " + JSON.stringify(res));
+                });
+            });
+
+        } else if(this.state.rightButtonText === "Assign") {
+
+            console.log("Assigned");
+            this.setState({leftButtonText : "Send Email"});
+            this.setState({rightButtonText : "Assign to New Requisition"});
+            if(this.state.showAddToReq === true) {
+                this.setState({showSuccess: true});
+                this.state.jobs.forEach(job => {
+                    if(jobTitle === job.title) {
+                        let payload = {
+                            jobID: job.jobID,
+                            candidateID: candidateID
+                        };
+                        addJobToCandidate(job.jobID, payload).then(res => {
+                            console.log("Add Job To Candidate Response: " + JSON.stringify(res));
+                        })
+                    }
+                })
+            }
         }
 
-        if(this.state.showAddToReq === true) {
-            this.setState({showSuccess: true});
-            console.log("Job Title: " + jobTitle);
-            this.state.jobs.forEach(job => {
-                if(jobTitle === job.title) {
-                    console.log(job.jobID);
-                    let payload = {
-                        jobID: job.jobID,
-                        candidateID: candidateID
-                    };
-                    console.log(payload);
-                    addJobToCandidate(job.jobID, payload).then(res => {
-                        console.log(res);
-                    });
-                }
-            });
-        }
     }
 
-    handleCancelClick () {
-        this.props.changeInterviewState();
+    handleLeftButtonClick () {
+        if(this.state.leftButtonText === "Cancel") {
 
-        if(this.state.showAddToReq === true) {
-            this.setState({showAddToReq: false});
-            this.setState({buttonText1: "Send Email"});
-            this.setState({buttonText2: "Assign to New Requisition"});
-            this.setState({showSuccess: false});
-        }
-        if(this.state.showCalendar === true) {
-            this.setState({showCalendar: false});
-            this.setState({buttonText1: "Send Email"});
-            this.setState({buttonText2: "Assign to New Requisition"});
-            this.setState({showSuccess: false});
+            console.log("Cancel Clicked");
+            this.setState({leftButtonText: "Send Email"});
+            this.setState({rightButtonText: "Assign to New Requisition"});
+
+            if(this.props.initialReadyForInterview === true) {
+                this.props.changeInterviewState();
+            }
+
+            if(this.state.showAddToReq === true) {
+                this.setState({showAddToReq: false});
+            }
+
+            if(this.state.showCalendar === true) {
+                this.setState({showCalendar: false});
+                this.setState({showInfo: true});
+            }
+
         }
     }
 
@@ -89,32 +140,13 @@ export default class CandidateProfileModal extends React.Component {
     };
 
     handleScheduleClick () {
-        this.props.changeInterviewState();
-
+        // this.props.changeInterviewState();
         if(this.state.showCalendar === false) {
             this.setState({showInfo: false});
-            this.setState({buttonText1: "Cancel"});
-            this.setState({buttonText2: "Schedule"});
+            this.setState({leftButtonText: "Cancel"});
+            this.setState({rightButtonText: "Schedule"});
             this.setState({showCalendar: true});
-        } else if(this.state.showCalendar === true) {
-
-            getApplicationsForUser(this.props.info.candidateID).then(res => {
-               const applications = res.data.result;
-               applications.forEach(app => {
-                  if(app.status === this.props.currentCandidate.status) {
-                      currentApplications.push(app);
-                  }
-               });
-
-                let payload = {
-                    "interviewTime": this.state.date.getFullYear()+"-"
-                        +this.addZ(this.state.date.getMonth()+1)+"-"
-                        +this.addZ(this.state.date.getDay())+" "
-                        +this.convertTime12to24(document.getElementById("timeSelection").value)+":00"
-                };
-
-                setInterviewForApplication(currentApplications[0].applicationID, payload);
-            });
+            this.props.changeInterviewState();
         }
     }
 
@@ -130,6 +162,7 @@ export default class CandidateProfileModal extends React.Component {
                     <p><strong>Address:</strong>{" " + this.props.info.streetAddress}</p>
                     <p><strong>Location:</strong>{" " + this.props.info.city + ", " + this.props.info.state}</p>
                 </div>
+                <p hidden={!this.state.showSuccess}>{this.state.scheduleSuccessText}</p>
                 <div hidden={!this.state.showCalendar} className={"calendarContainer"}>
                     <Calendar
                         value={this.state.date}
@@ -150,9 +183,9 @@ export default class CandidateProfileModal extends React.Component {
                             <option>5:00 PM</option>
                          </select>
                     </div>
+                    <p hidden={!this.state.showSuccess}>{this.state.scheduleSuccessText}</p>
                 </div>
-
-                <div hidden={!this.props.readyForInterview}><button onClick={this.handleScheduleClick}>Schedule Interview</button></div>
+                <div hidden={!this.props.readyForInterview}><button onClick={this.handleScheduleClick} className={"scheduleInterviewBtn"}>Schedule Interview</button></div>
                 <div className={"addReqToCandidateText"} hidden={!this.state.showAddToReq}>
                     <p>Assign <strong>{this.props.info.firstName}</strong> to:
                     <select id={"reqSelection"}>
@@ -163,11 +196,10 @@ export default class CandidateProfileModal extends React.Component {
                         )};
                     </select>?
                     </p>
-                    <p hidden={!this.state.showSuccess}>Candidate successfully added.</p>
                 </div>
                 <div className={"candidateProfileModalButtons"}>
-                    <button className={"candidateProfileModalButton"} id={"candidateProfileModalButton1"} onClick={this.handleCancelClick}><a href={"mailto:"+this.props.info.email}>{this.state.buttonText1}</a></button>
-                    <button className={"candidateProfileModalButton"} id={"candidateProfileModalButton2"} onClick={() => this.handleAddToReqClick(this.props.info.candidateID, document.getElementById("reqSelection").value)}>{this.state.buttonText2}</button>
+                    <button className={"candidateProfileModalButton"} id={"candidateProfileModalButton1"} onClick={this.handleLeftButtonClick}><a href={"mailto:"+this.props.info.email}>{this.state.leftButtonText}</a></button>
+                    <button className={"candidateProfileModalButton"} id={"candidateProfileModalButton2"} onClick={() => this.handleRightButtonClick(this.props.info.candidateID, document.getElementById("reqSelection").value)}>{this.state.rightButtonText}</button>
                 </div>
             </div>
         )

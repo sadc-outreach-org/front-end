@@ -103,6 +103,25 @@
     color: #fff;
 }
 
+.scheduleInterviewBtn {
+    border: none;
+    outline: none;
+    height: 40px;
+    background: #fb2525;
+    color: #fff;
+    font-size: 18px;
+    width: 300px;
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+}
+
+.scheduleInterviewBtn:hover {
+    cursor: pointer;
+    background: #C9271E;
+    color: #fff;
+}
+
 .candidateProfileModalContainer h1 {
     padding-top: 40px;
     padding-bottom: 10px;
@@ -113,8 +132,8 @@
 
 .candidateModalInfo {
     text-align: left;
-    padding-left: 35%;
-    margin-top: 14%;
+    padding-left: 29%;
+    margin-top: 10%;
     font-size: 20px;
 }
 
