@@ -9,6 +9,7 @@ import Modal from 'react-modal';
 //import Form from "reactstrap/src/Form";
 import {uploadResume} from "../services";
 import {updateCandidateProfile} from '../../services.js'
+import logo from "../../../images/heb-red.png";
 
 Modal.defaultStyles.overlay.backgroundColor = 'rgba(0, 0, 0, 0.7)';
 const customStyling = {
@@ -139,129 +140,130 @@ class CandidateProfileInfo extends Component {
 
         return (
             <div className={"profileView"}>
-                <div className={"main-content"}>
-                    <div className={"form"}>
-                        <h1 className={"profile-header"}>Profile</h1>
-                        <div className={"column"}>
-                            <label htmlFor="">First Name</label>
-                            <Input
-                                type={"text"}
-                                id={"firstName"}
-                                className={"profileField"}
-                                placeholder={"First Name"}
-                                defaultValue={this.state.firstName}
-                                onChange={(event) => this.setState({firstName: event.target.value})}
-                            />
-                            <label htmlFor="">City</label>
-                            <Input
-                                type={"text"}
-                                id={"city"}
-                                className={"profileField"}
-                                placeholder={"City"}
-                                defaultValue={this.state.city}
-                                onChange={(event) => this.setState({city: event.target.value})}
-                            />
-                            <label htmlFor="">Address</label>
-                            <Input
-                                type={"text"}
-                                id={"streetAddress"}
-                                className={"profileField"}
-                                placeholder={"Street Address"}
-                                defaultValue={this.state.streetAddress}
-                                onChange={(event) => this.setState({streetAddress: event.target.value})}
-                            />
-                            <label htmlFor="">Phone Number</label>
-                            <Input
-                                type={"text"}
-                                id={"phone"}
-                                placeholder={"Phone Number"}
-                                className={"profileField"}
-                                defaultValue={this.state.phoneNumber}
-                                onChange={(event) => this.setState({phoneNumber: event.target.value})}
-                            />
-                            <label htmlFor="">Resume</label>
+                <div className={"addNewCandidateImage"}>
+                    <img src={logo} className={"smallHebLogo"} alt={"hebLogo"}/>
+                </div>
+                <div className={"form"}>
+                    <h1 className={"profile-header"}>Your Profile</h1>
+                    <div className={"column"}>
+                        <label htmlFor="">First Name</label>
+                        <Input
+                            type={"text"}
+                            id={"firstName"}
+                            className={"profileField"}
+                            placeholder={"First Name"}
+                            defaultValue={this.state.firstName}
+                            onChange={(event) => this.setState({firstName: event.target.value})}
+                        />
+                        <label htmlFor="">City</label>
+                        <Input
+                            type={"text"}
+                            id={"city"}
+                            className={"profileField"}
+                            placeholder={"City"}
+                            defaultValue={this.state.city}
+                            onChange={(event) => this.setState({city: event.target.value})}
+                        />
+                        <label htmlFor="">Address</label>
+                        <Input
+                            type={"text"}
+                            id={"streetAddress"}
+                            className={"profileField"}
+                            placeholder={"Street Address"}
+                            defaultValue={this.state.streetAddress}
+                            onChange={(event) => this.setState({streetAddress: event.target.value})}
+                        />
+                        <label htmlFor="">Phone Number</label>
+                        <Input
+                            type={"text"}
+                            id={"phone"}
+                            placeholder={"Phone Number"}
+                            className={"profileField"}
+                            defaultValue={this.state.phoneNumber}
+                            onChange={(event) => this.setState({phoneNumber: event.target.value})}
+                        />
+                        <label htmlFor="">Resume</label>
+                        <div>
+                            <br/>
+                        </div>
+                        <div className="iframe-container">
+                            <Form id = "resumeUploadForm" onSubmit={this.onFileSubmit}>
+                                <Input id = "resumeUploadInput" type="file" name = "file" onChange={this.onChange}/>
+                                <Button
+                                    type={"submit"}
+                                    className={"submitResumeUpload btn-block"}
+                                >UPLOAD</Button>
+                            </Form>
+                            <iframe title="PDF" src={fileURL+'#view=Fit&toolbar=0&statusbar=0&messages=0&navpanes=0&scrollbar=0'}/>
+                            <button text="Click me" className="modalOpen" onClick={this.handleOpenModal}></button>
+
+
                             <div>
-                                <br/>
-                            </div>
-                            <div className="iframe-container">
-                                <Form id = "resumeUploadForm" onSubmit={this.onFileSubmit}>
-                                    <Input id = "resumeUploadInput" type="file" name = "file" onChange={this.onChange}/>
-                                    <Button
-                                        type={"submit"}
-                                        className={"submitResumeUpload btn-block"}
-                                    >UPLOAD</Button>
-                                </Form>
-                                <iframe title="PDF" src={fileURL+'#view=Fit&toolbar=0&statusbar=0&messages=0&navpanes=0&scrollbar=0'}/>
-                                <button text="Click me" className="modalOpen" onClick={this.handleOpenModal}></button>
-
-
-                                <div>
-                                    <Modal isOpen={this.state.showModal} ariaHideApp={false} style={customStyling}
-                                           contentLabel="Minimal Modal Example">
-                                        <div className="modalCloseButton" onClick={this.handleCloseModal}/>
-                                        <Pdf_modal file={this.state.file}/>
-                                        <div className="printf" onClick={this.print_pdf}/>
-                                    </Modal>
-                                </div>
+                                <Modal isOpen={this.state.showModal} ariaHideApp={false} style={customStyling}
+                                       contentLabel="Minimal Modal Example">
+                                    <div className="modalCloseButton" onClick={this.handleCloseModal}/>
+                                    <Pdf_modal file={this.state.file}/>
+                                    <div className="printf" onClick={this.print_pdf}/>
+                                </Modal>
                             </div>
                         </div>
-                        <div className={"column"}>
-                            <label htmlFor="">Last Name</label>
-                            <Input
-                                type={"text"}
-                                id={"lastName"}
-                                className={"profileField"}
-                                placeholder={"Last Name"}
-                                defaultValue={this.state.lastName}
-                                onChange={(event) => this.setState({lastName: event.target.value})}
-                            />
-                            <label htmlFor="">State</label>
-                            <Input
-                                type={"text"}
-                                id={"state"}
-                                className={"profileField"}
-                                placeholder={"State"}
-                                defaultValue={this.state.state}
-                                onChange={(event) => this.setState({state: event.target.value})}
-                            />
-                            <label htmlFor="">Email</label>
-                            <Input
-                                type={"text"}
-                                id={"email"}
-                                className={"profileField"}
-                                placeholder={"Email"}
-                                defaultValue={this.state.email}
-                                onChange={(event) => this.setState({email: event.target.value})}
-                            />
-                            <label htmlFor="">Zip Code</label>
-                            <Input
-                                type={"text"}
-                                id={"zip"}
-                                className={"profileField"}
-                                placeholder={"Zip Code"}
-                                defaultValue={this.state.zipCode}
-                                onChange={(event) => this.setState({zipCode: event.target.value})}
-                            />
-                            <label htmlFor="">Resume Upload</label>
-                              <div >
-                                <Form id = "resumeUploadForm" onSubmit={this.onFileSubmit}>
-                                    <Input id = "resumeUploadInput" type="file" name = "file" onChange={this.onChange}/>
-                                    <Button
-                                        type={"submit"}
-                                        className={"submitResumeUpload btn-block"}
-                                    >UPLOAD</Button>
-                                </Form>
-                              </div>
-                        </div>
-                        <Button
-                            type={"submit"}
-                            className={"btn-submit"}
-                            disabled={!disableUpdateButton}
-                            onClick={() => this.handleUpdateButton()}
-                        >UPDATE</Button>
-                        <div id={"updateSuccessContainer"} hidden={!this.state.showSuccess}>
-                            <p id={"updateSuccessText"}>Your profile was updated successfully.</p>
-                        </div>
+                    </div>
+                    <div className={"column"}>
+                        <label htmlFor="">Last Name</label>
+                        <Input
+                            type={"text"}
+                            id={"lastName"}
+                            className={"profileField"}
+                            placeholder={"Last Name"}
+                            defaultValue={this.state.lastName}
+                            onChange={(event) => this.setState({lastName: event.target.value})}
+                        />
+                        <label htmlFor="">State</label>
+                        <Input
+                            type={"text"}
+                            id={"state"}
+                            className={"profileField"}
+                            placeholder={"State"}
+                            defaultValue={this.state.state}
+                            onChange={(event) => this.setState({state: event.target.value})}
+                        />
+                        <label htmlFor="">Email</label>
+                        <Input
+                            type={"text"}
+                            id={"email"}
+                            className={"profileField"}
+                            placeholder={"Email"}
+                            defaultValue={this.state.email}
+                            onChange={(event) => this.setState({email: event.target.value})}
+                        />
+                        <label htmlFor="">Zip Code</label>
+                        <Input
+                            type={"text"}
+                            id={"zip"}
+                            className={"profileField"}
+                            placeholder={"Zip Code"}
+                            defaultValue={this.state.zipCode}
+                            onChange={(event) => this.setState({zipCode: event.target.value})}
+                        />
+                        <label htmlFor="">Resume Upload</label>
+                          <div >
+                            <Form id = "resumeUploadForm" onSubmit={this.onFileSubmit}>
+                                <Input id = "resumeUploadInput" type="file" name = "file" onChange={this.onChange}/>
+                                <Button
+                                    type={"submit"}
+                                    className={"submitResumeUpload btn-block"}
+                                >UPLOAD</Button>
+                            </Form>
+                          </div>
+                    </div>
+                    <Button
+                        type={"submit"}
+                        className={"btn-submit"}
+                        disabled={!disableUpdateButton}
+                        onClick={() => this.handleUpdateButton()}
+                    >UPDATE</Button>
+                    <div id={"updateSuccessContainer"} hidden={!this.state.showSuccess}>
+                        <p id={"updateSuccessText"}>Your profile was updated successfully.</p>
                     </div>
                 </div>
             </div>
