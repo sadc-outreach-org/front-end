@@ -7,20 +7,24 @@
     width: 60%;
 
 }
+.iframe-container{
+    float:right;
+}
 
 .iframe-container iframe {
-    width: 24%;
-    height: 140px;
+    width: 30%;
+    height: 120px;
+
 
 }
 .iframe-container  .modalOpen {
     opacity: 0.3;
     position:relative;
-    right:20%;
-    bottom:80px;
+    right:24%;
+    bottom:65px;
     transition: 0.5s;
-    opacity: 1;
-    padding: 10% 7.5%;
+    opacity: 0;
+    padding: 15% 9.5%;
 }
 
 .modal-header {
