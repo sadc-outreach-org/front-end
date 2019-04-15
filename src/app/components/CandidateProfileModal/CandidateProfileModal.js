@@ -18,7 +18,8 @@ export default class CandidateProfileModal extends React.Component {
             showInfo: true,
             showCalendar : false,
             date: new Date(),
-            currentApplication: []
+            currentApplication: [],
+            scheduleSuccessText: "Interview Scheduled. "
         };
 
         this.handleRightButtonClick = this.handleRightButtonClick.bind(this);
@@ -27,18 +28,25 @@ export default class CandidateProfileModal extends React.Component {
     }
 
     handleRightButtonClick(candidateID, jobTitle) {
+
         if(this.state.rightButtonText === "Assign to New Requisition") {
 
             console.log("Assign to New Req Clicked");
             this.setState({leftButtonText : "Cancel"});
             this.setState({rightButtonText : "Assign"});
-            this.props.changeInterviewState();
+            if(this.props.initialReadyForInterview === true) {
+                this.props.changeInterviewState();
+            }
             if(this.state.showAddToReq === false) {
                 this.setState({showAddToReq : true});
                 getJobs().then(res => {
                     const jobs = res.data.result;
                     this.setState({jobs: jobs});
                 })
+            }
+
+            if(this.props.readyForInterview === true) {
+                this.props.changeInterviewState();
             }
 
         } else if(this.state.rightButtonText === "Schedule") {
@@ -48,6 +56,7 @@ export default class CandidateProfileModal extends React.Component {
             this.setState({rightButtonText : "Assign to New Requisition"});
             this.setState({showCalendar: false});
             this.setState({showInfo: true});
+            this.setState({showSuccess: true});
 
             getApplicationsForUser(this.props.info.candidateID).then(res => {
                 const applications = res.data.result;
@@ -99,7 +108,7 @@ export default class CandidateProfileModal extends React.Component {
             this.setState({leftButtonText: "Send Email"});
             this.setState({rightButtonText: "Assign to New Requisition"});
 
-            if(this.props.readyForInterview === true) {
+            if(this.props.initialReadyForInterview === true) {
                 this.props.changeInterviewState();
             }
 
@@ -131,12 +140,13 @@ export default class CandidateProfileModal extends React.Component {
     };
 
     handleScheduleClick () {
-        this.props.changeInterviewState();
+        // this.props.changeInterviewState();
         if(this.state.showCalendar === false) {
             this.setState({showInfo: false});
             this.setState({leftButtonText: "Cancel"});
             this.setState({rightButtonText: "Schedule"});
             this.setState({showCalendar: true});
+            this.props.changeInterviewState();
         }
     }
 
@@ -152,6 +162,7 @@ export default class CandidateProfileModal extends React.Component {
                     <p><strong>Address:</strong>{" " + this.props.info.streetAddress}</p>
                     <p><strong>Location:</strong>{" " + this.props.info.city + ", " + this.props.info.state}</p>
                 </div>
+                <p hidden={!this.state.showSuccess}>{this.state.scheduleSuccessText}</p>
                 <div hidden={!this.state.showCalendar} className={"calendarContainer"}>
                     <Calendar
                         value={this.state.date}
@@ -172,6 +183,7 @@ export default class CandidateProfileModal extends React.Component {
                             <option>5:00 PM</option>
                          </select>
                     </div>
+                    <p hidden={!this.state.showSuccess}>{this.state.scheduleSuccessText}</p>
                 </div>
                 <div hidden={!this.props.readyForInterview}><button onClick={this.handleScheduleClick} className={"scheduleInterviewBtn"}>Schedule Interview</button></div>
                 <div className={"addReqToCandidateText"} hidden={!this.state.showAddToReq}>
@@ -184,7 +196,6 @@ export default class CandidateProfileModal extends React.Component {
                         )};
                     </select>?
                     </p>
-                    <p hidden={!this.state.showSuccess}>Candidate successfully added.</p>
                 </div>
                 <div className={"candidateProfileModalButtons"}>
                     <button className={"candidateProfileModalButton"} id={"candidateProfileModalButton1"} onClick={this.handleLeftButtonClick}><a href={"mailto:"+this.props.info.email}>{this.state.leftButtonText}</a></button>
