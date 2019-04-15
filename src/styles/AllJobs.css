@@ -45,6 +45,8 @@
     text-align: center;
     border: 1px solid #dddddd;
     padding: 8px;
+    background-color: #fb2525;
+    color: #fff;
 }
 
 .jobContainer th:hover {

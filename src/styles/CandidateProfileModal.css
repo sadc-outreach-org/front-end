@@ -73,6 +73,10 @@
     padding: 0;
 }
 
+.candidateProfileModalContainer h3 {
+    margin-top: 15%;
+}
+
 .react-calendar__month-view__weekdays {
     color:#fff;
 }
