@@ -2,8 +2,6 @@ import React from 'react';
 import '../../../styles/AllJobs.css';
 import {getJobs, getRequisitions, getReqsForJob, getUsers} from '../../services.js';
 import logo from "../../../images/heb-red.png";
-import {addJobToCandidate} from "../../services";
-import {getCandidateInfo} from "../services";
 import AllCandidatesModal from '../AllCandidatesModal/AllCandidatesModal';
 import Modal from 'react-modal';
 
