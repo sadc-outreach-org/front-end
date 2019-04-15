@@ -39,43 +39,40 @@
     margin-right: 100px;
 }
 
+.profileView {
+    text-align: center;
+}
+
 .profileView .profileField {
     border: 1px solid black;
     padding: 4px;
     margin-top: 10px;
     width: 80%;
-    margin: auto;
     margin-left: 50px;
 }
 
 .profileView label {
     float: left;
     width: 10em;
-    margin-left: 50px;
+    margin-left: 75px;
     font-weight: bold;
     margin-top: 10px;
     text-align: left;
+    margin-bottom: -8px;
 }
 
-.main-content {
-    float: left;
-    display: inline;
-    width: 85%;
-    grid-template-columns: auto auto;
-    margin-top: 2%;
+#updateSuccessContainer {
+    margin-top: 10px;
+    border: 2px solid darkgreen;
+    background-color: seagreen;
+    text-align: center;
 }
 
-
-#temp-nav {
+#updateSuccessText {
     color: white;
-    background-color: gray;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    margin: 0;
+    font-weight: bold;
 }
 
 .profile-header {
     color: black;
-    text-align: left;
-    margin-left: 50px;
 }

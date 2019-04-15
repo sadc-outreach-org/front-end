@@ -64,7 +64,9 @@ export default class ApplicationStatus extends React.Component {
     render() {
         return (
             <div className={"applicationStatusContainer"}>
-                <h1 className={"application-header"}>Application Status for: {this.props.clickedApplication.requisition.title}</h1>
+                <div className={"application-header"}>
+                    <h1>Application Status for {this.props.clickedApplication.requisition.title}</h1>
+                </div>
                 <ul className="progressbar">
                     <li className={"progressbar-item"}>Submit Code for Review</li>
                     <li className={"progressbar-item"}>Schedule Interview</li>
@@ -96,11 +98,10 @@ export default class ApplicationStatus extends React.Component {
                             </Form>
                         </div>
                         <div hidden={!this.state.showScheduleInterviewText}>
-                            <p>Please give the hiring manager <strong>1-2 weeks</strong> to get back to schedule your interview.</p>
-                            <p>If you have any questions, please email the hiring manager at: <a href={"mailto:"+this.props.clickedApplication.requisition.admin.email}>{this.props.clickedApplication.requisition.admin.email}</a></p>
+                            <p>Please give the hiring manager <strong>1-2 weeks</strong> to schedule your interview.</p>
+                            <p>For questions, please email the hiring manager at: <a href={"mailto:"+this.props.clickedApplication.requisition.admin.email}>{this.props.clickedApplication.requisition.admin.email}</a></p>
                         </div>
                         <div hidden={!this.state.showAttendInterviewText}>
-                            {/*<p>Congratulations! Your interview is set for April 28, 2019 at 3:00 PM{console.log("Application Info: " + JSON.stringify(this.props.clickedApplication))}</p>*/}
                             <p>Congratulations! Your interview is set for <strong>{this.props.clickedApplication.interviewTime}</strong></p>
                             <p>Please arrive at the HEB Headquarters no later than the stated time.</p>
                         </div>

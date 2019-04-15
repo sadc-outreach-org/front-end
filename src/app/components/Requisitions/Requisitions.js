@@ -1,6 +1,7 @@
 import React from 'react';
 import '../../../styles/AllRequisitions.css';
 import {getRequisitions} from '../../services.js';
+import logo from '../../../images/heb-red.png';
 
 export default class Requisitions extends React.Component {
     state = {
@@ -17,8 +18,10 @@ export default class Requisitions extends React.Component {
     render() {
         return (
             <div className={"requisitionsContainer"}>
+                <div className={"addNewCandidateImage"}>
+                    <img src={logo} className={"smallHebLogo"} alt={"hebLogo"}/>
+                </div>
                 <h1 id={"requisitionsHeader"}>Requisitions</h1>
-                <input type={"text"} id={"requisitionsSearchInput"} onKeyUp={console.log("typed")} placeholder={"Search by title"} title={"Type in a title"}/>
                 <table className={"requisitionsTable"}>
                     <tbody>
                     <tr>

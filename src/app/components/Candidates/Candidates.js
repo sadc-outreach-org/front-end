@@ -1,4 +1,5 @@
 import React from 'react';
+import logo from '../../../images/heb-red.png';
 import '../../../styles/AllCandidates.css';
 import {getUsers, getCandidateInfo, sortUsersByApplication} from '../../components/services.js';
 import Modal from 'react-modal';
@@ -18,7 +19,7 @@ const customStyling = {
         top: '40%',
         left: '50%',
         height: '70%',
-        padding: 0,
+        padding: '0',
         transform: 'translate(-50%, -50%)'
     }
 };
@@ -127,9 +128,11 @@ export default class Candidates extends React.Component {
     render() {
         return (
             <div className={"candidatesContainer"}>
+                <div className={"addNewCandidateImage"}>
+                    <img src={logo} className={"smallHebLogo"} alt={"hebLogo"}/>
+                </div>
                 <h1 id={"applicantsHeader"}>Applicants</h1>
-                <input type={"text"} id={"candidateSearchInput"} placeholder={"Search by name"} title={"Type in a name"}/>
-                <table className={"candidatesTable"}>
+                <table className={"candidatesTable"} id={"candidates-table"}>
                     <tbody>
                         <tr>
                             <th>First<i className="upArrow" onClick={() => this.sortCandidatebyFirstNameAsc()}></i><i className="downArrow" onClick={() => this.sortCandidatebyFirstNameDesc()}></i></th>
