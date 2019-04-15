@@ -46,7 +46,7 @@ export default class Candidates extends React.Component {
 
     changeInterviewState() {
         if(this.state.readyForInterview === true) {
-            this.setState({readyForInterview : false})
+            this.setState({readyForInterview: false})
         } else if(this.state.readyForInterview === false) {
             this.setState({readyForInterview: true});
         }

@@ -94,6 +94,7 @@ export default class CandidateProfileModal extends React.Component {
 
     handleLeftButtonClick () {
         if(this.state.leftButtonText === "Cancel") {
+
             console.log("Cancel Clicked");
             this.setState({leftButtonText: "Send Email"});
             this.setState({rightButtonText: "Assign to New Requisition"});
