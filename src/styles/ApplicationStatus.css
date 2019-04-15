@@ -1,33 +1,93 @@
 .application-header {
-    color: black;
+    text-align: left;
+    background-color: red;
+    padding: 4px;
+}
+
+.application-header h1 {
+    margin-left: 20px;
+    color: white;
+}
+
+.applicationUpdated {
+    clear: both;
+    text-align: center;
+    background-color: seagreen;
+    padding: 8px;
+    margin-left: 200px;
+    margin-right: 200px;
+    border: 6px solid lightgreen;
+}
+
+.applicationStepCard {
+    text-align: center;
+    border: 1px solid gray;
+    margin-top: 6%;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.application-step-header {
+    margin-bottom: -10px;
+    padding: 0;
+}
+
+.applicationUpdated p {
+    color: white;
+    font-size: 20px;
+}
+
+.applicationStatusContainer {
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    overflow: hidden;
+}
+
+.applicationStatusStepSpace {
+    height: 100%;
     text-align: center;
 }
 
-.application-p {
-    float: left;
-    display: block;
-    clear: both;
-    margin-top: 0;
-}
-
-.application-subheader {
-    color: black;
-    float: left;
-    display: block;
-    clear: both;
-    margin-bottom: 1%;
+.challenge-header {
+    margin-bottom: -0.5%;
 }
 
 #githubSubmissionLink {
-    display: block;
-    width: 300px;
-    padding-top: 2px;
-    padding-bottom: 2px;
-    clear: both;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 14px;
+    height: 20px;
+    width: 400px;
+    margin-left: 500px;
 }
 
-#gitHubSubmissionButton {
-    float: right;
+#githubSubmissionLink:focus {
+    border-color: gold;
+    outline: none;
+}
+
+.gitHubSubmissionButton {
+    border: none;
+    outline: none;
+    height: 30px;
+    background: #fb2525;
+    color: #fff;
+    font-size: 18px;
+    margin-left: 20px;
+}
+
+.gitHubSubmissionButton:hover {
+    cursor: pointer;
+    background: #C9271E;
+    color: #fff;
+}
+
+.form-inline {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    margin-bottom: 10px;
 }
 
 .modalCloseButton {
@@ -37,7 +97,7 @@
     top: 32px;
     width: 32px;
     height: 32px;
-    opacity: 0.3;
+    opacity: 0.7;
     z-index: 2;
 }
 
@@ -52,7 +112,7 @@
     content: ' ';
     height: 33px;
     width: 2px;
-    background-color: #333;
+    background-color: white;
 }
 
 .modalCloseButton:before {
@@ -66,22 +126,18 @@
 .progressbar {
     counter-reset: step;
     padding-top: 3%;
-    margin-left: 15%;
+    margin-left: 17%;
 }
 
 .progressbar li {
     list-style-type: none;
     width: 25%;
     float: left;
-    font-size: 12px;
+    font-size: 16px;
     position: relative;
     text-align: center;
     text-transform: uppercase;
     color: #7d7d7d;
-}
-
-.progressbar li:hover {
-    cursor: pointer;
 }
 
 .progressbar li:before {
@@ -117,6 +173,7 @@
 
 .progressbar li.active {
     color: green;
+    font-weight: bold;
 }
 
 .progressbar li.active:before {
@@ -146,6 +203,8 @@
     text-align: center;
     border: 1px solid #dddddd;
     padding: 8px;
+    background-color: #fb2525;
+    color: white;
 }
 
 .candidateApplicationsTable th:hover {

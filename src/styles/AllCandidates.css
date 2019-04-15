@@ -1,7 +1,7 @@
 .candidatesTable {
     font-family: arial, sans-serif;
     border-collapse: collapse;
-    width: 60%;
+    width: 70%;
     background-color: white;
     margin: auto;
 }
@@ -15,7 +15,9 @@
 .candidatesTable th {
     text-align: center;
     border: 1px solid #dddddd;
-    padding: 8px;
+    padding: 10px;
+    background-color: #fb2525;
+    color: white;
 }
 
 .candidatesTable th:hover {
@@ -24,6 +26,10 @@
 
 .candidatesTable tr:nth-child(even) {
     background-color: #dddddd;
+}
+
+.candidatesTable tr:hover {
+    cursor: pointer;
 }
 
 #applicantsHeader {

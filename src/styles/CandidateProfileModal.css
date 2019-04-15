@@ -1,3 +1,11 @@
+.addReqToCandidateText {
+    background-color: lightgray;
+    padding: 8px;
+    margin-left: 200px;
+    margin-right: 200px;
+    border: 2px solid gray;
+}
+
 .candidateProfileModalButtons {
     position: absolute;
     text-align: center;
@@ -5,9 +13,24 @@
     bottom: 0;
 }
 
+.candidateModalHeader {
+    text-align: left;
+    background-color: #fb2525;
+}
+
+.candidateModalHeader h1 {
+    text-align: left;
+    color: white;
+}
+
 #candidateProfileModalButton1 {
     float: left;
     width: 50%;
+}
+
+#candidateProfileModalButton1 a {
+    text-decoration: none;
+    color: white;
 }
 
 #candidateProfileModalButton2 {
@@ -18,12 +41,26 @@
 .candidateProfileModalContainer {
     height: 100%;
     width: 100%;
+    text-align: center;
     margin: 0;
     padding: 0;
     position: relative;
 }
 
-.candidateProfileModalContainer button {
+
+.calendarContainer {
+    margin-left: 10%;
+    margin-top: 18px;
+    margin-bottom: 20px;
+}
+
+.candidateProfileModalContainer select {
+    margin-left: 10px;
+    margin-right: 10px;
+    padding: 10px;
+}
+
+.candidateProfileModalButton {
     border: none;
     outline: none;
     height: 40px;
@@ -36,19 +73,84 @@
     padding: 0;
 }
 
-.candidateProfileModalContainer button:hover {
+.react-calendar__month-view__weekdays {
+    color:#fff;
+}
+
+.react-calendar {
+    background: #fb2525 !important;
+    /*color: #000000 !important;*/
+}
+
+.react-calendar__month-view__days__day {
+    color: #fff !important;
+}
+
+.react-calendar__navigation button {
+    background: #FFFFFF !important;
+    color: #000000 !important;
+}
+
+#candidateProfileModalButton1:hover {
+    cursor: pointer;
+    background: #C9271E;
+    color: #fff;
+}
+
+#candidateProfileModalButton2:hover {
+    cursor: pointer;
+    background: #C9271E;
+    color: #fff;
+}
+
+.scheduleInterviewBtn {
+    border: none;
+    outline: none;
+    height: 40px;
+    background: #fb2525;
+    color: #fff;
+    font-size: 18px;
+    width: 300px;
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+}
+
+.scheduleInterviewBtn:hover {
     cursor: pointer;
     background: #C9271E;
     color: #fff;
 }
 
 .candidateProfileModalContainer h1 {
-    padding: 10% 0 0 0;
-    margin: 0;
-    text-align: center;
+    padding-top: 40px;
+    padding-bottom: 10px;
+    margin-left: 20px;
+    margin-right: 0;
+    margin-top: 0;
 }
 
-.candidateProfileModalContainer p {
-    text-align: center;
+.candidateModalInfo {
+    text-align: left;
+    padding-left: 29%;
+    margin-top: 10%;
     font-size: 20px;
+}
+
+#timeSelection {
+    margin-left: 500px;
+}
+
+.timeSelect {
+    position: absolute;
+    margin-top: -160px;
+    margin-bottom: 20px;
+}
+
+.candidateProfileModalContainer .addToReqButton:hover {
+    cursor: pointer;
+}
+
+.candidateProfileModalContainer .row:hover {
+    cursor: default;
 }

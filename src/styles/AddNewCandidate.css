@@ -1,0 +1,86 @@
+.smallHebLogo {
+    width: 150px;
+    height: 50px;
+}
+
+.addNewCandidateContainer {
+    text-align: center;
+}
+
+.addNewCandidateContainer h1 {
+    /*font-size: 24px;*/
+    color: black;
+}
+
+.addNewCandidateImage {
+    margin-top: 20px;
+    margin-left: 20px;
+    text-align: left;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.addNewCandidateForm {
+    margin-left: 400px;
+    margin-right: 400px;
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 1px solid black;
+}
+
+.addNewCandidateContainer input {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.addNewCandidateContainer input[type="email"], input[type="password"], input[type="text"] {
+    border: none;
+    border-bottom: 1px solid #000;
+    background: white;
+    outline: none;
+    height: 40px;
+    font-size: 16px;
+}
+
+.custom-file-input::-webkit-file-upload-button {
+    visibility: hidden;
+}
+.custom-file-input::before {
+    content: 'Resume';
+    display: inline-block;
+    background: -webkit-linear-gradient(top, #f9f9f9, #e3e3e3);
+    border: 1px solid #999;
+    border-radius: 3px;
+    padding: 5px 8px;
+    outline: none;
+    white-space: nowrap;
+    -webkit-user-select: none;
+    cursor: pointer;
+    /*text-shadow: 1px 1px #fff;*/
+    font-size: 10pt;
+}
+.custom-file-input:hover::before {
+    border-color: black;
+}
+.custom-file-input:active::before {
+    background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
+}
+
+.submitSignup {
+    border: none;
+    outline: none;
+    height: 40px;
+    background: #fb2525;
+    color: #fff;
+    font-size: 18px;
+    border-radius: 20px;
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+.submitSignup:hover {
+    cursor: pointer;
+    background: #C9271E;
+    color: #fff;
+}

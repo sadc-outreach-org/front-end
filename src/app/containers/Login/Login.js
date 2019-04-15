@@ -1,8 +1,18 @@
 import React, {Component} from 'react';
 import logo from '../../../images/heb-red.png';
-import {Button, Form, FormGroup, Input, Container, Row, Col} from 'reactstrap';
+import {Button, Form, FormGroup, Input, Container, Row, Col, Alert} from 'reactstrap';
 import '../../../styles/Login.css';
 import { login } from '../../services';
+
+const ConditionalAlert = ({visible, message})=> {
+    if(visible){
+        return(
+            <Alert color={"danger"}>
+                {message}
+            </Alert>
+        );
+    } else return null;
+}
 
 class Login extends Component {
     constructor(props) {
@@ -10,6 +20,7 @@ class Login extends Component {
         this.state = {
             email: '',
             password: '',
+            badLogin: false
         };
         this.handleClick = this.handleClick.bind(this);
     }
@@ -21,15 +32,25 @@ class Login extends Component {
             password: this.state.password
         };
 
-        console.log(payload);
-
         login(payload).then(res => {
                 console.log(res);
                 console.log(res.data.result);
+                localStorage.setItem("userID", res.data.result.id);
+                let id = localStorage.getItem("userID");
+                console.log("User ID of logged in user: " + id);
                 if(res.status === 200){
-                    this.props.history.push('/c-dashboard/profile', {});
-                 }
-            })
+                    if(res.data.result.role === "Candidate")
+                        this.props.history.push('/c-dashboard/profile', {});
+                    else if(res.data.result.role === "Admin")
+                        this.props.history.push('/hm-dashboard/profile', {});
+                    else
+                        console.log("Successfully logged in but user is not a candidate or admin!");
+                 } else {
+                    this.setState({badLogin: true});
+                }
+            }).catch( error => {
+                this.setState({badLogin: true});
+            });
     };
 
     render() {
@@ -61,6 +82,7 @@ class Login extends Component {
                                             onChange={(event) => this.setState({password: event.target.value})}
                                             required
                                         />
+                                        <ConditionalAlert visible={this.state.badLogin} message={'Incorrect username or password!'}/>
                                         <Button
                                             type={"submit"}
                                             className={"submitSignup btn-block"}

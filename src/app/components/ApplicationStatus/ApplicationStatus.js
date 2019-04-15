@@ -1,30 +1,112 @@
 import React from 'react';
+import {Button, Form, FormGroup, Input} from 'reactstrap';
 import '../../../styles/ApplicationStatus.css';
+import {submitGitLink} from "../../services";
 
 export default class ApplicationStatus extends React.Component {
-    state = {
+    constructor (props) {
+        super(props);
+        this.state = {
+            gitLink: '',
+            showUpdated: false,
+            originalClass: 'progressbar-item',
+            showCodingChallenge: false,
+            showScheduleInterviewText: false,
+            showAttendInterviewText: false
+        };
 
+        this.handleGitSubmit = this.handleGitSubmit.bind(this);
+    }
+
+    componentDidMount() {
+        this.setState({gitLink: this.props.clickedApplication.gitLink});
+        let steps = document.getElementsByClassName("progressbar-item");
+        let i;
+        for(i = 0; i < steps.length; i++) {
+
+            if(steps[i].innerHTML.includes(this.props.clickedApplication.status)) {
+                steps[i].className = steps[i].className+" active";
+            } else {
+                steps[i].className = this.state.originalClass;
+            }
+
+            if(this.props.clickedApplication.status === "Submit Code for Review") {
+                this.setState({showCodingChallenge: true});
+            } else {
+                this.setState({showCodingChallenge: false});
+            }
+
+            if(this.props.clickedApplication.status === "Schedule Interview") {
+                this.setState({showScheduleInterviewText: true});
+            } else {
+                this.setState({showScheduleInterviewText: false});
+            }
+
+            if(this.props.clickedApplication.status === "Attend Interview") {
+                this.setState({showAttendInterviewText: true});
+            } else {
+                this.setState({showAttendInterviewText: false});
+            }
+        }
+    }
+
+    handleGitSubmit = event => {
+        event.preventDefault();
+
+        let payload = {
+            gitLink: this.state.gitLink
+        };
+
+        submitGitLink(payload, this.props.clickedApplication.applicationID);
+        this.setState({showUpdated: true});
     };
 
     render() {
         return (
             <div className={"applicationStatusContainer"}>
-                <h1 className={"application-header"}>Application Status for: Developer I</h1>
+                <div className={"application-header"}>
+                    <h1>Application Status for {this.props.clickedApplication.requisition.title}</h1>
+                </div>
                 <ul className="progressbar">
-                    <li className="active">Coding Challenge</li>
-                    <li className="active">Submit Code for Review</li>
-                    <li>Attend Interview</li>
+                    <li className={"progressbar-item"}>Submit Code for Review</li>
+                    <li className={"progressbar-item"}>Schedule Interview</li>
+                    <li className={"progressbar-item"}>Attend Interview</li>
                 </ul>
-                <h2 className={"application-subheader"}>Step 1: Coding Challenge</h2>
-                <p className={"application-p"}>Coding Challenge: Write a program that prints out "Hello World!"</p>
-                <h2 className={"application-subheader"}>Step 2: Submit Code for Review</h2>
-                <p className={"application-p"}>Once you've completed the coding challenge, submit your github link here:</p>
-                <form>
-                    <input type={"text"} name={"submissionLink"} id={"githubSubmissionLink"} placeholder={"Github Link"}/>
-                    <input type={"submit"} name={"submissionLink"} id={"githubSubmissionButton"}/>
-                </form>
-                <h2 className={"application-subheader"}>Step 3: Attend Interview</h2>
-                <p className={"application-p"}>Your interview is scheduled for February 2, 2019 at 3:00 PM.</p>
+                <div className={"applicationStatusStepSpace"}>
+                    <div className={"applicationStepCard"}>
+                        <h2 className={"application-step-header"}>{this.props.clickedApplication.status}</h2>
+                        <p className={"application-step-p"} hidden={!this.state.showCodingChallenge}>Please complete the following coding challenge and submit using the form below:{console.log("Coding Challenge Info: " + JSON.stringify(this.props.codingChallengeInfo))}</p>
+                        <div hidden={!this.state.showCodingChallenge}>
+                            <h2 className={"challenge-header"}><u>Your Challenge</u></h2>
+                            <p className={"application-step-p"}><strong>{this.props.codingChallengeInfo.name}</strong> - {this.props.codingChallengeInfo.description}</p>
+                            <Form onSubmit={this.handleGitSubmit} className={"form-inline"}>
+                                <FormGroup>
+                                    <Input
+                                        type={"text"}
+                                        name={"gitHubSubmitField"}
+                                        id={"githubSubmissionLink"}
+                                        placeholder={"Github Repo Link"}
+                                        defaultValue={this.props.clickedApplication.gitLink}
+                                        onChange={(event) => this.setState({gitLink: event.target.value})}
+                                        required
+                                    />
+                                    <Button
+                                        type={"submit"}
+                                        className={"gitHubSubmissionButton"}
+                                    >Submit</Button>
+                                </FormGroup>
+                            </Form>
+                        </div>
+                        <div hidden={!this.state.showScheduleInterviewText}>
+                            <p>Please give the hiring manager <strong>1-2 weeks</strong> to schedule your interview.</p>
+                            <p>For questions, please email the hiring manager at: <a href={"mailto:"+this.props.clickedApplication.requisition.admin.email}>{this.props.clickedApplication.requisition.admin.email}</a></p>
+                        </div>
+                        <div hidden={!this.state.showAttendInterviewText}>
+                            <p>Congratulations! Your interview is set for <strong>{this.props.clickedApplication.interviewTime}</strong></p>
+                            <p>Please arrive at the HEB Headquarters no later than the stated time.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         )
     }

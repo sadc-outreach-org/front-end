@@ -1,23 +1,44 @@
 import React from 'react';
 import '../../../styles/ActiveApplications.css';
-import {getRequisitions, getApplicationsForReq} from '../../services.js';
+import {getRequisitions, getApplicationsForReq, getApplicationDetails} from '../../services.js';
+import CandidateProfileModal from '../CandidateProfileModal/CandidateProfileModal';
+import logo from "../../../images/heb-red.png";
+import Modal from 'react-modal';
+
+Modal.defaultStyles.overlay.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+
+const customStyling = {
+    content : {
+        top: '40%',
+        left: '50%',
+        height: '70%',
+        padding: '0',
+        transform: 'translate(-50%, -50%)'
+    }
+};
 
 export default class ActiveApplications extends React.Component {
     constructor (props) {
         super(props);
         this.state = {
             reqs: [],
-            applications: []
+            applications: [],
+            currentApplication: [],
+            info: [],
+            readyForInterview: false,
+            showCalendar: false,
+            showModal: false
         };
 
         this.handleReqClick = this.handleReqClick.bind(this);
+        this.handleOpenModal = this.handleOpenModal.bind(this);
+        this.handleCloseModal = this.handleCloseModal.bind(this);
     }
 
     handleReqClick(reqID) {
         getApplicationsForReq(reqID).then(res => {
             const applications = res.data.result;
             this.setState({applications: applications})
-            console.log(applications);
         })
     }
 
@@ -28,11 +49,39 @@ export default class ActiveApplications extends React.Component {
         })
     };
 
+    handleOpenModal (application) {
+        getApplicationDetails(application.applicationID).then(res => {
+            console.log(res.data.result);
+            const info = res.data.result.candidate;
+            this.setState({info: info});
+            console.log(info);
+        });
+        this.setState({currentApplication: application});
+        this.setState({showModal: true});
+        if(application.status === "Schedule Interview") {
+            this.setState({readyForInterview: true}, function() {
+                this.setState({showCalendar: true});
+            });
+        } else {
+            this.setState({readyForInterview: false}, function() {
+                this.setState({showCalendar: false});
+            });
+        }
+    }
+
+    handleCloseModal () {
+        this.setState({showModal: false});
+        this.setState({readyForInterview: false});
+    }
+
     render() {
         return (
             <div className={"activeApplicationsContainer"}>
+                <div className={"addNewCandidateImage"}>
+                    <img src={logo} className={"smallHebLogo"} alt={"hebLogo"}/>
+                </div>
                 <h1 id={"activeApplicationsHeader"}>Active Applications</h1>
-                {/*<input type={"text"} id={"activeApplicationsSearchInput"} onKeyUp={console.log("typed")} placeholder={"Search by title"} title={"Type in a title"}/>*/}
+                <p>Click on a requisition to see all applications for it.</p>
                 <table className={"requisitionsActiveApplicationsTable"}>
                     <tbody>
                     <tr>
@@ -56,7 +105,7 @@ export default class ActiveApplications extends React.Component {
                         <th>Application Status</th>
                     </tr>
                     {this.state.applications.map(app =>
-                        <tr>
+                        <tr onClick={() => this.handleOpenModal(app)}>
                             <td>
                                 {app.applicationID}
                             </td>
@@ -73,6 +122,15 @@ export default class ActiveApplications extends React.Component {
                     )}
                     </tbody>
                 </table>
+                <Modal
+                    isOpen={this.state.showModal}
+                    ariaHideApp={false}
+                    style={customStyling}
+                    contentLabel=""
+                >
+                    <div className="modalCloseButton" onClick={this.handleCloseModal}/>
+                    <CandidateProfileModal info={this.state.info} currentCandidate={this.state.currentCandidate} readyForInterview={this.state.readyForInterview}/>
+                </Modal>
             </div>
         )
     }

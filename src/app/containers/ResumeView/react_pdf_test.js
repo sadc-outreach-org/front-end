@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {getResume} from '../../services.js';
+import {getResume} from '../../services';
 import '../../../styles/pdf_modal.css';
 import Pdf_modal from '../../components/Modal/resume_modal';
 import Modal from 'react-modal';
@@ -13,7 +13,8 @@ const customStyling = {
         height: '750px',
         // right: 'auto',
         // bottom: 'auto',
-        transform: 'translate(-50%, -50%)'
+        transform: 'translate(-50%, -50%)',
+
     }
 };
 
@@ -30,10 +31,10 @@ export default class Applications extends React.Component {
         };
         this.handleOpenModal = this.handleOpenModal.bind(this);
         this.handleCloseModal = this.handleCloseModal.bind(this);
-        this.print_pdf = this.print_pdf.bind(this);
     }
     componentDidMount() {
-        getResume().then(res => {
+        getResume(57).then(res => {
+
 
 //Create a Blob from the PDF Stream
             const pdf = new Blob(
@@ -57,14 +58,12 @@ export default class Applications extends React.Component {
     handleCloseModal () {
         this.setState({showModal: false})
     }
-    print_pdf () {
-        window.frames["printf"].focus();
-        window.frames["printf"].print();
-    }
 
     render() {
         let {file, url, isShowing} = this.state;
         const fileURL = URL.createObjectURL(file);
+        const sample = 'http://unec.edu.az/application/uploads/2014/12/pdf-sample.pdf'
+        const type = 'pdf';
 
 
         return (
