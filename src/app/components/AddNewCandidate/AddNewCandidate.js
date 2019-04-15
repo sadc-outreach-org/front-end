@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from '../../../images/heb-red.png';
 import {Button, Form, FormGroup, Input, Container, Row, Col, Alert} from 'reactstrap';
-import '../../../styles/SignUp.css';
+import '../../../styles/AddNewCandidate.css';
 import {addCandidate, uploadResume} from '../../components/services';
 
 const ConditionalAlert = ({visible, message})=> {
@@ -41,15 +41,7 @@ class AddNewCandidate extends React.Component {
     fileUp(userID, file) {
         const formData = new FormData();
         console.log("This is the user ID pushed to fileUP method: " + userID);
-        formData.append('file',file)
-        /* Jerry had this in his resume upload stuff but it's unused and will
-        cause errors in CircleCI. Will remove when verified it's not needed
-         */
-        // const config = {
-        //     headers: {
-        //         'content-type': 'multipart/form-data'
-        //     }
-        // }
+        formData.append('file',file);
         return uploadResume(userID, formData);
     }
 
@@ -78,7 +70,7 @@ class AddNewCandidate extends React.Component {
                  console.log("The following is the response for file upload:");
                  console.log(response);
                  console.log(response.data.result);
-             })
+             });
              if(res.status === 200) {
                  this.successfulAddition();
              }
@@ -97,15 +89,17 @@ class AddNewCandidate extends React.Component {
             state: '',
             resume: null,
             candidateWasAdded: true
-        })
+        });
         this.formRef.current.reset();
     }
 
     render() {
         return (
-            <div className={"signupContainer"}>
-                <img src={logo} className={"hebLogo"} alt={"hebLogo"}/>
-                <Container>
+            <div className={"addNewCandidateContainer"}>
+                <div className={"addNewCandidateImage"}>
+                    <img src={logo} className={"smallHebLogo"} alt={"hebLogo"}/>
+                </div>
+                <Container className={"addNewCandidateForm"}>
                     <Row>
                         <Col xs={"12"} md={{size: 6, offset: 3}} lg={{size: 4, offset: 4}}>
                             <Form onSubmit={this.handleSubmit} innerRef={this.formRef}>
@@ -187,7 +181,8 @@ class AddNewCandidate extends React.Component {
                                         type={"file"}
                                         name={"resume"}
                                         id={"resume"}
-                                        defaultValue={this.state.gitLink}
+                                        className={"custom-file-input"}
+                                        defaultValue={this.state.resume}
                                         onChange={(event) => this.setState({file: event.target.files[0]})}
                                         required
                                     />
@@ -195,7 +190,7 @@ class AddNewCandidate extends React.Component {
                                     <Button
                                         type={"submit"}
                                         className={"submitSignup btn-block"}
-                                    >ADD CANDIDATE</Button>
+                                    >SUBMIT</Button>
                                 </FormGroup>
                             </Form>
                         </Col>

@@ -1,10 +1,17 @@
 import React from 'react';
 import '../../../styles/ApplicationStatus.css';
+import logo from '../../../images/heb-red.png';
 import ApplicationStatus from '../ApplicationStatus/ApplicationStatus';
-import {getApplicationsForUser} from '../../services.js';
+import {getApplicationsForUser, getApplicationDetails} from '../../services.js';
 import Modal from 'react-modal';
 
 Modal.defaultStyles.overlay.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+
+const customStyling = {
+    content : {
+        padding: '0'
+    }
+};
 
 export default class Applications extends React.Component {
     constructor (props) {
@@ -12,6 +19,7 @@ export default class Applications extends React.Component {
         this.state = {
             applications: [],
             clickedApplication: [],
+            codingChallengeInfo: [],
             showModal: false
         };
 
@@ -38,12 +46,19 @@ export default class Applications extends React.Component {
         this.setState({clickedApplication: singleApplication}, function() {
             this.setState({showModal: true});
         });
+        getApplicationDetails(singleApplication.applicationID).then(res => {
+            this.setState({codingChallengeInfo: res.data.result.requisition.codingChallenges[0]});
+        });
     }
 
     render() {
         return (
             <div className={"candidateApplicationsContainer"}>
+                <div className={"addNewCandidateImage"}>
+                    <img src={logo} className={"smallHebLogo"} alt={"hebLogo"}/>
+                </div>
                 <h1 className={"applicationsHeader"}>Applications</h1>
+                <p>Select an application to view its status.</p>
                 <table className={"candidateApplicationsTable"}>
                     <tr>
                         <th>Requisition</th>
@@ -63,10 +78,11 @@ export default class Applications extends React.Component {
                 <Modal
                     isOpen={this.state.showModal}
                     ariaHideApp={false}
+                    style={customStyling}
                     contentLabel="Minimal Modal Example"
                 >
                     <div className="modalCloseButton" onClick={this.handleCloseModal}/>
-                    <ApplicationStatus clickedApplication={this.state.clickedApplication}/>
+                    <ApplicationStatus clickedApplication={this.state.clickedApplication} codingChallengeInfo={this.state.codingChallengeInfo}/>
                 </Modal>
             </div>
         );

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, Form, FormGroup, Input, Container, Row, Col} from 'reactstrap';
+import {Button, Form, FormGroup, Input} from 'reactstrap';
 import '../../../styles/ApplicationStatus.css';
 import {submitGitLink} from "../../services";
 
@@ -8,7 +8,11 @@ export default class ApplicationStatus extends React.Component {
         super(props);
         this.state = {
             gitLink: '',
-            showUpdated: false
+            showUpdated: false,
+            originalClass: 'progressbar-item',
+            showCodingChallenge: false,
+            showScheduleInterviewText: false,
+            showAttendInterviewText: false
         };
 
         this.handleGitSubmit = this.handleGitSubmit.bind(this);
@@ -19,17 +23,40 @@ export default class ApplicationStatus extends React.Component {
         let steps = document.getElementsByClassName("progressbar-item");
         let i;
         for(i = 0; i < steps.length; i++) {
+
             if(steps[i].innerHTML.includes(this.props.clickedApplication.status)) {
                 steps[i].className = steps[i].className+" active";
+            } else {
+                steps[i].className = this.state.originalClass;
+            }
+
+            if(this.props.clickedApplication.status === "Submit Code for Review") {
+                this.setState({showCodingChallenge: true});
+            } else {
+                this.setState({showCodingChallenge: false});
+            }
+
+            if(this.props.clickedApplication.status === "Schedule Interview") {
+                this.setState({showScheduleInterviewText: true});
+            } else {
+                this.setState({showScheduleInterviewText: false});
+            }
+
+            if(this.props.clickedApplication.status === "Attend Interview") {
+                this.setState({showAttendInterviewText: true});
+            } else {
+                this.setState({showAttendInterviewText: false});
             }
         }
     }
 
     handleGitSubmit = event => {
         event.preventDefault();
+
         let payload = {
             gitLink: this.state.gitLink
         };
+
         submitGitLink(payload, this.props.clickedApplication.applicationID);
         this.setState({showUpdated: true});
     };
@@ -37,40 +64,48 @@ export default class ApplicationStatus extends React.Component {
     render() {
         return (
             <div className={"applicationStatusContainer"}>
-                <h1 className={"application-header"}>Application Status for: {this.props.clickedApplication.requisition.title}</h1>
+                <div className={"application-header"}>
+                    <h1>Application Status for {this.props.clickedApplication.requisition.title}</h1>
+                </div>
                 <ul className="progressbar">
                     <li className={"progressbar-item"}>Submit Code for Review</li>
                     <li className={"progressbar-item"}>Schedule Interview</li>
                     <li className={"progressbar-item"}>Attend Interview</li>
-                    <li className={"progressbar-item"}>Wait for Response</li>
                 </ul>
-                <h2 className={"application-subheader"}>Step 1: Submit Code for Review</h2>
-                <p className={"application-p"}>Coding Challenge: Write a program that prints out "Hello World!"</p>
-                <Form onSubmit={this.handleGitSubmit}>
-                    <FormGroup>
-                        <Input
-                            type={"text"}
-                            name={"gitHubSubmitField"}
-                            id={"githubSubmissionLink"}
-                            placeholder={"Github Repo Link"}
-                            defaultValue={this.props.clickedApplication.gitLink}
-                            onChange={(event) => this.setState({gitLink: event.target.value})}
-                            required
-                        />
-                        <Button
-                            type={"submit"}
-                            className={"gitHubSubmissionButton btn-block"}
-                        >Submit</Button>
-                    </FormGroup>
-                </Form>
-                <h2 className={"application-subheader"}>Step 2: Schedule Interview</h2>
-                <p className={"application-p"}>Waiting for Hiring Manager to schedule your interview</p>
-                <h2 className={"application-subheader"}>Step 3: Attend Interview</h2>
-                <p className={"application-p"}>Your interview is scheduled for February 2, 2019 at 3:00 PM.</p>
-                <h2 className={"application-subheader"}>Step 4: Wait for Response</h2>
-                <p className={"application-p"}>Please allow at least two weeks for a response from your hiring manager.</p>
-                <div hidden={!this.state.showUpdated} className={"applicationUpdated"}>
-                    <p><strong>Your Application has been successfully updated.</strong></p>
+                <div className={"applicationStatusStepSpace"}>
+                    <div className={"applicationStepCard"}>
+                        <h2 className={"application-step-header"}>{this.props.clickedApplication.status}</h2>
+                        <p className={"application-step-p"} hidden={!this.state.showCodingChallenge}>Please complete the following coding challenge and submit using the form below:{console.log("Coding Challenge Info: " + JSON.stringify(this.props.codingChallengeInfo))}</p>
+                        <div hidden={!this.state.showCodingChallenge}>
+                            <h2 className={"challenge-header"}><u>Your Challenge</u></h2>
+                            <p className={"application-step-p"}><strong>{this.props.codingChallengeInfo.name}</strong> - {this.props.codingChallengeInfo.description}</p>
+                            <Form onSubmit={this.handleGitSubmit} className={"form-inline"}>
+                                <FormGroup>
+                                    <Input
+                                        type={"text"}
+                                        name={"gitHubSubmitField"}
+                                        id={"githubSubmissionLink"}
+                                        placeholder={"Github Repo Link"}
+                                        defaultValue={this.props.clickedApplication.gitLink}
+                                        onChange={(event) => this.setState({gitLink: event.target.value})}
+                                        required
+                                    />
+                                    <Button
+                                        type={"submit"}
+                                        className={"gitHubSubmissionButton"}
+                                    >Submit</Button>
+                                </FormGroup>
+                            </Form>
+                        </div>
+                        <div hidden={!this.state.showScheduleInterviewText}>
+                            <p>Please give the hiring manager <strong>1-2 weeks</strong> to schedule your interview.</p>
+                            <p>For questions, please email the hiring manager at: <a href={"mailto:"+this.props.clickedApplication.requisition.admin.email}>{this.props.clickedApplication.requisition.admin.email}</a></p>
+                        </div>
+                        <div hidden={!this.state.showAttendInterviewText}>
+                            <p>Congratulations! Your interview is set for <strong>{this.props.clickedApplication.interviewTime}</strong></p>
+                            <p>Please arrive at the HEB Headquarters no later than the stated time.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         )

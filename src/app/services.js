@@ -17,12 +17,15 @@ export const login = (payload) => {
     return axios.post(`${API_URL}/login`, payload);
 };
 
+
 export const submitGitLink = (payload, appID) => {
     return axios.post(`${API_URL}/applications/${appID}/gitLink`, payload);
 };
 
-export const getResume = () => {
-    return  axios(site.concat(fakeUser,"/resume"), {
+export const getResume = (UserID) => {
+    return  axios(site.concat(UserID,"/resume"), {
+
+
         method: 'GET',
         responseType: 'blob' //Force to receive data in a Blob Format
     })
@@ -67,4 +70,12 @@ export const addJobToCandidate = (jobID, payload) => {
 
 export const setInterviewForApplication = (appID, payload) => {
     return axios.post(`${API_URL}/applications/${appID}/interviewTime`, payload);
+};
+
+export const getApplicationDetails = (appID) => {
+    return axios.get(`${API_URL}/applications/${appID}`);
+};
+
+export const updateCandidateProfile = (userID, payload) => {
+    return axios.post(`${API_URL}/users/${userID}`, payload);
 };

@@ -1,14 +1,14 @@
 import React from 'react';
+import logo from '../../../images/heb-red.png';
 import '../../../styles/AllCandidates.css';
-import {getUsers, getCandidateInfo, sortUsersByApplication} from '../../components/services.js';
+import {getCandidateInfo} from '../../components/services.js';
 import Modal from 'react-modal';
 import CandidateProfileModal from '../CandidateProfileModal/CandidateProfileModal';
 import {
-    sortUsersByApplicationAsc,
-    sortUsersByApplicationDesc,
-    sortUsersByEmail, sortUsersByEmailAsc, sortUsersByEmailDesc,
-    sortUsersByFirstName, sortUsersByFirstNameAsc, sortUsersByFirstNameDesc,
-    sortUsersByLastName, sortUsersByLastNameAsc, sortUsersByLastNameDesc
+    sortUsersByApplicationAsc, sortUsersByApplicationDesc,
+    sortUsersByEmailAsc, sortUsersByEmailDesc,
+    sortUsersByFirstNameAsc, sortUsersByFirstNameDesc,
+    sortUsersByLastNameAsc, sortUsersByLastNameDesc
 } from "../../components/services";
 
 Modal.defaultStyles.overlay.backgroundColor = 'rgba(0, 0, 0, 0.7)';
@@ -18,7 +18,7 @@ const customStyling = {
         top: '40%',
         left: '50%',
         height: '70%',
-        padding: 0,
+        padding: '0',
         transform: 'translate(-50%, -50%)'
     }
 };
@@ -64,7 +64,6 @@ export default class Candidates extends React.Component {
                 this.setState({showCalendar: false});
             });
         }
-
     }
 
     handleCloseModal () {
@@ -131,15 +130,18 @@ export default class Candidates extends React.Component {
     render() {
         return (
             <div className={"candidatesContainer"}>
+                <div className={"addNewCandidateImage"}>
+                    <img src={logo} className={"smallHebLogo"} alt={"hebLogo"}/>
+                </div>
                 <h1 id={"applicantsHeader"}>Applicants</h1>
-                <input type={"text"} id={"candidateSearchInput"} placeholder={"Search by name"} title={"Type in a name"}/>
-                <table className={"candidatesTable"}>
+                <p>Select a candidate to view their contact information, assign them to a new requisition, or schedule an interview.</p>
+                <table className={"candidatesTable"} id={"candidates-table"}>
                     <tbody>
                         <tr>
-                            <th>First<i className="upArrow" onClick={() => this.sortCandidatebyFirstNameAsc()}></i><i className="downArrow" onClick={() => this.sortCandidatebyFirstNameDesc()}></i></th>
-                            <th>Last<i className="upArrow" onClick={() => this.sortCandidatebyLastNameAsc()}></i><i className="downArrow" onClick={() => this.sortCandidateByLastNameDesc()}></i></th>
-                            <th>Email<i className="upArrow" onClick={() => this.sortCandidatebyEmailAsc()}></i><i className="downArrow" onClick={() => this.sortCandidatebyEmailDesc()}></i></th>
-                            <th>Application Status<i className="upArrow"onClick={() => this.sortCandidatebyAppStatusAsc()} ></i><i className="downArrow" onClick={() => this.componentDidMount()}></i></th>
+                            <th>First<i className="upArrow" onClick={() => this.sortCandidatebyFirstNameAsc()}/><i className="downArrow" onClick={() => this.sortCandidatebyFirstNameDesc()}/></th>
+                            <th>Last<i className="upArrow" onClick={() => this.sortCandidatebyLastNameAsc()}/><i className="downArrow" onClick={() => this.sortCandidateByLastNameDesc()}/></th>
+                            <th>Email<i className="upArrow" onClick={() => this.sortCandidatebyEmailAsc()}/><i className="downArrow" onClick={() => this.sortCandidatebyEmailDesc()}/></th>
+                            <th>Application Status<i className="upArrow"onClick={() => this.sortCandidatebyAppStatusAsc()}/><i className="downArrow" onClick={() => this.componentDidMount()}/></th>
                         </tr>
                         {this.state.candidates.map(candidate =>
                             <tr onClick={() => this.handleOpenModal(candidate, candidate.candidateID, candidate.status)}>
@@ -149,7 +151,6 @@ export default class Candidates extends React.Component {
                                 <td>{candidate.status}</td>
                             </tr>)
                         }
-
                     </tbody>
                 </table>
                 <Modal
