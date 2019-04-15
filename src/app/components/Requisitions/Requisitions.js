@@ -22,7 +22,6 @@ export default class Requisitions extends React.Component {
                     <img src={logo} className={"smallHebLogo"} alt={"hebLogo"}/>
                 </div>
                 <h1 id={"requisitionsHeader"}>Requisitions</h1>
-                <input type={"text"} id={"requisitionsSearchInput"} onKeyUp={console.log("typed")} placeholder={"Search by title"} title={"Type in a title"}/>
                 <table className={"requisitionsTable"}>
                     <tbody>
                     <tr>

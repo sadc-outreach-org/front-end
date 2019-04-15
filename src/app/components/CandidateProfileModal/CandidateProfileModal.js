@@ -108,9 +108,11 @@ export default class CandidateProfileModal extends React.Component {
     render() {
         return (
             <div className={"candidateProfileModalContainer"}>
-                <h1>{this.props.info.firstName + " " + this.props.info.lastName}</h1>
-                <div hidden={!this.state.showInfo}>
-                    <p><strong>Email:</strong><a href={"mailto:"+this.props.info.email}>{this.props.info.email}</a></p>
+                <div className={"candidateModalHeader"}>
+                    <h1>{this.props.info.firstName + " " + this.props.info.lastName}</h1>
+                </div>
+                <div hidden={!this.state.showInfo} className={"candidateModalInfo"}>
+                    <p><strong>Email: </strong><a href={"mailto:"+this.props.info.email}>{this.props.info.email}</a></p>
                     <p><strong>Phone:</strong>{" " + this.props.info.phoneNum}</p>
                     <p><strong>Address:</strong>{" " + this.props.info.streetAddress}</p>
                     <p><strong>Location:</strong>{" " + this.props.info.city + ", " + this.props.info.state}</p>
