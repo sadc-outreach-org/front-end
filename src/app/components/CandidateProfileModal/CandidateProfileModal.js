@@ -150,8 +150,8 @@ export default class CandidateProfileModal extends React.Component {
                     <p hidden={!this.state.showSuccess}>Candidate successfully added.</p>
                 </div>
                 <div className={"candidateProfileModalButtons"}>
-                    <button id={"candidateProfileModalButton1"} onClick={this.handleCancelClick}><a href={"mailto:"+this.props.info.email}>{this.state.buttonText1}</a></button>
-                    <button id={"candidateProfileModalButton2"} onClick={() => this.handleAddToReqClick(this.props.info.candidateID, document.getElementById("reqSelection").value)}>{this.state.buttonText2}</button>
+                    <button className={"candidateProfileModalButton"} id={"candidateProfileModalButton1"} onClick={this.handleCancelClick}><a href={"mailto:"+this.props.info.email}>{this.state.buttonText1}</a></button>
+                    <button className={"candidateProfileModalButton"} id={"candidateProfileModalButton2"} onClick={() => this.handleAddToReqClick(this.props.info.candidateID, document.getElementById("reqSelection").value)}>{this.state.buttonText2}</button>
                 </div>
             </div>
         )
