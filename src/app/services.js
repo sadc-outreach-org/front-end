@@ -79,3 +79,7 @@ export const getApplicationDetails = (appID) => {
 export const updateCandidateProfile = (userID, payload) => {
     return axios.post(`${API_URL}/users/${userID}`, payload);
 };
+
+export const getCandidateInfo = (candidateID) => {
+    return axios.get(`${API_URL}/users/${candidateID}`);
+};

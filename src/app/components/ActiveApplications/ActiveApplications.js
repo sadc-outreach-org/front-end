@@ -51,10 +51,8 @@ export default class ActiveApplications extends React.Component {
 
     handleOpenModal (application) {
         getApplicationDetails(application.applicationID).then(res => {
-            console.log(res.data.result);
             const info = res.data.result.candidate;
             this.setState({info: info});
-            console.log(info);
         });
         this.setState({currentApplication: application});
         this.setState({showModal: true});

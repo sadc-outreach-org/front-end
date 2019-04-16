@@ -1,5 +1,5 @@
 import React from 'react';
-import {getJobs, addJobToCandidate, setInterviewForApplication, getApplicationsForUser} from '../../services.js';
+import {getJobs, addJobToCandidate, setInterviewForApplication, getApplicationsForUser, getCandidateInfo} from '../../services.js';
 import '../../../styles/CandidateProfileModal.css';
 import Calendar from "react-calendar";
 
@@ -51,7 +51,6 @@ export default class CandidateProfileModal extends React.Component {
 
         } else if(this.state.rightButtonText === "Schedule") {
 
-            console.log("Scheduled");
             this.setState({leftButtonText : "Send Email"});
             this.setState({rightButtonText : "Assign to New Requisition"});
             this.setState({showCalendar: false});
@@ -80,7 +79,6 @@ export default class CandidateProfileModal extends React.Component {
 
         } else if(this.state.rightButtonText === "Assign") {
 
-            console.log("Assigned");
             this.setState({leftButtonText : "Send Email"});
             this.setState({rightButtonText : "Assign to New Requisition"});
             if(this.state.showAddToReq === true) {
@@ -104,7 +102,6 @@ export default class CandidateProfileModal extends React.Component {
     handleLeftButtonClick () {
         if(this.state.leftButtonText === "Cancel") {
 
-            console.log("Cancel Clicked");
             this.setState({leftButtonText: "Send Email"});
             this.setState({rightButtonText: "Assign to New Requisition"});
 
