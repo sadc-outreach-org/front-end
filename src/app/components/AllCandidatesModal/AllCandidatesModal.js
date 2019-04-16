@@ -98,14 +98,21 @@ export default class AllCandidatesModal extends React.Component {
                             <th>First<i className="upArrow" onClick={() => this.sortCandidatebyFirstNameAsc()}/><i className="downArrow" onClick={() => this.sortCandidatebyFirstNameDesc()}/></th>
                             <th>Last<i className="upArrow" onClick={() => this.sortCandidatebyLastNameAsc()}/><i className="downArrow" onClick={() => this.sortCandidateByLastNameDesc()}/></th>
                             <th>Email<i className="upArrow" onClick={() => this.sortCandidatebyEmailAsc()}/><i className="downArrow" onClick={() => this.sortCandidatebyEmailDesc()}/></th>
-                            <th/>
+                            <th>Add</th>
                         </tr>
                         {this.state.candidates.map(candidate =>
                             <tr className={"candidateProfileModalContainer row"}>
                                 <td>{candidate.firstName}</td>
                                 <td>{candidate.lastName}</td>
                                 <td>{candidate.email}</td>
-                                <td><form><input type="submit" value="Add" style={{width : '100%'}} className={"candidateProfileModalContainer addToReqButton"} onClick={() => this.handleAddToReq(candidate)}/></form></td>
+                                <td>
+                                    <div className="circle-plus" onClick={() => this.handleAddToReq(candidate)}>
+                                        <div className="circle">
+                                            <div className="horizontal"/>
+                                            <div className="vertical"/>
+                                        </div>
+                                    </div>
+                                </td>
                             </tr>)
                         }
                         </tbody>

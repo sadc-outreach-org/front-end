@@ -1,6 +1,6 @@
 import React from 'react';
 import '../../../styles/ActiveApplications.css';
-import {getRequisitions, getApplicationsForReq, getApplicationDetails} from '../../services.js';
+import {getRequisitions, getApplicationsForReq, getApplicationDetails, getCandidateInfo} from '../../services.js';
 import CandidateProfileModal from '../CandidateProfileModal/CandidateProfileModal';
 import logo from "../../../images/heb-red.png";
 import Modal from 'react-modal';
@@ -27,7 +27,8 @@ export default class ActiveApplications extends React.Component {
             info: [],
             readyForInterview: false,
             showCalendar: false,
-            showModal: false
+            showModal: false,
+            moreCandidateInfo: []
         };
 
         this.handleReqClick = this.handleReqClick.bind(this);
@@ -51,10 +52,11 @@ export default class ActiveApplications extends React.Component {
 
     handleOpenModal (application) {
         getApplicationDetails(application.applicationID).then(res => {
-            console.log(res.data.result);
             const info = res.data.result.candidate;
             this.setState({info: info});
-            console.log(info);
+            getCandidateInfo(this.state.info.candidateID).then(res => {
+                this.setState({moreCandidateInfo: res.data.result});
+            })
         });
         this.setState({currentApplication: application});
         this.setState({showModal: true});
@@ -129,7 +131,7 @@ export default class ActiveApplications extends React.Component {
                     contentLabel=""
                 >
                     <div className="modalCloseButton" onClick={this.handleCloseModal}/>
-                    <CandidateProfileModal info={this.state.info} currentCandidate={this.state.currentCandidate} readyForInterview={this.state.readyForInterview}/>
+                    <CandidateProfileModal info={this.state.info} moreCandidateInfo={this.state.moreCandidateInfo} currentCandidate={this.state.currentCandidate} readyForInterview={this.state.readyForInterview}/>
                 </Modal>
             </div>
         )
