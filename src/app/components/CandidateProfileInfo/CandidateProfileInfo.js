@@ -45,6 +45,7 @@ class CandidateProfileInfo extends Component {
             candidateID: '',
             showSuccess: false,
             updatedResume: false
+
         };
         this.handleOpenModal = this.handleOpenModal.bind(this);
         this.handleCloseModal = this.handleCloseModal.bind(this);
@@ -126,11 +127,13 @@ class CandidateProfileInfo extends Component {
         };
         this.setState({showSuccess: true});
         updateCandidateProfile(this.state.candidateID, payload);
+
         const formData = new FormData();
         formData.append('file',this.state.file);
         console.log(localStorage.getItem("userID"));
         this.setState({updatedResume: false});
         return uploadResume(localStorage.getItem("userID"),formData);
+
     }
 
     render() {
@@ -200,12 +203,14 @@ class CandidateProfileInfo extends Component {
                         <div className="iframe-container">
                             <Form id = "resumeUploadForm" onSubmit={this.onFileSubmit}>
                                 <Input id = "resumeUploadInput" type="file" name = "file" onChange={this.onChange}/>
+
                                 {/*<Button*/}
                                     {/*type={"submit"}*/}
                                     {/*className={"submitResumeUpload btn-block"}*/}
                                 {/*>UPLOAD</Button>*/}
                             </Form>
                             <iframe title="PDF" src={fileURL+'#view=Fit&toolbar=0&statusbar=0&messages=0&navpanes=0&scrollbar=0'}  border = '0' scrolling="no"/>
+
                             <button text="Click me" className="modalOpen" onClick={this.handleOpenModal}></button>
 
 

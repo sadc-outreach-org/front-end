@@ -41,18 +41,15 @@
     /*!*font-size: 16px;*!*/
 /*!*}*!*/
 
-/*.submitSignup {*/
-    /*border: none;*/
-    /*outline: none;*/
-    /*height: 40px;*/
-    /*background: #fb2525;*/
-    /*color: #fff;*/
-    /*font-size: 18px;*/
-    /*border-radius: 20px;*/
-    /*width: 100%;*/
-    /*margin-top: 20px;*/
-    /*margin-bottom: 30px;*/
-/*}*/
+
+.signupContainer input[type="email"], input[type="password"], input[type="text"] {
+    border: none;
+    border-bottom: 1px solid #000;
+    background: transparent;
+    outline: none;
+    height: 40px;
+    font-size: 16px;
+}
 
 /*.submitSignup:hover {*/
     /*cursor: pointer;*/
