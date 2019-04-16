@@ -44,6 +44,7 @@ class CandidateProfileInfo extends Component {
             phoneNumber: '',
             candidateID: '',
             showSuccess: false,
+            updatedResume: false
         };
         this.handleOpenModal = this.handleOpenModal.bind(this);
         this.handleCloseModal = this.handleCloseModal.bind(this);
@@ -101,6 +102,7 @@ class CandidateProfileInfo extends Component {
 
     onChange = event => {
         this.setState({file:event.target.files[0]})
+        this.setState({updatedResume: true});
     }
     fileUp(file) {
         console.log(file);
@@ -127,6 +129,7 @@ class CandidateProfileInfo extends Component {
         const formData = new FormData();
         formData.append('file',this.state.file);
         console.log(localStorage.getItem("userID"));
+        this.setState({updatedResume: false});
         return uploadResume(localStorage.getItem("userID"),formData);
     }
 
@@ -140,6 +143,7 @@ class CandidateProfileInfo extends Component {
             || zipCode !== this.state.user.zipCode
             || state !== this.state.user.state
             || city !== this.state.user.city
+            || this.state.updatedResume === true
             || phoneNumber !== this.state.user.phoneNum;
         const fileURL = URL.createObjectURL(file);
         const sample = 'http://unec.edu.az/application/uploads/2014/12/pdf-sample.pdf'
