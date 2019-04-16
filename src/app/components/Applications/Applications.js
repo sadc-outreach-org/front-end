@@ -58,6 +58,7 @@ export default class Applications extends React.Component {
                     <img src={logo} className={"smallHebLogo"} alt={"hebLogo"}/>
                 </div>
                 <h1 className={"applicationsHeader"}>Applications</h1>
+                <p>Select an application to view its status.</p>
                 <table className={"candidateApplicationsTable"}>
                     <tr>
                         <th>Requisition</th>
