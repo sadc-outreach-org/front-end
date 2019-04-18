@@ -197,7 +197,8 @@ class CandidateProfileInfo extends Component {
                         <div>
                             <br/>
                         </div>
-                        <div className="iframe-container">
+
+                        <div className="iframe-container" align="right" position = "relative" bottom = "100%">
                             <Form id = "resumeUploadForm" onSubmit={this.onFileSubmit}>
                                 <Input id = "resumeUploadInput" type="file" name = "file" onChange={this.onChange}/>
                                 {/*<Button*/}
