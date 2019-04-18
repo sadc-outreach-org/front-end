@@ -32,7 +32,8 @@ export default class Candidates extends React.Component {
             info: [],
             showModal: false,
             readyForInterview: false,
-            initialReadyForInterview: false
+            initialReadyForInterview: false,
+            moreCandidateInfo: []
         };
         this.changeInterviewState = this.changeInterviewState.bind(this);
         this.handleOpenModal = this.handleOpenModal.bind(this);
@@ -58,6 +59,7 @@ export default class Candidates extends React.Component {
         getCandidateInfo(candidateID).then(res => {
             const info = res.data.result;
             this.setState({info: info});
+            this.setState({moreCandidateInfo: info});
         });
         this.setState({currentCandidate: candidate});
         this.setState({showModal: true});
@@ -173,7 +175,7 @@ export default class Candidates extends React.Component {
                     contentLabel=""
                 >
                     <div className="modalCloseButton" onClick={this.handleCloseModal}/>
-                    <CandidateProfileModal info={this.state.info} currentCandidate={this.state.currentCandidate} initialReadyForInterview={this.state.initialReadyForInterview} readyForInterview={this.state.readyForInterview} changeInterviewState={this.changeInterviewState}/>
+                    <CandidateProfileModal moreCandidateInfo={this.state.moreCandidateInfo} info={this.state.info} currentCandidate={this.state.currentCandidate} initialReadyForInterview={this.state.initialReadyForInterview} readyForInterview={this.state.readyForInterview} changeInterviewState={this.changeInterviewState}/>
                 </Modal>
             </div>
         )
