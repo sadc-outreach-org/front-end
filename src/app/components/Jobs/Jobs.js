@@ -1,5 +1,6 @@
 import React from 'react';
 import '../../../styles/AllJobs.css';
+
 import {getJobs, getRequisitions, getReqsForJob, getUsers} from '../../services.js';
 import logo from "../../../images/heb-red.png";
 import AllCandidatesModal from '../AllCandidatesModal/AllCandidatesModal';
@@ -12,6 +13,7 @@ const customStyling = {
         padding: '0',
     }
 };
+
 
 export default class Jobs extends React.Component {
     constructor (props) {

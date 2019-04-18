@@ -1,5 +1,6 @@
 import React from 'react';
 import '../../../styles/ActiveApplications.css';
+
 import {getRequisitions, getApplicationsForReq, getApplicationDetails} from '../../services.js';
 import CandidateProfileModal from '../CandidateProfileModal/CandidateProfileModal';
 import logo from "../../../images/heb-red.png";
@@ -16,6 +17,7 @@ const customStyling = {
         transform: 'translate(-50%, -50%)'
     }
 };
+
 
 export default class ActiveApplications extends React.Component {
     constructor (props) {

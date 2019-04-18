@@ -145,7 +145,9 @@ export default class Candidates extends React.Component {
                     <img src={logo} className={"smallHebLogo"} alt={"hebLogo"}/>
                 </div>
                 <h1 id={"applicantsHeader"}>Applicants</h1>
+
                 <p>Select a candidate to view their contact information, assign them to a new requisition, or schedule an interview.</p>
+
                 <table className={"candidatesTable"} id={"candidates-table"}>
                     <tbody>
                         <tr>
