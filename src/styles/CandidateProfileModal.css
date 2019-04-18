@@ -152,10 +152,31 @@
     margin-bottom: 20px;
 }
 
+.candidateProfileModalContainer .addToReqButton {
+    border: 1px solid black;
+    outline: none;
+    height: 20px;
+    background: #FF3126;
+    color: #fff;
+    font-size: 12px;
+    width: 300px;
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+}
+
 .candidateProfileModalContainer .addToReqButton:hover {
     cursor: pointer;
+    background: #C9271E;
+    color: #fff;
 }
 
 .candidateProfileModalContainer .row:hover {
     cursor: default;
 }
+
+.circle-plus {height:6em; width:6em; margin-left: 55px; font-size:6px /*Will change icon size*/;}
+.circle-plus:hover {cursor: pointer;}
+.circle-plus .circle {position: relative; width: 4.5em; height: 4.5em; border-radius: 100%; border: solid .8em #FF3126;}
+.circle-plus .circle .horizontal {position: absolute; background-color: #FF3126; width: 2.4em; height: .7em; top: 1.9em; left: 1.05em;}
+.circle-plus .circle .vertical {position: absolute; background-color: #FF3126; width: .7em; height: 2.4em; top: 1.05em; left: 1.9em;}
