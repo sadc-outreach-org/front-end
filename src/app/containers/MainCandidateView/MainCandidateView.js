@@ -19,6 +19,8 @@ class MainCandidateView extends Component {
 
         this.handleOpenModal = this.handleOpenModal.bind(this);
         this.handleCloseModal = this.handleCloseModal.bind(this);
+
+        Modal.setAppElement('#root');
     }
 
     render() {
@@ -43,7 +45,7 @@ class MainCandidateView extends Component {
                     isOpen={this.state.showModal}
                     contentLabel="Notifications"
                 >
-                    <div className="modalCloseButton" onClick={this.handleCloseModal}/>
+                    <div className="modalCloseButton" id="modalCloseButton" onClick={this.handleCloseModal}/>
                     <NotificationList/>
                 </Modal>
             </div>
