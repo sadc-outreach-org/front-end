@@ -1,6 +1,5 @@
 import React from 'react';
 import '../../../styles/ActiveApplications.css';
-
 import {getRequisitions, getApplicationsForReq, getApplicationDetails, getCandidateInfo} from '../../services.js';
 import CandidateProfileModal from '../CandidateProfileModal/CandidateProfileModal';
 import logo from "../../../images/heb-red.png";

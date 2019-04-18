@@ -52,7 +52,6 @@ export default class Candidates extends React.Component {
         } else if(this.state.readyForInterview === false) {
             this.setState({readyForInterview: true});
         }
-        // this.setState({readyForInterview: !this.state.readyForInterview});
     }
 
     handleOpenModal (candidate, candidateID, status) {

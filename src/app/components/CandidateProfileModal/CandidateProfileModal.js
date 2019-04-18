@@ -73,7 +73,7 @@ export default class CandidateProfileModal extends React.Component {
                 };
 
                 setInterviewForApplication(currentApplications[0].applicationID, payload).then(res => {
-                    console.log("Set Interview: " + JSON.stringify(res));
+                    console.log("Set Interview Responses: " + JSON.stringify(res));
                 });
             });
 
@@ -83,6 +83,7 @@ export default class CandidateProfileModal extends React.Component {
             this.setState({rightButtonText : "Assign to New Requisition"});
             if(this.state.showAddToReq === true) {
                 this.setState({showSuccess: true});
+                this.setState({showAddToReq : false});
                 this.state.jobs.forEach(job => {
                     if(jobTitle === job.title) {
                         let payload = {
@@ -137,7 +138,6 @@ export default class CandidateProfileModal extends React.Component {
     };
 
     handleScheduleClick () {
-        // this.props.changeInterviewState();
         if(this.state.showCalendar === false) {
             this.setState({showInfo: false});
             this.setState({leftButtonText: "Cancel"});
