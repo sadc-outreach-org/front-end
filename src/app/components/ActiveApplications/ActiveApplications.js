@@ -58,6 +58,7 @@ export default class ActiveApplications extends React.Component {
             this.setState({info: info});
             getCandidateInfo(this.state.info.candidateID).then(res => {
                 this.setState({moreCandidateInfo: res.data.result});
+                console.log("More Info: " + JSON.stringify(res));
             })
         });
         this.setState({currentApplication: application});
