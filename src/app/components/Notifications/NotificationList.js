@@ -36,7 +36,7 @@ export default class NotificationList extends React.Component {
                                     <button onClick={() => markNotificationRead(notification.notificationID).then(this.fetchNotifications())}>
                                         X
                                     </button>
-                                </td>
+                                 </td>
                             </tr>
                         )}
                     </tbody>

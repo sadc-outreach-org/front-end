@@ -59,7 +59,11 @@ export const getNotifications = (userID) => {
     return axios.get(`${API_URL}/users/${userID}/notifications`);
 };
 
-export const addNotification = (payload) => {
+export const addNotification = (userID, message) => {
+    let payload = {
+        userID: userID,
+        message: message
+    };
     return axios.post(`${API_URL}/notifications`, payload);
 };
 
