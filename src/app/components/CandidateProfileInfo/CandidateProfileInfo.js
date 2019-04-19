@@ -44,6 +44,8 @@ class CandidateProfileInfo extends Component {
             phoneNumber: '',
             candidateID: '',
             showSuccess: false,
+            updatedResume: false
+
         };
         this.handleOpenModal = this.handleOpenModal.bind(this);
         this.handleCloseModal = this.handleCloseModal.bind(this);
@@ -98,10 +100,14 @@ class CandidateProfileInfo extends Component {
             console.log(response.data);
         })
     }
+
     onChange = event => {
         this.setState({file:event.target.files[0]})
+        this.setState({updatedResume: true});
     }
     fileUp(file) {
+        console.log(file);
+        console.log(this.state.file);
         const formData = new FormData();
         formData.append('file',file)
         console.log(localStorage.getItem("userID"))
@@ -121,6 +127,13 @@ class CandidateProfileInfo extends Component {
         };
         this.setState({showSuccess: true});
         updateCandidateProfile(this.state.candidateID, payload);
+
+        const formData = new FormData();
+        formData.append('file',this.state.file);
+        console.log(localStorage.getItem("userID"));
+        this.setState({updatedResume: false});
+        return uploadResume(localStorage.getItem("userID"),formData);
+
     }
 
     render() {
@@ -133,6 +146,7 @@ class CandidateProfileInfo extends Component {
             || zipCode !== this.state.user.zipCode
             || state !== this.state.user.state
             || city !== this.state.user.city
+            || this.state.updatedResume === true
             || phoneNumber !== this.state.user.phoneNum;
         const fileURL = URL.createObjectURL(file);
         const sample = 'http://unec.edu.az/application/uploads/2014/12/pdf-sample.pdf'
@@ -186,15 +200,18 @@ class CandidateProfileInfo extends Component {
                         <div>
                             <br/>
                         </div>
-                        <div className="iframe-container">
+
+                        <div className="iframe-container" align="right" position = "relative" bottom = "100%">
                             <Form id = "resumeUploadForm" onSubmit={this.onFileSubmit}>
                                 <Input id = "resumeUploadInput" type="file" name = "file" onChange={this.onChange}/>
-                                <Button
-                                    type={"submit"}
-                                    className={"submitResumeUpload btn-block"}
-                                >UPLOAD</Button>
+
+                                {/*<Button*/}
+                                    {/*type={"submit"}*/}
+                                    {/*className={"submitResumeUpload btn-block"}*/}
+                                {/*>UPLOAD</Button>*/}
                             </Form>
-                            <iframe title="PDF" src={fileURL+'#view=Fit&toolbar=0&statusbar=0&messages=0&navpanes=0&scrollbar=0'}/>
+                            <iframe title="PDF" src={fileURL+'#view=Fit&toolbar=0&statusbar=0&messages=0&navpanes=0&scrollbar=0'}  border = '0' scrolling="no"/>
+
                             <button text="Click me" className="modalOpen" onClick={this.handleOpenModal}></button>
 
 
@@ -245,16 +262,7 @@ class CandidateProfileInfo extends Component {
                             defaultValue={this.state.zipCode}
                             onChange={(event) => this.setState({zipCode: event.target.value})}
                         />
-                        <label htmlFor="">Resume Upload</label>
-                          <div >
-                            <Form id = "resumeUploadForm" onSubmit={this.onFileSubmit}>
-                                <Input id = "resumeUploadInput" type="file" name = "file" onChange={this.onChange}/>
-                                <Button
-                                    type={"submit"}
-                                    className={"submitResumeUpload btn-block"}
-                                >UPLOAD</Button>
-                            </Form>
-                          </div>
+
                     </div>
                     <Button
                         type={"submit"}

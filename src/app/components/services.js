@@ -73,8 +73,8 @@ export const markNotificationRead = (notificationID) => {
 
 export const getCandidateInfo = (candidateID) => {
     return axios.get(`${API_URL}/users/${candidateID}`);
-}
+};
 
 export const updatePassword = (payload) => {
     return axios.post(`${API_URL}/password`, payload);
-}
+};

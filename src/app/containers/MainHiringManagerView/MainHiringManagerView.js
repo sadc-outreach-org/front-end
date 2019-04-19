@@ -30,18 +30,17 @@ class MainCandidateProfileView extends Component {
                     <div>
                         <SideMenu>
                             <Item divider={true} label="Actions" value="segment1"/>
-                            <Item label="Applicants" value="/applicants"></Item>
-                            <Item label="Jobs" value="/jobs"></Item>
-                            <Item label="Requisitions" value="/requisitions"></Item>
-                            <Item label="Active Applications" value="/active-applications"></Item>
-                            <Item label="Add New Candidate" value="/add-new-candidate"></Item>
+                            <Item label="Applicants" value="/applicants"/>
+                            <Item label="Jobs" value="/jobs"/>
+                            <Item label="Requisitions" value="/requisitions"/>
+                            <Item label="Active Applications" value="/active-applications"/>
+                            <Item label="Add New Candidate" value="/add-new-candidate"/>
                             <Item divider={true} label={"Notifications"}/>
                             <Item label={"Notifications"} onClick={this.handleOpenModal}/>
                         </SideMenu>
                         <div className={"mainHiringManagerContent"}>
                             <Route path={"/applicants"} component={AllCandidates}/>
                             <Route path={"/jobs"} component={Jobs}/>
-                            <Route path={"/requisitions"} component={Requisitions}/>
                             <Route path={"/active-applications"} component={ActiveApplications}/>
                             <Route path={"/add-new-candidate"} component={AddNewCandidate}/>
                         </div>

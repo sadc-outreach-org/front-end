@@ -32,7 +32,8 @@ export default class Candidates extends React.Component {
             info: [],
             showModal: false,
             readyForInterview: false,
-            initialReadyForInterview: false
+            initialReadyForInterview: false,
+            moreCandidateInfo: []
         };
         this.changeInterviewState = this.changeInterviewState.bind(this);
         this.handleOpenModal = this.handleOpenModal.bind(this);
@@ -51,13 +52,13 @@ export default class Candidates extends React.Component {
         } else if(this.state.readyForInterview === false) {
             this.setState({readyForInterview: true});
         }
-        // this.setState({readyForInterview: !this.state.readyForInterview});
     }
 
     handleOpenModal (candidate, candidateID, status) {
         getCandidateInfo(candidateID).then(res => {
             const info = res.data.result;
             this.setState({info: info});
+            this.setState({moreCandidateInfo: info});
         });
         this.setState({currentCandidate: candidate});
         this.setState({showModal: true});
@@ -145,7 +146,9 @@ export default class Candidates extends React.Component {
                     <img src={logo} className={"smallHebLogo"} alt={"hebLogo"}/>
                 </div>
                 <h1 id={"applicantsHeader"}>Applicants</h1>
+
                 <p>Select a candidate to view their contact information, assign them to a new requisition, or schedule an interview.</p>
+
                 <table className={"candidatesTable"} id={"candidates-table"}>
                     <tbody>
                         <tr>
@@ -171,7 +174,7 @@ export default class Candidates extends React.Component {
                     contentLabel=""
                 >
                     <div className="modalCloseButton" onClick={this.handleCloseModal}/>
-                    <CandidateProfileModal info={this.state.info} currentCandidate={this.state.currentCandidate} initialReadyForInterview={this.state.initialReadyForInterview} readyForInterview={this.state.readyForInterview} changeInterviewState={this.changeInterviewState}/>
+                    <CandidateProfileModal moreCandidateInfo={this.state.moreCandidateInfo} info={this.state.info} currentCandidate={this.state.currentCandidate} initialReadyForInterview={this.state.initialReadyForInterview} readyForInterview={this.state.readyForInterview} changeInterviewState={this.changeInterviewState}/>
                 </Modal>
             </div>
         )

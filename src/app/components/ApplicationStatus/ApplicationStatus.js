@@ -12,7 +12,9 @@ export default class ApplicationStatus extends React.Component {
             originalClass: 'progressbar-item',
             showCodingChallenge: false,
             showScheduleInterviewText: false,
-            showAttendInterviewText: false
+            showAttendInterviewText: false,
+            showSuccess: false,
+            showGitLink: false
         };
 
         this.handleGitSubmit = this.handleGitSubmit.bind(this);
@@ -32,8 +34,10 @@ export default class ApplicationStatus extends React.Component {
 
             if(this.props.clickedApplication.status === "Submit Code for Review") {
                 this.setState({showCodingChallenge: true});
+                this.setState({showGitLink: true});
             } else {
                 this.setState({showCodingChallenge: false});
+                this.setState({showGitLink: false});
             }
 
             if(this.props.clickedApplication.status === "Schedule Interview") {
@@ -59,6 +63,8 @@ export default class ApplicationStatus extends React.Component {
 
         submitGitLink(payload, this.props.clickedApplication.applicationID);
         this.setState({showUpdated: true});
+        this.setState({showSuccess: true});
+        this.setState({showGitLink: false});
     };
 
     render() {
@@ -76,26 +82,29 @@ export default class ApplicationStatus extends React.Component {
                     <div className={"applicationStepCard"}>
                         <h2 className={"application-step-header"}>{this.props.clickedApplication.status}</h2>
                         <p className={"application-step-p"} hidden={!this.state.showCodingChallenge}>Please complete the following coding challenge and submit using the form below:{console.log("Coding Challenge Info: " + JSON.stringify(this.props.codingChallengeInfo))}</p>
-                        <div hidden={!this.state.showCodingChallenge}>
+                        <div hidden={!this.state.showCodingChallenge} className={"codingChallengeDiv"}>
                             <h2 className={"challenge-header"}><u>Your Challenge</u></h2>
                             <p className={"application-step-p"}><strong>{this.props.codingChallengeInfo.name}</strong> - {this.props.codingChallengeInfo.description}</p>
-                            <Form onSubmit={this.handleGitSubmit} className={"form-inline"}>
-                                <FormGroup>
-                                    <Input
-                                        type={"text"}
-                                        name={"gitHubSubmitField"}
-                                        id={"githubSubmissionLink"}
-                                        placeholder={"Github Repo Link"}
-                                        defaultValue={this.props.clickedApplication.gitLink}
-                                        onChange={(event) => this.setState({gitLink: event.target.value})}
-                                        required
-                                    />
-                                    <Button
-                                        type={"submit"}
-                                        className={"gitHubSubmissionButton"}
-                                    >Submit</Button>
-                                </FormGroup>
-                            </Form>
+                            <div hidden={!this.state.showGitLink}>
+                                <Form onSubmit={this.handleGitSubmit} className={"form-inline"}>
+                                    <FormGroup>
+                                        <Input
+                                            type={"text"}
+                                            name={"gitHubSubmitField"}
+                                            id={"githubSubmissionLink"}
+                                            placeholder={"Github Repo Link"}
+                                            defaultValue={this.props.clickedApplication.gitLink}
+                                            onChange={(event) => this.setState({gitLink: event.target.value})}
+                                            required
+                                        />
+                                        <Button
+                                            type={"submit"}
+                                            className={"gitHubSubmissionButton"}
+                                        >Submit</Button>
+                                    </FormGroup>
+                                </Form>
+                            </div>
+                            <p hidden={!this.state.showSuccess}>Your application has been updated!</p>
                         </div>
                         <div hidden={!this.state.showScheduleInterviewText}>
                             <p>Please give the hiring manager <strong>1-2 weeks</strong> to schedule your interview.</p>

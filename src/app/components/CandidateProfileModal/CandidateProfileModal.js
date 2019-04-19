@@ -1,5 +1,5 @@
 import React from 'react';
-import {getJobs, addJobToCandidate, setInterviewForApplication, getApplicationsForUser} from '../../services.js';
+import {getJobs, addJobToCandidate, setInterviewForApplication, getApplicationsForUser, getCandidateInfo} from '../../services.js';
 import '../../../styles/CandidateProfileModal.css';
 import Calendar from "react-calendar";
 
@@ -51,7 +51,6 @@ export default class CandidateProfileModal extends React.Component {
 
         } else if(this.state.rightButtonText === "Schedule") {
 
-            console.log("Scheduled");
             this.setState({leftButtonText : "Send Email"});
             this.setState({rightButtonText : "Assign to New Requisition"});
             this.setState({showCalendar: false});
@@ -74,17 +73,17 @@ export default class CandidateProfileModal extends React.Component {
                 };
 
                 setInterviewForApplication(currentApplications[0].applicationID, payload).then(res => {
-                    console.log("Set Interview: " + JSON.stringify(res));
+                    console.log("Set Interview Responses: " + JSON.stringify(res));
                 });
             });
 
         } else if(this.state.rightButtonText === "Assign") {
 
-            console.log("Assigned");
             this.setState({leftButtonText : "Send Email"});
             this.setState({rightButtonText : "Assign to New Requisition"});
             if(this.state.showAddToReq === true) {
                 this.setState({showSuccess: true});
+                this.setState({showAddToReq : false});
                 this.state.jobs.forEach(job => {
                     if(jobTitle === job.title) {
                         let payload = {
@@ -104,7 +103,6 @@ export default class CandidateProfileModal extends React.Component {
     handleLeftButtonClick () {
         if(this.state.leftButtonText === "Cancel") {
 
-            console.log("Cancel Clicked");
             this.setState({leftButtonText: "Send Email"});
             this.setState({rightButtonText: "Assign to New Requisition"});
 
@@ -140,7 +138,6 @@ export default class CandidateProfileModal extends React.Component {
     };
 
     handleScheduleClick () {
-        // this.props.changeInterviewState();
         if(this.state.showCalendar === false) {
             this.setState({showInfo: false});
             this.setState({leftButtonText: "Cancel"});
@@ -159,8 +156,8 @@ export default class CandidateProfileModal extends React.Component {
                 <div hidden={!this.state.showInfo} className={"candidateModalInfo"}>
                     <p><strong>Email: </strong><a href={"mailto:"+this.props.info.email}>{this.props.info.email}</a></p>
                     <p><strong>Phone:</strong>{" " + this.props.info.phoneNum}</p>
-                    <p><strong>Address:</strong>{" " + this.props.info.streetAddress}</p>
-                    <p><strong>Location:</strong>{" " + this.props.info.city + ", " + this.props.info.state}</p>
+                    <p><strong>Address:</strong>{" " + this.props.moreCandidateInfo.streetAddress}</p>
+                    <p><strong>Location:</strong>{" " + this.props.moreCandidateInfo.city + ", " + this.props.moreCandidateInfo.state}</p>
                 </div>
                 <p hidden={!this.state.showSuccess}>{this.state.scheduleSuccessText}</p>
                 <div hidden={!this.state.showCalendar} className={"calendarContainer"}>
