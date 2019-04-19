@@ -56,7 +56,19 @@ export const uploadResume = (userID, pdfFile) => {
 };
 
 export const getNotifications = (userID) => {
-    return axios.get(site.concat("/getNotifications?userid=", userID));
+    return axios.get(`${API_URL}/users/${userID}/notifications`);
+};
+
+export const addNotification = (userID, message) => {
+    let payload = {
+        userID: userID,
+        message: message
+    };
+    return axios.post(`${API_URL}/notifications`, payload);
+};
+
+export const markNotificationRead = (notificationID) => {
+    return axios.post(`${API_URL}/notifications/${notificationID}`);
 };
 
 export const getCandidateInfo = (candidateID) => {

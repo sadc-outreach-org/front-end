@@ -1,30 +1,42 @@
 import React from 'react';
-import { getNotifications } from "../services";
+import { getNotifications, markNotificationRead } from "../services";
 
 export default class NotificationList extends React.Component {
-    state = {
-        notifications: ['a', 'b', 'c']
-    };
+    constructor(props) {
+        super(props);
+        this.state = {
+            notifications: []
+        };
+        this.fetchNotifications = this.fetchNotifications.bind(this);
+    }
 
     componentDidMount(){
-        getNotifications().then(res => {
+        this.fetchNotifications();
+    }
+
+    fetchNotifications = () => {
+        console.log("FETCHING NOTIFICATIONS!");
+        getNotifications(localStorage.getItem("userID")).then(res => {
             const notificationList = res.data.result;
-            //this.setState({notifications: notificationList});
+            this.setState({notifications: notificationList});
         });
     }
+
     render(){
         return(
             <div>
                 <table>
                     <tbody>
                         {this.state.notifications.map(notification =>
-                            <tr>
+                            <tr key={notification.notificationID}>
                                 <td>
-                                    Notification text
+                                    {notification.hasRead ? notification.message : <b>{notification.message}</b>}
                                 </td>
                                 <td>
-                                    X
-                                </td>
+                                    <button onClick={() => markNotificationRead(notification.notificationID).then(this.fetchNotifications())}>
+                                        X
+                                    </button>
+                                 </td>
                             </tr>
                         )}
                     </tbody>

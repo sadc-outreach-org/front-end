@@ -3,6 +3,7 @@ import logo from '../../../images/heb-red.png';
 import {Button, Form, FormGroup, Input, Container, Row, Col, Alert} from 'reactstrap';
 import '../../../styles/Login.css';
 import { login } from '../../services';
+import {addNotification} from "../../components/services";
 
 const ConditionalAlert = ({visible, message})=> {
     if(visible){
@@ -40,15 +41,15 @@ class Login extends Component {
                 console.log("User ID of logged in user: " + id);
                 if(res.status === 200){
                     if(res.data.result.role === "Candidate")
-                        this.props.history.push('/c-dashboard/profile', {});
+                        this.props.history.push('/c-dashboard/#/profile', {});
                     else if(res.data.result.role === "Admin")
-                        this.props.history.push('/hm-dashboard/profile', {});
+                        this.props.history.push('/hm-dashboard/#/applicants', {});
                     else
                         console.log("Successfully logged in but user is not a candidate or admin!");
                  } else {
                     this.setState({badLogin: true});
                 }
-            }).catch( error => {
+        }).catch( error => {
                 this.setState({badLogin: true});
             });
     };

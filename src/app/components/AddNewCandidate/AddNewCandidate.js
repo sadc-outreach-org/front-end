@@ -2,7 +2,7 @@ import React from 'react';
 import logo from '../../../images/heb-red.png';
 import {Button, Form, FormGroup, Input, Container, Row, Col, Alert} from 'reactstrap';
 import '../../../styles/AddNewCandidate.css';
-import {addCandidate, uploadResume} from '../../components/services';
+import {addCandidate, uploadResume, addNotification} from '../../components/services';
 
 const ConditionalAlert = ({visible, message})=> {
     if(visible){
@@ -72,12 +72,12 @@ class AddNewCandidate extends React.Component {
                  console.log(response.data.result);
              });
              if(res.status === 200) {
-                 this.successfulAddition();
+                 this.successfulAddition(res.data.result.candidateID);
              }
          });
     };
 
-    successfulAddition() {
+    successfulAddition(candidateID) {
         this.setState({
             email: '',
             firstName: '',
@@ -91,6 +91,7 @@ class AddNewCandidate extends React.Component {
             candidateWasAdded: true
         });
         this.formRef.current.reset();
+        addNotification(parseInt(candidateID), "Thank you for applying to HEB! This is where you will be able to track the status of your application");
     }
 
     render() {
