@@ -1,45 +1,45 @@
-/*.hebLogo {*/
-    /*width: 300px;*/
-    /*height: 100px;*/
-    /*position: absolute;*/
-    /*left: 20%;*/
-    /*top: -50px;*/
-/*}*/
+.hebLogo {
+    width: 300px;
+    height: 100px;
+    position: absolute;
+    left: 20%;
+    top: -50px;
+}
 
-/*.signupContainer {*/
-    /*background-color: #FFFFFF;*/
-    /*width: 500px;*/
-    /*height: 1000px;*/
-    /*top: 60%;*/
-    /*left: 50%;*/
-    /*position: absolute;*/
-    /*transform: translate(-50%, -50%);*/
-    /*box-sizing: border-box;*/
-    /*text-align: center;*/
-    /*padding: 70px 30px;*/
-    /*margin-bottom: 40px;*/
-/*}*/
+.signupContainer {
+    background-color: #FFFFFF;
+    width: 500px;
+    height: 1000px;
+    top: 60%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    box-sizing: border-box;
+    text-align: center;
+    padding: 70px 30px;
+    margin-bottom: 40px;
+}
 
-/*.signupContainer h1 {*/
-    /*margin: 0;*/
-    /*padding: 0 0 20px;*/
-    /*text-align: center;*/
-    /*font-size: 22px;*/
-/*}*/
+.signupContainer h1 {
+    margin: 0;
+    padding: 0 0 20px;
+    text-align: center;
+    font-size: 22px;
+}
 
-/*.signupContainer input {*/
-    /*width: 100%;*/
-    /*margin-bottom: 20px;*/
-/*}*/
+.signupContainer input {
+    width: 100%;
+    margin-bottom: 20px;
+}
 
-/*!*.signupContainer input[type="email"], input[type="password"], input[type="text"] {*!*/
-    /*!*border: none;*!*/
-    /*!*border-bottom: 1px solid #000;*!*/
-    /*!*background: transparent;*!*/
-    /*!*outline: none;*!*/
-    /*!*height: 40px;*!*/
-    /*!*font-size: 16px;*!*/
-/*!*}*!*/
+.signupContainer input[type="email"], input[type="password"], input[type="text"] {
+    border: none;
+    border-bottom: 1px solid #000;
+    background: transparent;
+    outline: none;
+    height: 40px;
+    font-size: 16px;
+}
 
 
 .signupContainer input[type="email"], input[type="password"], input[type="text"] {
@@ -51,24 +51,24 @@
     font-size: 16px;
 }
 
-/*.submitSignup:hover {*/
-    /*cursor: pointer;*/
-    /*background: #C9271E;*/
-    /*color: #fff;*/
-/*}*/
+.submitSignup:hover {
+    cursor: pointer;
+    background: #C9271E;
+    color: #fff;
+}
 
-/*.signupContainer a {*/
-    /*text-decoration: none;*/
-    /*font-size: 12px;*/
-    /*line-height: 20px;*/
-    /*color: darkgrey;*/
-    /*font-weight: bold;*/
-/*}*/
+.signupContainer a {
+    text-decoration: none;
+    font-size: 12px;
+    line-height: 20px;
+    color: darkgrey;
+    font-weight: bold;
+}
 
-/*.signupContainer a:hover {*/
-    /*color: #ffc107;*/
-/*}*/
+.signupContainer a:hover {
+    color: #ffc107;
+}
 
-/*.title{*/
-    /*color: black;*/
-/*}*/
+.title{
+    color: black;
+}

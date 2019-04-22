@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import logo from '../../../images/heb-red.png';
 import {Button, Form, FormGroup, Input, Container, Row, Col, Alert} from 'reactstrap';
 import '../../../styles/SignUp.css';
 import {updatePassword} from '../../components/services';
@@ -57,7 +56,6 @@ class SignUp extends Component {
     render() {
         return (
             <div className={"signupContainer"}>
-                <img src={logo} className={"hebLogo"} alt={"hebLogo"}/>
                 <Container>
                     <Row>
                         <Col xs={"12"} md={{size: 6, offset: 3}} lg={{size: 4, offset: 4}}>
