@@ -10,6 +10,12 @@ import {Route, HashRouter} from "react-router-dom";
 import Modal from "react-modal";
 import NotificationList from "../../components/Notifications/NotificationList";
 
+const customStyling = {
+    content : {
+        padding: '0',
+    }
+};
+
 class MainCandidateProfileView extends Component {
     constructor(props) {
         super(props);
@@ -48,6 +54,7 @@ class MainCandidateProfileView extends Component {
                 </HashRouter>
                 <Modal
                     isOpen={this.state.showModal}
+                    style={customStyling}
                     contentLabel="Notifications"
                 >
                     <div className="modalCloseButton" id="modalCloseButton" onClick={this.handleCloseModal}/>

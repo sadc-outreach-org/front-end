@@ -10,6 +10,12 @@ import '../../../styles/MainCandidateView.css';
 import Modal from 'react-modal';
 import NotificationList from "../../components/Notifications/NotificationList";
 
+const customStyling = {
+    content : {
+        padding: '0',
+    }
+};
+
 class MainCandidateView extends Component {
     constructor(props) {
         super(props);
@@ -30,8 +36,8 @@ class MainCandidateView extends Component {
                     <div>
                         <SideMenu>
                             <Item divider={true} label="Actions" value="segment1"/>
-                            <Item label="Profile" value="profile"></Item>
-                            <Item label="Applications" value="applications"></Item>
+                            <Item label="Profile" value="profile"/>
+                            <Item label="Applications" value="applications"/>
                             <Item divider={true} label={"Notifications"}/>
                             <Item label={"Notifications"} onClick={this.handleOpenModal}/>
                         </SideMenu>
@@ -43,6 +49,7 @@ class MainCandidateView extends Component {
                 </HashRouter>
                 <Modal
                     isOpen={this.state.showModal}
+                    style={customStyling}
                     contentLabel="Notifications"
                 >
                     <div className="modalCloseButton" id="modalCloseButton" onClick={this.handleCloseModal}/>

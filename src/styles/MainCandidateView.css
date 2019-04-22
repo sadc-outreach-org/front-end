@@ -13,3 +13,8 @@
     opacity: 1;
     color: black;
 }
+
+#notificationsAlert {
+    text-align: center;
+    margin-top: 10%;
+}
