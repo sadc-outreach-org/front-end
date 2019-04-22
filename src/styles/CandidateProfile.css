@@ -5,13 +5,13 @@
 }
 
 .btn-submit {
-    margin-top: 40px;
     width: 100%;
     border: none;
     outline: none;
     height: 40px;
     font-size: 18px;
     border-radius: 10px;
+    margin-bottom: 20px;
 }
 
 .btn-submit:disabled {

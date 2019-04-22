@@ -5,7 +5,8 @@ export default class NotificationList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            notifications: []
+            notifications: [],
+            hasNotifications: false
         };
         this.fetchNotifications = this.fetchNotifications.bind(this);
     }
@@ -19,13 +20,24 @@ export default class NotificationList extends React.Component {
         getNotifications(localStorage.getItem("userID")).then(res => {
             const notificationList = res.data.result;
             this.setState({notifications: notificationList});
+            if(notificationList.toString() === "") {
+                console.log("Notifications are empty");
+                this.setState({hasNotifications : false});
+            } else {
+                console.log("Notifications are not Empty");
+                this.setState({hasNotifications : true});
+            }
         });
-    }
+    };
 
     render(){
         return(
-            <div>
-                <table>
+            <div className={"notificationsContainer"}>
+                <div className={"application-header"}>
+                    <h1>Notifications</h1>
+                </div>
+                <p id={"notificationsAlert"} hidden={this.state.hasNotifications}><strong>You have no new notifications.</strong></p>
+                <table hidden={!this.state.hasNotifications}>
                     <tbody>
                         {this.state.notifications.map(notification =>
                             <tr key={notification.notificationID}>
