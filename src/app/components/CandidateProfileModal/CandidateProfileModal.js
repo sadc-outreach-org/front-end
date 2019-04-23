@@ -70,7 +70,7 @@ export default class CandidateProfileModal extends React.Component {
                 let payload = {
                     "interviewTime": this.state.date.getFullYear()+"-"
                         +this.addZ(this.state.date.getMonth()+1)+"-"
-                        +(this.state.date.getDay())+" "
+                        +this.addZ(this.state.date.getDay())+" "
                         +this.convertTime12to24(document.getElementById("timeSelection").value)+":00"
                 };
 
