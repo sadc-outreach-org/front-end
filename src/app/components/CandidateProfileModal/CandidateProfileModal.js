@@ -19,7 +19,7 @@ export default class CandidateProfileModal extends React.Component {
             showCalendar : false,
             date: new Date(),
             currentApplication: [],
-            scheduleSuccessText: "Interview Scheduled. "
+            successText: "Interview Scheduled."
         };
 
         this.handleRightButtonClick = this.handleRightButtonClick.bind(this);
@@ -53,6 +53,7 @@ export default class CandidateProfileModal extends React.Component {
 
             this.setState({leftButtonText : "Send Email"});
             this.setState({rightButtonText : "Assign to New Requisition"});
+            this.setState({successText : "Interview Scheduled."});
             this.setState({showCalendar: false});
             this.setState({showInfo: true});
             this.setState({showSuccess: true});
@@ -68,7 +69,7 @@ export default class CandidateProfileModal extends React.Component {
                 let payload = {
                     "interviewTime": this.state.date.getFullYear()+"-"
                         +this.addZ(this.state.date.getMonth()+1)+"-"
-                        +this.addZ(this.state.date.getDay())+" "
+                        +(this.state.date.getDay())+" "
                         +this.convertTime12to24(document.getElementById("timeSelection").value)+":00"
                 };
 
@@ -81,6 +82,7 @@ export default class CandidateProfileModal extends React.Component {
 
             this.setState({leftButtonText : "Send Email"});
             this.setState({rightButtonText : "Assign to New Requisition"});
+            this.setState({successText : "Candidate successfully added."});
             if(this.state.showAddToReq === true) {
                 this.setState({showSuccess: true});
                 this.setState({showAddToReq : false});
@@ -159,7 +161,7 @@ export default class CandidateProfileModal extends React.Component {
                     <p><strong>Address:</strong>{" " + this.props.moreCandidateInfo.streetAddress}</p>
                     <p><strong>Location:</strong>{" " + this.props.moreCandidateInfo.city + ", " + this.props.moreCandidateInfo.state}</p>
                 </div>
-                <p hidden={!this.state.showSuccess}>{this.state.scheduleSuccessText}</p>
+                <p hidden={!this.state.showSuccess}>{this.state.successText}</p>
                 <div hidden={!this.state.showCalendar} className={"calendarContainer"}>
                     <Calendar
                         value={this.state.date}
@@ -180,7 +182,7 @@ export default class CandidateProfileModal extends React.Component {
                             <option>5:00 PM</option>
                          </select>
                     </div>
-                    <p hidden={!this.state.showSuccess}>{this.state.scheduleSuccessText}</p>
+                    <p hidden={!this.state.showSuccess}>{this.state.successText}</p>
                 </div>
                 <div hidden={!this.props.readyForInterview}><button onClick={this.handleScheduleClick} className={"scheduleInterviewBtn"}>Schedule Interview</button></div>
                 <div className={"addReqToCandidateText"} hidden={!this.state.showAddToReq}>

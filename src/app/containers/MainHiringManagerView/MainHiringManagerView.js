@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import AllCandidates from '../../components/Candidates/Candidates';
 import Jobs from '../../components/Jobs/Jobs';
-import Requisitions from '../../components/Requisitions/Requisitions';
 import ActiveApplications from '../../components/ActiveApplications/ActiveApplications';
 import AddNewCandidate from '../../components/AddNewCandidate/AddNewCandidate';
 import '../../../styles/MainHiringManagerView.css';
@@ -38,7 +37,6 @@ class MainCandidateProfileView extends Component {
                             <Item divider={true} label="Actions" value="segment1"/>
                             <Item label="Applicants" value="/applicants"/>
                             <Item label="Jobs" value="/jobs"/>
-                            <Item label="Requisitions" value="/requisitions"/>
                             <Item label="Active Applications" value="/active-applications"/>
                             <Item label="Add New Candidate" value="/add-new-candidate"/>
                             <Item divider={true} label={"Notifications"}/>
