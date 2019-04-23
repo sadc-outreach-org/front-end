@@ -1,4 +1,5 @@
 import axios from 'axios';
+import {addNotification} from "./components/services";
 
 const API_URL = "http://34.73.221.154:8080";
 var fakeUser = "1";
@@ -65,7 +66,7 @@ export const getApplicationsForUser = (userID) => {
 };
 
 export const addJobToCandidate = (jobID, payload) => {
-    return axios.post(`${API_URL}/jobs/${jobID}/applications`, payload);
+    return axios.post(`${API_URL}/jobs/${jobID}/applications`, payload).then(res => addNotification(payload.candidateID, "You have been added to a new opening! Check the applications tab for more information."));
 };
 
 export const setInterviewForApplication = (appID, payload) => {
