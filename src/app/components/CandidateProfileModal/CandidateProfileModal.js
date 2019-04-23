@@ -2,6 +2,7 @@ import React from 'react';
 import {getJobs, addJobToCandidate, setInterviewForApplication, getApplicationsForUser, getCandidateInfo} from '../../services.js';
 import '../../../styles/CandidateProfileModal.css';
 import Calendar from "react-calendar";
+import {addNotification} from "../services";
 
 const currentApplications = [];
 
@@ -74,6 +75,7 @@ export default class CandidateProfileModal extends React.Component {
 
                 setInterviewForApplication(currentApplications[0].applicationID, payload).then(res => {
                     console.log("Set Interview Responses: " + JSON.stringify(res));
+                    addNotification(res.data.result.candidate.candidateID, `Your interviewer has scheduled your interview for ${res.data.result.interviewTime}, good luck!`);
                 });
             });
 

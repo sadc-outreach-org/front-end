@@ -2,6 +2,7 @@ import React from 'react';
 import {Button, Form, FormGroup, Input} from 'reactstrap';
 import '../../../styles/ApplicationStatus.css';
 import {submitGitLink} from "../../services";
+import {addNotification} from "../services";
 
 export default class ApplicationStatus extends React.Component {
     constructor (props) {
@@ -21,6 +22,8 @@ export default class ApplicationStatus extends React.Component {
     }
 
     componentDidMount() {
+        console.log('adminID: ');
+        console.log(this.props.clickedApplication);
         this.setState({gitLink: this.props.clickedApplication.gitLink});
         let steps = document.getElementsByClassName("progressbar-item");
         let i;
@@ -62,6 +65,8 @@ export default class ApplicationStatus extends React.Component {
         };
 
         submitGitLink(payload, this.props.clickedApplication.applicationID);
+
+        addNotification(this.props.clickedApplication.requisition.admin.adminID, `Candidate ${this.props.clickedApplication.candidate.firstName + ' ' + this.props.clickedApplication.candidate.lastName} has submitted their code for review!`);
         this.setState({showUpdated: true});
         this.setState({showSuccess: true});
         this.setState({showGitLink: false});
