@@ -38,7 +38,6 @@ class MainCandidateProfileView extends Component {
                             <Item divider={true} label="Actions" value="segment1"/>
                             <Item label="Applicants" value="/applicants"/>
                             <Item label="Jobs" value="/jobs"/>
-                            <Item label="Requisitions" value="/requisitions"/>
                             <Item label="Active Applications" value="/active-applications"/>
                             <Item label="Add New Candidate" value="/add-new-candidate"/>
                             <Item divider={true} label={"Notifications"}/>
