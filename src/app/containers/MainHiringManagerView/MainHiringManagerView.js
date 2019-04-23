@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import AllCandidates from '../../components/Candidates/Candidates';
 import Jobs from '../../components/Jobs/Jobs';
-import Requisitions from '../../components/Requisitions/Requisitions';
 import ActiveApplications from '../../components/ActiveApplications/ActiveApplications';
 import AddNewCandidate from '../../components/AddNewCandidate/AddNewCandidate';
 import '../../../styles/MainHiringManagerView.css';

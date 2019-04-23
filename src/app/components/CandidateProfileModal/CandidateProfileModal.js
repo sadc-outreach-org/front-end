@@ -73,11 +73,9 @@ export default class CandidateProfileModal extends React.Component {
                         +this.convertTime12to24(document.getElementById("timeSelection").value)+":00"
                 };
 
-                console.log(payload);
-
-                // setInterviewForApplication(currentApplications[0].applicationID, payload).then(res => {
-                //     console.log("Set Interview Responses: " + JSON.stringify(res));
-                // });
+                setInterviewForApplication(currentApplications[0].applicationID, payload).then(res => {
+                    console.log("Set Interview Responses: " + JSON.stringify(res));
+                });
             });
 
         } else if(this.state.rightButtonText === "Assign") {
